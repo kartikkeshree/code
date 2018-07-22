@@ -1,0 +1,52 @@
+<div ng-include src="'modules/core/views/header-inside.html'"></div>
+<section>
+	<div data-ride="carousel" class="carousel slide inner-page" id="myCarousel" >
+		<div role="listbox" class="carousel-inner"> <a id="open-map" href="javascript:void(0)">Show Map</a>
+			<div class="item active"> <img src="/modules/core/images/banner.jpg" alt="Banner Image" title="Dentist Forum" />
+				<div class="container">
+					<div class="carousel-caption">
+						<h1>Currently 5,000 Doctors in all over India.</h1>
+						<hr />
+						<form class="banner-serch-form col-xs-12">
+							<div class="row">
+								<div class="col-tn-6 col-xs-4 col-sm-offset-1"><span class="user-icon"></span>
+									<input type="text" class="form-control" placeholder="Doctor Name, Speciality">
+								</div>
+								<div class="col-tn-6 col-xs-3"><span class="area-icon"></span>
+									<input type="text" class="form-control" placeholder="Area">
+								</div>
+								<div class="col-tn-12 col-xs-3"><a role="button" href="#" class="btn btn-primary">Search</a></div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="shadow-spreater"></div>
+			</div>
+		</div>
+	</div>
+	<div class="google-map hide" id="inner-page-map">
+		<div class="change-location">Please Choose Your Location - <a href="javascript:void(0)">Pune</a></div>
+		<div class="close-map"><a id="close-map" href="javascript:void(0)">Close</a></div>
+		<div class="map-section-shadow"></div>
+		<iframe class="inner-iframe-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d242118.0689479398!2d73.86296739999999!3d18.52461645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf2e67461101%3A0x828d43bf9d9ee343!2sPune%2C+Maharashtra%2C+India!5e0!3m2!1sen!2s!4v1418710888923"></iframe>
+	</div>
+	<div class="container inner-cont" >
+		<div class="row">
+			<div class="page-header">
+				<h2>Account Activation</h2>
+			</div>
+			<div class="col-sm-8 col-xs-12 top-buffer-15 bottom-buffer" class="row" data-ng-controller="UserActivationController">
+				<h4>{{activationMsg.msg}}</h4>
+			</div>
+		</div>
+	</div>
+	<div class="book-appointments text-center">
+		<div class="container">
+			<h1 class="text-uppercase"><span>Doctors</span></h1>
+			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text. </p>
+			<div class="btn btn-primary text-uppercase">Book Appointments</div>
+		</div>
+	</div>
+
+	<div ng-include src="'modules/core/views/footer.html'"></div>
+</section>

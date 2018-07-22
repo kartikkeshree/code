@@ -1,0 +1,174 @@
+<!--
+<section data-ng-controller="ClinicsController" data-ng-init="findOne()">
+    <div class="page-header">
+        <h1>Edit Clinic</h1>
+    </div>
+    <div class="col-md-12">
+        <form class="form-horizontal" data-ng-submit="update()" novalidate>
+            <fieldset>
+                <div class="form-group">
+                    <label class="control-label" for="name">Name</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="clinic.name" id="name" class="form-control" placeholder="Name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Update" class="btn btn-default">
+                </div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+            </fieldset>
+        </form>
+    </div>
+</section>-->
+
+<div ng-include src="'modules/dentists/views/layouts/header_files.html'"></div>
+<div class="mainwrapper">
+    <div ng-include src="'modules/dentists/views/layouts/header.html'"></div>
+    <div ng-include src="'modules/dentists/views/layouts/leftmenu.html'"></div>
+
+    <div class="rightpanel">
+        <ul class="breadcrumbs">
+            <li><a href="dashboard.html"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
+            <li><a href="clinic.html">Clinic</a> <span class="separator"></span></li>
+            <li>Add Clinic</li>
+            <li class="right"><a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color
+                Skins</a>
+                <ul class="dropdown-menu pull-right skin-color">
+                    <li><a href="default">Default</a></li>
+                    <li><a href="navyblue">Navy Blue</a></li>
+                    <li><a href="palegreen">Pale Green</a></li>
+                    <li><a href="red">Red</a></li>
+                    <li><a href="green">Green</a></li>
+                    <li><a href="brown">Brown</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="pageheader"><a href="clinic.html" class="btn btn-primary pull-right top-buffer-20">Back</a>
+
+            <div class="pageicon"><span class="iconfa-plus"></span></div>
+            <div class="pagetitle">
+                <h5>Add new clinic</h5>
+
+                <h1>Add Clinic</h1>
+            </div>
+        </div>
+        <!--pageheader-->
+
+        <div class="maincontent">
+            <div class="maincontentinner">
+                <div class="widget" ng-controller="ClinicsController" ng-init="findOne()">
+                    <h4 class="widgettitle">Fill all fields</h4>
+
+                    <div class="widgetcontent">
+                        <form class="stdform" data-ng-submit="create()">
+                            <div class="par control-group">
+                                <label class="control-label">Clinic Name</label>
+
+                                <div class="controls">
+                                    <input type="text" class="span4" placeholder="Clinic Name" name="clinic_name" data-ng-model="clinic.name" />
+                                </div>
+                            </div>
+
+                            <div class="par">
+                                <label>Clinic Photo</label>
+                                <div data-provides="fileupload" class="fileupload fileupload-new">
+                                    <div class="input-append">
+                                        <div class="uneditable-input span3">
+                                            <i class="iconfa-file fileupload-exists"></i>
+                                            <span class="fileupload-preview"></span>
+                                        </div>
+                                        <span class="btn btn-file"><span class="fileupload-new">Select file</span>
+                                        <span class="fileupload-exists">Change</span>
+                                        <input type="file"></span>
+                                        <a data-dismiss="fileupload" class="btn fileupload-exists" href="#">Remove</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="par control-group">
+                                <label class="control-label">Clinic Address 1</label>
+                                <div class="controls">
+                                    <input type="text" class="span4" placeholder="Clinic Address" name="clinic_address1" data-ng-model="clinic.address1"/>
+                                </div>
+                            </div>
+
+                            <div class="par control-group">
+                                <label class="control-label">Clinic Address 2</label>
+
+                                <div class="controls">
+                                    <input type="text" class="span4" placeholder="Address Line 2" name="clinic_address2" data-ng-model="clinic.address2"/>
+                                </div>
+                            </div>
+
+                            <div class="par control-group">
+                                <label class="control-label">Area</label>
+                                <div class="controls">
+                                    <input type="text" class="span4" placeholder="Area" name="area_id" data-ng-model="clinic.area_id"/>
+                                </div>
+                            </div>
+
+                            <div class="par control-group">
+                                <label class="control-label">City</label>
+                                <div class="controls">
+                                    <input type="text" class="span4" placeholder="City" name="clinic_city" data-ng-model="clinic.city"/>
+                                </div>
+                            </div>
+
+                            <div class="par control-group">
+                                <label class="control-label">Landmark</label>
+                                <div class="controls">
+                                    <input type="text" class="span4" placeholder="Landmark" name="clinic_landmark" data-ng-model="clinic.landmark"/>
+                                </div>
+                            </div>
+
+                            <!-- <div class="par control-group">
+                                 <label class="control-label">Geo Location</label>
+                                 <div class="controls">
+                                     <iframe class="geo-map"
+                                             src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d121069.05634361373!2d73.84408502084187!3d18.510455421892956!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf2e67461101%3A0x828d43bf9d9ee343!2sPune%2C+Maharashtra%2C+India!5e0!3m2!1sen!2sus!4v1417601232032"
+                                             frameborder="0" style="border:0"></iframe>
+                                 </div>
+                             </div>-->
+
+
+                            <div class="par control-group">
+                                <label class="control-label">Zip Code</label>
+
+                                <div class="controls">
+                                    <input type="text" class="span4" placeholder="Zip Code" name="clinic_zip" data-ng-model="clinic.zip"/>
+                                </div>
+                            </div>
+                            <div class="par control-group">
+                                <label class="control-label">Mobile No.</label>
+
+                                <div class="controls">
+                                    <input type="text" class="span4" placeholder="Mobile No." name="clinic_contact_no" data-ng-model="clinic.contact_no"/>
+                                </div>
+                            </div>
+                            <div class="par control-group">
+                                <label class="control-label">Phone No.</label>
+
+                                <div class="controls">
+                                    <input type="text" class="span4" placeholder="Phone No." name="clinic_contact2" data-ng-model="clinic.contact2"/>
+                                </div>
+                            </div>
+                            <p class="stdformbutton">
+                                <button class="btn btn-primary">Submit</button>
+                                <button class="btn" type="reset">Cancel</button>
+                            </p>
+                        </form>
+                    </div>
+                    <!--widgetcontent-->
+                </div>
+                <!--widget-->
+                <div ng-include src="'modules/dentists/views/layouts/footer.html'"></div>
+                <!--footer-->
+            </div>
+            <!--maincontentinner-->
+        </div>
+        <!--maincontent-->
+    </div>
+</div>
+

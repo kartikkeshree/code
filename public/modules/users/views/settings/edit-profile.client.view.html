@@ -1,0 +1,128 @@
+
+<div ng-include src="'modules/core/views/header.html'"></div>
+<section data-ng-controller="SettingsController">
+
+	<div class="container inner-cont inside-border">
+		<div class="row">
+			<div class="page-header">
+				Register Now
+			<!-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p> -->
+			</div>
+			<div class="col-sm-8 col-xs-12 top-buffer-15 bottom-buffer" >
+				<form name="userForm" data-ng-submit="updateUserProfile()" class="form-horizontal" autocomplete="off" enctype="multipart/form-data">
+					<fieldset>
+                        <div data-ng-show="error" class="text-center text-danger">
+                            <strong data-ng-bind="error"></strong>
+                        </div>
+                        <br/>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">First Name</label>
+						<div class="col-sm-9"> <span class="user-icon"></span>
+							<input type="text" name="first_name" class="form-control" data-ng-model="user[0].first_name" placeholder="First Name">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Last Name</label>
+						<div class="col-sm-9"> <span class="user-icon"></span>
+							<input type="text" name="last_name" class="form-control" data-ng-model="user[0].last_name"  placeholder="Last Name">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Address1</label>
+						<div class="col-sm-9"> <span class="area-icon form-icon"></span>
+							<textarea class="form-control" placeholder="Address1" name="address1" data-ng-model="user[0].address1"></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Address2</label>
+						<div class="col-sm-9"> <span class="area-icon form-icon"></span>
+							<textarea class="form-control" placeholder="Address2" name="address2" data-ng-model="user[0].address2"></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Area</label>
+						<div class="col-sm-9"> <span class="area-icon form-icon"></span>
+							<select class="form-control" name="area" data-ng-model="user[0].area_id">
+								<option value="">Select Area</option>
+								<option ng-repeat="area in areaList" value="{{area.id}}" ng-selected="((user[0].area_id == area.id)?true:false)">{{area.area_name}}</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">City</label>
+						<div class="col-sm-9"> <span class="area-icon form-icon"></span>
+							<input  type="text" name="city" class="form-control"  data-ng-model="user[0].city" placeholder="City">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Zip</label>
+						<div class="col-sm-9"> <span class="area-icon form-icon"></span>
+							<input  type="text" name="zip" class="form-control" data-ng-model="user[0].zip" placeholder="Zip">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Mobile</label>
+						<div class="col-sm-9"> <span class="phone-number form-icon"></span>
+							<input type="text" name="contact_no" class="form-control" data-ng-model="user[0].contact_no" placeholder="Mobile">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Photo</label>
+						<div class="col-sm-9">
+							<a class="media-left" href="javascript:void(0);" id="profile-image-container">
+								<img id="profile_image" src="/images/profile_images/{{user[0].image}}" height="100" width="100">
+							</a>
+							<input type="file" ng-model-instant id="fileToUpload" onchange="angular.element(this).scope().uploadFile(this.files)" style="margin: -32px 0 0 90px;" />
+						</div>
+					</div>
+
+                   <!--Dentist information -->
+                   <!-- <div class="form-group">
+                        <label class="col-sm-3 control-label">DCI Number</label>
+                        <div class="col-sm-9"> <span class="phone-number form-icon"></span>
+                            <input type="text" name="dci_registration" class="form-control" data-ng-model="user[0].dci_registration" placeholder="DCI Number">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">DCI Number</label>
+                        <div class="col-sm-9"> <span class="phone-number form-icon"></span>
+                            <input type="text" name="dci_registration" class="form-control" data-ng-model="user[0].dci_registration" placeholder="DCI Number">
+                        </div>
+                    </div>-->
+
+
+					<div class="form-group">
+						<div class="col-sm-offset-3 col-sm-9">
+							<button type="submit" class="btn btn-primary">Update</button>
+						</div>
+					</div>
+
+					</fieldset>
+				</form>
+			</div>
+			<div class="col-sm-4 col-xs-12 top-buffer-15 bottom-buffer">
+				<iframe class="address-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.4615615519147!2d73.78993400000003!3d18.508033!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2be4cb2886fd1%3A0xb22e740567166b2b!2sCaprium+Technologies+India+Pvt.+Ltd.!5e0!3m2!1sen!2s!4v1418721676091"></iframe>
+				<div class="address">
+					<p><span class="area-icon"></span>Ishana-II 1st Floor, Bhusari Colony Paud Road, <br />
+						Opp Lohiya Jain IT Park, <br />
+						Kothrud, Pune 411038, India</p>
+					<p><span class="phone-number"></span>8983-109-109</p>
+					<p><span class="email-id"></span>info@doctorhere.in</p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<div class="book-appointments text-center">
+		<div class="container">
+			<h1 class="text-uppercase">Doctors</h1>
+			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text. </p>
+            <a href="#!/dentistList/" class="btn btn-primary text-uppercase">Book Appointment</a>
+		</div>
+	</div>
+
+	<div ng-include src="'modules/core/views/footer.html'"></div>
+</section>
+

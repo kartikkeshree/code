@@ -1,0 +1,125 @@
+<div ng-include src="'modules/core/views/header-inside.html'"></div>
+<div class="container inside-content" data-ng-controller="ForumsController" ng-init="find('my-forum','')">
+    <div class="row">
+
+        <div class="inside-page-title top-buffer-20">
+            <h1>My Forum</h1>
+            <button class="btn btn-primary pull-right" id="add-topic">Add Query</button>
+        </div>
+        <div class="clearfix"></div>
+        <div ng-show="success" role="alert" class="alert alert-success topic-alert">
+            <strong>Well done!</strong> {{success}}.
+        </div>
+        <div ng-show="error" role="alert" class="alert alert-danger topic-alert">
+            <strong>Error!</strong> {{error}}.
+        </div>
+
+        <div class="post-new-topic-form">
+            <form role="form" class="form-horizontal post-new-topic" data-ng-submit="addForumQuestion()">
+
+                <h4 class="new-post-title">Post New Topic</h4>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Topic Title / Subject</label>
+
+                    <div class="col-sm-9">
+                        <input type="text" data-ng-model="newForum.question" placeholder="Topic Title / Subject"
+                               class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Topic Description</label>
+
+                    <div class="col-sm-9">
+                        <textarea class="form-control" data-ng-model="newForum.description"
+                                  placeholder="Topic Description"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <button class="btn btn-primary" type="submit">Add Query</button>
+                        <button class="btn btn-default" type="reset" id="cancel-topic">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="panel panel-default top-buffer-20">
+            <!-- Default panel contents -->
+            <div class="panel-heading custom-heading">
+                <h5>My Forum</h5>
+
+                <form method="post" class="searchbar" data-ng-submit="forumFilter()">
+                    <input type="text" data-ng-model="forum_data.filterVal" placeholder="Enter keyword &amp; hit enter"
+                           class="pull-right form-control no-padding-input small-input-text" >
+                    <input type="submit" class="hidden">
+                </form>
+            </div>
+
+            <!-- Table -->
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Forum Topic Title</th>
+                    <th>Date Time</th>
+                    <th>Comments</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-if="forum_data.length < 1">
+                    <td>No query Yet!</td>
+                </tr>
+                <tr ng-repeat="forum in forum_data">
+                    <th scope="row">{{$index+1}}</th>
+                    <td><a href="#!/forumDetails/{{forum.id}}">{{forum.question}}</a></td>
+                    <td>{{forum.created_date | date:'dd MMM yyyy - H:mm a'}}</td>
+                    <td>{{forum.cmtCnt}}</td>
+                    <td>{{(forum.fStatus == 'Yes')?'Approved':'Pending'}}</td>
+                    <td><a href="#!/forumDetails/{{forum.id}}" title="Edit">
+                        <div class="edit-appointment"></div>
+                    </a><a ng-click="publishStatus(forum.id, 'delete', $index)" href="javascript:void(0);"
+                           title="Delete">
+                        <div class="delete-appoinment"></div>
+                    </a></td>
+                </tr>
+
+
+                </tbody>
+            </table>
+           <!-- Pagination Section -->
+                <div class="pagination-section" ng-if="forum_data.length > 0">
+                    <ul class="pagination pull-right">
+                        <li ng-class="{disabled: currentPage == 1}"><a aria-label="Previous" href="javascript:void(0);" ng-click="prevPage('my-forum','')"><span aria-hidden="true">«</span></a></li>
+                        <li ng-class="{active: n == currentPage}" ng-repeat="n in pagedItems" ng-click="setPage('my-forum','')"><a href="javascript:void(0);" ng-bind="n">1<span class="sr-only">(current)</span></a></li>
+                        <li ng-class="{disabled: currentPage == pagedItems.length}"><a aria-label="Next" href="javascript:void(0);"  ng-click="nextPage('my-forum','')"><span aria-hidden="true">»</span></a></li>
+                    </ul>
+                </div>
+			<!-- End -->
+        </div>
+
+    </div>
+</div>
+<div class="book-appointments text-center">
+    <div class="container">
+        <h1 class="text-uppercase">Doctors</h1>
+
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text.</p>
+        <a class="btn btn-primary text-uppercase" href="#!/dentistList/">Book Appointment</a>
+    </div>
+</div>
+
+<div ng-include src="'modules/core/views/footer.html'"></div>
+<script type="text/javascript">
+
+    $('#add-topic').click(function () {
+        $('.post-new-topic-form').addClass('new-post-topic-height');
+    });
+    $('#cancel-topic').click(function () {
+        $('.post-new-topic-form').removeClass('new-post-topic-height');
+    });
+
+</script>

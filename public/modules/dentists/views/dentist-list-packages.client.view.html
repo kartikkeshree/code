@@ -1,0 +1,98 @@
+<div ng-include src="'modules/dentists/views/layouts/header_files.html'"></div>
+<div class="mainwrapper">
+    <div ng-include src="'modules/dentists/views/layouts/header.html'"></div>
+    <div ng-include src="'modules/dentists/views/layouts/leftmenu.html'"></div>
+<div class="rightpanel" data-ng-controller="PackageController" data-ng-init="find()">
+
+    <ul class="breadcrumbs">
+        <li><a href="#!/dashboard"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
+        <li>Sms Packages</li>
+        <li class="right">
+            <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
+            <ul class="dropdown-menu pull-right skin-color">
+                <li><a href="default">Default</a></li>
+                <li><a href="navyblue">Navy Blue</a></li>
+                <li><a href="palegreen">Pale Green</a></li>
+                <li><a href="red">Red</a></li>
+                <li><a href="green">Green</a></li>
+                <li><a href="brown">Brown</a></li>
+            </ul>
+        </li>
+    </ul>
+
+    <div class="pageheader">
+        <form method="post" class="searchbar right-buffer-10" data-ng-submit="find()" >
+            <input type="text" name="keyword" placeholder="To search type and hit enter..." data-ng-model="search.searchVal"/>
+        </form>
+        <!--<a href="#" class="btn btn-primary pull-right top-buffer-20 left-buffer-10">Add Package</a>-->
+        <div class="pageicon"><span class="iconfa-bullhorn"></span></div>
+        <div class="pagetitle">
+            <h5>All Package Summary</h5>
+            <h1>Package</h1>
+        </div>
+    </div><!--pageheader-->
+
+    <div class="maincontent">
+        <div class="maincontentinner">
+
+
+            <!-- <h4 class="widgettitle">Table Using Colgroup</h4>-->
+            <table class="table table-bordered responsive">
+                <colgroup>
+                    <col class="con0" style="width:4%;"/>
+                    <col class="con1" style="width:15%;"/>
+                    <col class="con0" style="width:15%;"/>
+                    <col class="con1" style="width:15%;"/>
+                    <col class="con0" style="width:10%;"/>
+                    <col class="con1" style="width:10%;"/>
+                    <col class="con0" style="width:10%;"/>
+                    <col class="con1" style="width:10%;"/>
+                    <col class="con1" style="width:10%;"/>
+
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="center">&nbsp;</th>
+                    <th class="center">Sr. No</th>
+                    <th class="center">Doctor Name</th>
+                    <th class="center">Doctor Email</th>
+                    <th class="center">No. of allocated sms</th>
+                    <th class="center">Sent</th>
+                    <th class="center">Remaining</th>
+                    <th class="center">Start Date</th>
+                    <th class="center">End date</th>
+                    <th class="center">Status</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr  data-ng-repeat="package in packages">
+                    <td class="center">&nbsp;</td>
+                    <td class="center">{{$index+1}}</td>
+                    <td class="center">{{package.first_name +" "+package.last_name}}</td>
+                    <td class="center">{{package.email}}</td>
+                    <td class="center">{{package.allocated}}</td>
+                    <td class="center">{{package.sent}}</td>
+                    <td class="center">{{package.remaining}}</td>
+                    <td class="center">{{package.start_date | date}}</td>
+                    <td class="center">{{package.end_date | date}}</td>
+                    <td class="center" ng-if="package.status == 'Approved' || package.status == 'Not Used'">Approved</td>
+                    <td class="center" ng-if="package.status == 'Used'">Used</td>
+                    <td class="center" ng-if="package.status == 'Pending' && user[0].role_id == 1">
+                        <a href="javascript:void(0)" data-ng-click="changePackageStatus(package.id,'Approved')">Pending</a>
+                    </td>
+                    <td class="center" ng-if="package.status == 'Pending' && user[0].role_id == 2">Pending</td>
+
+                </tr>
+
+                </tbody>
+            </table><!--Table end -->
+
+        </div><!--maincontentinner-->
+
+        <div ng-include src="'modules/dentists/views/layouts/footer.html'"></div><!--footer-->
+    </div><!--maincontent-->
+
+</div><!--rightpanel-->
+
+</div><!--mainwrapper-->

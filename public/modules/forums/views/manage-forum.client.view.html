@@ -1,0 +1,99 @@
+<div ng-include src="'modules/dentists/views/layouts/header_files.html'"></div>
+<div class="mainwrapper">
+    <div ng-include src="'modules/dentists/views/layouts/header.html'"></div>
+    <div ng-include src="'modules/dentists/views/layouts/leftmenu.html'"></div>
+    <div class="rightpanel" data-ng-controller="ForumsController" ng-init="find('manage-forum','')">
+
+        <ul class="breadcrumbs">
+            <li><a href="dashboard.html"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
+            <li>Manage Forum</li>
+            <li class="right"> <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
+                <ul class="dropdown-menu pull-right skin-color">
+                    <li><a href="default">Default</a></li>
+                    <li><a href="navyblue">Navy Blue</a></li>
+                    <li><a href="palegreen">Pale Green</a></li>
+                    <li><a href="red">Red</a></li>
+                    <li><a href="green">Green</a></li>
+                    <li><a href="brown">Brown</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="pageheader">
+            <form method="post" class="searchbar" data-ng-submit="forumFilter()">
+                <input type="text" name="keyword" data-ng-model="filterVal" placeholder="To search type and hit enter..." />
+                <input type="submit" class="hidden">
+            </form>
+            <div class="pageicon"><span class="iconfa-cog"></span></div>
+            <div class="pagetitle">
+                <h5>Forum Post Details</h5>
+                <h1>Manage Forum</h1>
+            </div>
+        </div>
+        <!--pageheader-->
+
+        <div class="maincontent">
+            <div class="maincontentinner">
+
+                <!-- <h4 class="widgettitle">Table Using Colgroup</h4>-->
+                <table class="table table-bordered responsive">
+                    <colgroup>
+                        <col class="con0" style="width:7%;"/>
+                        <col class="con1" style="width:15%;"/>
+                        <col class="con0" style="width:38%;"/>
+                        <col class="con1" style="width:10%;"/>
+                        <col class="con0" style="width:15%;"/>
+                        <col class="con1" style="width:15%;"/>
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="center">&nbsp;</th>
+                        <th class="center">Sr. No</th>
+                        <th>User Name</th>
+                        <th>Forum Title</th>
+                        <th class="center">Comments</th>
+                        <th class="center">Is - Publish</th>
+                        <th class="center">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="forum in forum_data">
+                        <td class="center">&nbsp;</td>
+                        <td class="center">{{$index+1}}</td>
+                        <td><a href="javascript:void(0);">{{forum.first_name +' '+ forum.last_name}}</a></td>
+
+                        <td><a href="javascript:void(0);" target="_blank">{{forum.question}}</a> <!--<span class="label label-success">New</span>--></td>
+                        <td class="center">{{forum.cmtCnt}}</td>
+
+                        <td class="center">{{forum.fStatus}}</td>
+                        <td class="center">
+                            <a ng-show="(forum.fStatus != 'Yes')" href="javascript:void(0);" ng-click="publishStatus(forum.id, 'Approved', $index)" title="Apporve"><span class="iconfa-ok large-a-icon"></span></a>
+                            <a ng-show="(forum.fStatus == 'Yes')" href="javascript:void(0);" title="Apporve"><span class="iconfa-ok large-a-icon icon-clicked"></span></a>&nbsp;
+                            <a ng-show="(forum.fStatus == 'Yes')" href="javascript:void(0);" ng-click="publishStatus(forum.id, 'Rejected', $index)" title="Reject"><span class="iconfa-remove large-a-icon"></span></a>
+                            <a ng-show="(forum.fStatus != 'Yes')" href="javascript:void(0);" title="Reject"><span class="iconfa-remove large-a-icon icon-clicked"></span></a>&nbsp;
+                            <a href="#!/forumDetails/{{forum.id}}" title="Edit"><span class="iconfa-edit large-a-icon"></span></a> &nbsp;
+                            <a href="javascript:void(0);" ng-click="publishStatus(forum.id, 'delete', $index)" title="Delete"><span class="iconfa-trash large-a-icon"></span></a>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+                <!--Table end -->
+			<!-- Pagination Section -->
+                <div class="pagination-admin pull-right" ng-if="forum_data.length > 0">
+                    <ul class="pagination pull-right">
+                        <li ng-class="{disabled: currentPage == 1}"><a aria-label="Previous" href="javascript:void(0);" ng-click="prevPage('manage-forum','')"><span aria-hidden="true">«</span></a></li>
+                        <li ng-class="{active: n == currentPage}" ng-repeat="n in pagedItems" ng-click="setPage('manage-forum','')"><a href="javascript:void(0);" ng-bind="n">1<span class="sr-only">(current)</span></a></li>
+                        <li ng-class="{disabled: currentPage == pagedItems.length}"><a aria-label="Next" href="javascript:void(0);"  ng-click="nextPage('manage-forum','')"><span aria-hidden="true">»</span></a></li>
+                    </ul>
+                </div>
+			<!-- End -->
+            </div>
+            <!--maincontentinner-->
+            <div ng-include src="'modules/dentists/views/layouts/footer.html'"></div>
+            <!--footer-->
+        </div>
+        <!--maincontent-->
+
+    </div>
+    <!--rightpanel-->
+</div>

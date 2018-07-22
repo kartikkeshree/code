@@ -1,0 +1,148 @@
+<div ng-include src="'modules/core/views/header-inside.html'"></div>
+<div data-ng-controller="ClassifiedsController" data-ng-init="findOne()">
+<div class="admin-action" ng-if="(isOwner == 'admin')">
+        <div class="container">
+            <div class="col-xs-4"><strong>{{classified[0].display_name}}</strong></div>
+            <div class="col-xs-3">{{classifiedComments.length}} Comments</div>
+            <div class="col-xs-5 text-right">
+                <div class="delete-icon" title="Delete" ng-click="publishStatus(classified[0].id, 'delete', 'classifiedDetail')"></div>
+                <div class="edit-icon" title="Edit" id="add-topic" onclick="$('.post-new-topic-form').attr('style','height:440px')"></div>
+                <div class="reject-icon" title="Reject"
+                     ng-click="publishStatus(classified[0].id, 'Rejected', 'classifiedDetail')"></div>
+                <div class="approve-icon" title="Approve"
+                     ng-click="publishStatus(classified[0].id, 'Approved', 'classifiedDetail')"></div>
+            </div>
+        </div>
+    </div>
+<div class="container inside-content" >
+    
+    <div class="row">
+        <div class="col-xs-12 top-buffer-20">
+            <div class="inside-page-title">
+                <h1>Classified</h1>
+                <button class="btn btn-primary pull-right" id="add-topic" onclick="$('.post-new-topic-form').attr('style','height:440px')" ng-if="classified[0].user_id==authentication[0].id || authentication[0].role_id==1">Update</button>
+            </div>
+            <div class="clearfix"></div>
+            <div ng-show="success" role="alert" class="alert alert-success topic-alert">
+                <strong>Well done!</strong> {{success}}.
+            </div>
+            <div ng-show="error" role="alert" class="alert alert-danger topic-alert">
+                <strong>Error!</strong> {{error}}.
+            </div>
+            <div class="post-new-topic-form">
+                <form role="form" class="form-horizontal post-new-topic" data-ng-submit="update()">
+
+                    <h4 class="new-post-title">Update</h4>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Ad Title / Subject</label>
+
+                        <div class="col-sm-9">
+                            <input type="text" data-ng-model="classified[0].title" placeholder="Ad Title / Subject" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group" ng-init="getCategory()">
+                                    <label class="col-sm-3 control-label">Category</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control no-padding-input" data-ng-model="classified[0].classified_category_id">
+                                            <option ng-selected="true">Select Category</option>
+                                            <option ng-repeat="category in categories" value="{{category.id}}" ng-selected="(classified[0].classified_category_id==category.id)?true:false">{{category.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Ad Description</label>
+
+                        <div class="col-sm-9">
+                            <textarea class="form-control" placeholder="Ad Description" data-ng-model="classified[0].description"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <button class="btn btn-primary" type="submit">Update</button>
+                            <button class="btn btn-default" type="button" id="cancel-topic" onclick="$('.post-new-topic-form').removeAttr('style')">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="clearfix"></div>
+            <div class="panel panel-default forum-section">
+
+                <div class="media">
+                    <div class="media-left" href="javascript:void(0);">
+                        <img src="/images/profile_images/{{classified[0].image}}" class="x-120" ng-if="classified[0].image!=null">
+                        <img src="/modules/core/images/default-pic.jpg" class="x-120" ng-if="classified[0].image==null">
+
+                        <div class="text-center top-buffer-10 text-primary"><strong>{{classified[0].display_name}}</strong></div>
+                        <div class="text-center"></div>
+                    </div>
+                    <div class="media-body full-width-container">
+                        <h4 class="text-primary top-bottom-buffer-15"><span class="well-box text-muted">Query</span>{{classified[0].display_title}}
+                        </h4>
+                        <hr/>
+                        <p>{{classified[0].display_description}}</p>
+
+                    </div>
+                </div>
+                <hr>
+                <div class="media comment-sec" ng-init=getClassfiedComment()>
+                    <div class="media" ng-repeat="classifiedComment in classifiedComments">
+          <a class="media-left" href="javascript:void(0);">
+            <img src="/images/profile_images/{{classifiedComment.image}}" class="x-48" ng-if="classifiedComment.image!=null">
+			<img src="/modules/core/images/default-pic.jpg" class="x-48" ng-if="classifiedComment.image==null">
+          </a>
+          <div class="media-body full-width-container">
+            <h4 class="media-heading">{{classifiedComment.display_name}}
+			<span>{{classifiedComment.created_date |    date:'mediumDate'}}</span><br>
+			<span><button class="btn btn-primary"  ng-if="authentication[0].role_id==1"  ng-click="deleteClassifiedComment(classifiedComment.id,$index)"  id="delete-comment">Delete</button>
+			</h4>
+				{{classifiedComment.description}}
+          </div>
+                        <hr>
+        </div>
+
+                </div>
+
+                    <form class="form-horizontal" role="form" ng-submit="saveClassfiedComment(classified[0].id)" ng-if="authentication!=undefined" novalidate>
+                        <h3 class="post-comment-title">Post Your Comment</h3>
+
+                        <div class="form-group">
+
+                            <div class="col-sm-12">
+                                <textarea placeholder="Comment" class="form-control"
+                                          ng-model="classified.commentText" required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-9">
+                                <button type="submit" class="btn btn-default">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="book-appointments text-center">
+        <div class="container">
+            <h1 class="text-uppercase"><span>Doctors</span></h1>
+
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text. </p>
+            <a class="btn btn-primary text-uppercase" href="#!/dentistList/">Book Appointment</a>
+        </div>
+    </div>
+    <div ng-include src="'modules/core/views/footer.html'"></div>
+ </div>
+<script type="text/javascript">
+    $('#add-topic').click(function () {
+        $('.post-new-topic-form').addClass('new-post-topic-height');
+    });
+    $('#cancel-topic').click(function () {
+        $('.post-new-topic-form').removeClass('new-post-topic-height');
+    });
+</script>

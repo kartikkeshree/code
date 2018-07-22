@@ -1,0 +1,137 @@
+<script type="text/javascript" src="modules/dentists/js/jquery-ui-1.9.2.min.js"></script>
+<div ng-include src="'modules/dentists/views/layouts/header_files.html'"></div>
+<div class="mainwrapper">
+    <div ng-include src="'modules/dentists/views/layouts/header.html'"></div>
+    <div ng-include src="'modules/dentists/views/layouts/leftmenu.html'"></div>
+    <div class="rightpanel" ng-controller="EventsController">
+
+        <ul class="breadcrumbs">
+            <li><a href="#!/dentistHome"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
+            <li><a href="#!/listEvents">Event</a> <span class="separator"></span></li>
+            <li>Add Event</li>
+            <li class="right"><a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color
+                    Skins</a>
+                <ul class="dropdown-menu pull-right skin-color">
+                    <li><a href="default">Default</a></li>
+                    <li><a href="navyblue">Navy Blue</a></li>
+                    <li><a href="palegreen">Pale Green</a></li>
+                    <li><a href="red">Red</a></li>
+                    <li><a href="green">Green</a></li>
+                    <li><a href="brown">Brown</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="pageheader"><a href="javascript:void(0);" class="btn btn-primary pull-right top-buffer-20" onclick="javascript:history.go(-1);">Back</a>
+
+            <div class="pageicon"><span class="iconfa-plus"></span></div>
+            <div class="pagetitle">
+                <h5 ng-if="isEdit == false">Add new Event</h5>
+                <h5 ng-if="isEdit == true">Edit Event</h5>
+                <h1 ng-if="isEdit == false">Add Event</h1>
+                <h1 ng-if="isEdit == true">Edit Event</h1>
+            </div>
+        </div>
+        <!--pageheader-->
+
+        <div class="maincontent">
+            <div class="maincontentinner">
+                <div class="widget" ng-init="findOne()">
+                    <h4 class="widgettitle">Fill all fields</h4>
+
+                    <div class="widgetcontent">
+                        <form class="stdform">
+                            <div class="par control-group" data-ng-show="error">
+                                <label class="control-label">&nbsp;</label>
+                                <div class="controls errorShow">
+                                    <strong>{{error}}</strong>
+                                </div>
+                            </div>
+                            <div class="par control-group">
+                                <label class="control-label">Tittle*</label>
+                                <div class="controls">
+                                    <input type="text" class="span4" placeholder="Event Tittle" data-ng-model="event.title" />
+                                </div>
+                            </div>
+
+                            <div class="par control-group">
+                                <label class="control-label">Description*</label>
+                                <div class="controls">
+                                    <textarea class="span4" placeholder="Event Description" data-ng-model="event.description"></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="par control-group">
+                                <label class="control-label">Address*</label>
+                                <div class="controls">
+                                    <textarea class="span4" placeholder="Event Location" data-ng-model="event.address"></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="par control-group">
+                                <label class="control-label" style="float: left;" >Start Date*</label>
+                                <div class="controls" style="float: left;">
+                                    <input id="event-start-date" type="text" name="date" class="input-small" ng-model="event.start_date" />
+                                </div>
+
+                                <label class="control-label" style="float: left; width:150px;">Start Time*</label>
+                                <div class="controls">
+                                    <select ng-model="event.start_time" class="input-small">
+                                        <option ng-repeat="time in timeArr" value="{{time| date:'HH:mm:ss'}}" ng-selected="(((time| date:'HH:mm:ss') == (event.start_datetime | date:'HH:mm:ss'))?true:false)"> {{time| date:'hh:mm a'}} </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="par control-group">
+                                <label class="control-label" style="float: left;">End Date*</label>
+                                <div class="controls" style="float: left;">
+                                    <input id="event-end-date" type="text" name="end_date" class="input-small" ng-model="event.end_date" />
+                                </div>
+
+                                <label class="control-label" style="float: left; width:150px;">End Time*</label>
+                                <div class="controls">
+                                    <select ng-model="event.end_time" class="input-small">
+                                        <option ng-repeat="time in timeArr" value="{{time| date:'HH:mm:ss'}}" ng-selected="(((time| date:'HH:mm:ss') == (event.end_datetime | date:'HH:mm:ss'))?true:false)"> {{time| date:'hh:mm a'}} </option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                             <div class="par control-group">
+                                <label class="control-label">Image</label>
+<!--<img src="images/event_images/{{event.image}}" alt="" id="header_img" style="float: left;" height="200" width="250">-->
+                                <div class="controls">
+                                    <div data-provides="fileupload" class="fileupload fileupload-new">
+                                            <div class="input-append">
+                                                <div class="uneditable-input span2"> <i class="iconfa-file fileupload-exists"></i> <span class="fileupload-preview"></span> </div>
+                                                <span class="btn btn-file"><span class="fileupload-new">Select file</span> <span class="fileupload-exists">Change</span>
+                                                    <input type="file" ng-model-instant id="fileToUpload" onchange="angular.element(this).scope().uploadFile(this.files)" />
+                                                </span> <a data-dismiss="fileupload" class="btn fileupload-exists" href="#">Remove</a> </div>
+                                        </div>
+                                    <br>
+                                     <div class="media-left" id="event-image-container" style="margin-left: 220px; height: 82px;" ng-show="((event.image != '' && event.image !== null)?true:false)">
+                                           <div class="new_image clinic-image">
+                                                <img src="/images/event_images/{{event.image}}" />
+                                            </div>
+                                        </div>
+                                    
+                                </div>
+                            </div>
+                            <p class="stdformbutton">
+                                <button class="btn btn-primary" ng-click="create()" ng-if="isEdit == false">Submit</button>
+                                <button class="btn btn-primary" ng-click="update()" ng-if="isEdit == true">Update</button>
+                                <button class="btn" type="reset">Cancel</button>
+                            </p>
+                        </form>
+                    </div>
+                    <!--widgetcontent-->
+                </div>
+
+            </div>
+            <!--widget-->
+            <div ng-include src="'modules/dentists/views/layouts/footer.html'"></div>
+            <!--footer-->
+            <!--maincontentinner-->
+        </div>
+        <!--maincontent-->
+    </div>
+</div>
+

@@ -1,0 +1,87 @@
+ <div ng-include src="'modules/dentists/views/layouts/header_files.html'"></div>
+<div class="mainwrapper" data-ng-controller="KnowledgebasesAdminController" data-ng-init="find()">
+    <div ng-include src="'modules/dentists/views/layouts/header.html'"></div>
+    <div ng-include src="'modules/dentists/views/layouts/leftmenu.html'"></div>
+    <div class="rightpanel">
+    <ul class="breadcrumbs" >
+        <li><a href="dashboard.html"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
+        <li>Knowledge Base</li>
+        <li class="right"> <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
+            <ul class="dropdown-menu pull-right skin-color">
+                <li><a href="default">Default</a></li>
+                <li><a href="navyblue">Navy Blue</a></li>
+                <li><a href="palegreen">Pale Green</a></li>
+                <li><a href="red">Red</a></li>
+                <li><a href="green">Green</a></li>
+                <li><a href="brown">Brown</a></li>
+            </ul>
+        </li>
+    </ul>
+    <div class="pageheader">
+        <div class="pageicon"><span class="iconfa-globe"></span></div>
+        <div class="pagetitle">
+            <h5>Knowledge Base Details</h5>
+            <h1>Knowledge Base</h1>
+        </div>
+    </div>
+    <!--pageheader-->
+
+    <div class="maincontent">
+        <div class="maincontentinner">
+            <!-- <h4 class="widgettitle">Table Using Colgroup</h4>-->
+            <table class="table table-bordered responsive">
+                <colgroup>
+                    <col class="con0" style="width:5%;"/>
+                    <col class="con1" style="width:8%;"/>
+                    <col class="con0" style="width:8%;"/>
+                    <col class="con1" style="width:39%;"/>
+                    <col class="con0" style="width:8%;"/>
+                    <col class="con0" style="width:5%;"/>
+
+
+
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="center">&nbsp;</th>
+                    <th class="center">Sr. No</th>
+                    <th>Page ID</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th class="center">Initial_Char</th>
+                    <th class="center">Select</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="wikiData in wikiDatas">
+                    <td class="center">&nbsp;</td>
+                    <td class="center">{{$index+1}}</td>
+                    <td>{{wikiData.pageid}}</td>
+                    <td>{{wikiData.title}}</td>
+                    <td><div style="height: 129px;overflow: auto;">{{wikiData.extract}}</div></td>
+                    <td class="center">{{wikiData.initial_char}}</td>
+
+                    <td class="center"><input type="radio" name="select" data-ng-click="getWikiData(wikiData)"/></td>
+                </tr>
+
+                </tbody>
+            </table><!--Table end -->
+
+
+            <div class="footer">
+                <div class="footer-left"> <span>&copy; 2014. Dentist Forum. All Rights Reserved.</span> </div>
+                <div class="footer-right"> <span>Designed by: <a href="http://caprium.com/">Caprium Technologies</a></span> </div>
+            </div>
+            <!--footer-->
+
+        </div>
+        <!--maincontentinner-->
+    </div>
+    <!--maincontent-->
+
+</div>
+<!--rightpanel-->
+
+</div>
+<!--mainwrapper--> 

@@ -1,0 +1,138 @@
+<div ng-include src="'modules/dentists/views/layouts/header_files.html'"></div>
+<div data-ng-controller="DentistsController" ng-init="getUserData()">
+    <div class="mainwrapper">
+        <div ng-include src="'modules/dentists/views/layouts/header.html'"></div>
+        <div ng-include src="'modules/dentists/views/layouts/leftmenu.html'"></div>
+    <div class="rightpanel">
+    <ul class="breadcrumbs">
+        <li><a href="#!/dashboard"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
+       <!-- <li><a href="#!/list">Dashboard</a> <span class="separator"></span></li>-->
+        <li><a href="javascript:void(0)">{{data.first_name+' '+data.last_name}}</a> <span class="separator"></span></li>
+        <li>Profile Details</li>
+        <li class="right"> <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
+            <ul class="dropdown-menu pull-right skin-color">
+                <li><a href="default">Default</a></li>
+                <li><a href="navyblue">Navy Blue</a></li>
+                <li><a href="palegreen">Pale Green</a></li>
+                <li><a href="red">Red</a></li>
+                <li><a href="green">Green</a></li>
+                <li><a href="brown">Brown</a></li>
+            </ul>
+        </li>
+    </ul>
+    <div class="pageheader"> <a href="javascript:void(0)" class="btn btn-primary pull-right top-buffer-20" onclick="javascript:history.go(-1)">Back</a>
+        <div class="pageicon"><span class="iconfa-user"></span></div>
+        <div class="pagetitle">
+            <h5>Patient Details</h5>
+            <h1>{{data.first_name+' '+data.last_name}}</h1>
+        </div>
+    </div>
+    <!--pageheader-->
+
+    <div class="maincontent">
+        <div class="maincontentinner">
+            <div class="widget">
+                <h4 class="widgettitle">Details</h4>
+                <div class="widgetcontent">
+                    <form class="stdform" action="" method="post">
+                        <div class="bottom-bor">
+                            <div class="view-left">Patient ID</div>
+                            <div class="right-view">{{data.patient_id}}</div>
+                             <div class="clearfix"></div>
+                        </div>
+                       
+
+                        <div class="bottom-bor">
+                            <div class="view-left">First Name</div>
+                            <div class="right-view">{{data.first_name}}</div>
+                        <div class="clearfix"></div>
+                        </div>
+                        <div class="bottom-bor">
+                            <div class="view-left">Last Name</div>
+                            <div class="right-view">{{data.last_name}}</div>
+                            <div class="clearfix"></div>
+                        </div>
+                        
+
+                        <div class="bottom-bor">
+                            <div class="view-left">Date of Birth</div>
+                            <div class="right-view" ng-if="data.birth_date!='0000-00-00'">{{data.birth_date | date:'M/d/y'}}</div>
+                            <div class="clearfix"></div>
+                        </div>
+                        
+
+                        <div class="bottom-bor">
+                            <div class="view-left">Email ID</div>
+                            <div class="right-view">{{data.email}}</div>
+                             <div class="clearfix"></div>
+                        </div>
+                       
+
+                        <div class="bottom-bor">
+                            <div class="view-left">Mobile No.</div>
+                            <div class="right-view">{{data.contact_no}}</div>
+                             <div class="clearfix"></div>
+                        </div>
+                       
+
+                        <div class="bottom-bor">
+                            <div class="view-left">Address </div>
+                            <div class="right-view">{{data.address1}}</div>
+                            <div class="clearfix"></div>
+                        </div>
+                        
+
+                        <div class="bottom-bor">
+                            <div class="view-left">Area</div>
+                            <div class="right-view">{{data.area_id}}</div>
+                            <div class="clearfix"></div>
+                        </div>
+                        
+
+                        <div class="bottom-bor">
+                            <div class="view-left">City</div>
+                            <div class="right-view">{{data.city}}</div>
+                            <div class="clearfix"></div>
+                        </div>
+                        
+
+                        <div class="bottom-bor">
+                            <div class="view-left">State</div>
+                            <div class="right-view">{{data.state}}</div>
+                            <div class="clearfix"></div>
+                        </div>
+                       
+
+                        <div class="bottom-bor">
+                            <div class="view-left">Zip Code</div>
+                            <div class="right-view">{{data.zip}}</div>
+                             <div class="clearfix"></div>
+                        </div>
+                       
+
+
+                    </form>
+                    <p class="stdformbutton btn-left">
+                        <button class="btn btn-primary " type="reset" onclick="javascript:history.go(-1)">Back</button>
+                    </p>
+                </div>
+                <!--widgetcontent-->
+            </div>
+            <!--widget-->
+
+           
+
+        </div> <!--maincontentinner-->
+         <div ng-include src="'modules/dentists/views/layouts/footer.html'"></div>
+            <!--footer-->
+    </div>
+            <!--maincontent-->
+
+        </div>
+        <!--rightpanel-->
+
+    </div>
+    <!--mainwrapper-->
+</div>
+</body>
+</html>

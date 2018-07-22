@@ -1,0 +1,283 @@
+/* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+
+body {
+	color: #5a5a5a;
+}
+/* CUSTOMIZE THE NAVBAR
+-------------------------------------------------- */
+
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+.navbar-wrapper {
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 20;
+	min-width: 480px;
+}
+/* Flip around the padding for proper display in narrow viewports */
+.navbar-wrapper > .container {
+	padding-right: 0;
+	padding-left: 0;
+}
+.navbar-wrapper .navbar {
+	padding-right: 15px;
+	padding-left: 15px;
+}
+/*.navbar-wrapper .navbar .container {
+  width: auto;
+}
+*/
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+/* Carousel base class */
+.carousel {
+	/*height: 350px;*/
+	min-width: 480px;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+	z-index: 10;
+}
+.carousel-caption {
+	top: 21px !important;
+	bottom: 0;
+	left:0px;
+}
+/* Declare heights because of positioning of img element */
+.carousel .item {	
+	height: 490px;
+	top:50px;
+	background-color: #fff;
+}
+.carousel-inner > .item > img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	min-width: 480px;
+}
+/* MARKETING CONTENT
+-------------------------------------------------- */
+
+/* Center align the text within the three columns below the carousel */
+.marketing .col-lg-4 {
+	margin-bottom: 20px;
+	text-align: center;
+}
+.marketing h2 {
+	font-weight: normal;
+}
+.marketing .col-lg-4 p {
+	margin-right: 10px;
+	margin-left: 10px;
+}
+/* Featurettes
+------------------------- */
+
+.featurette-divider {
+	margin: 80px 0; /* Space out the Bootstrap <hr> more */
+}
+/* Thin out the marketing headings */
+.featurette-heading {
+	font-weight: 300;
+	line-height: 1;
+	letter-spacing: -1px;
+}
+
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+@media (max-width: 900px) {
+.carousel .item {
+	height: 285px;
+}
+.carousel-caption {
+	top: 85px
+}
+}
+@media (max-width: 767px) {
+.carousel-caption {
+	top: 65px
+}
+.carousel-caption h1 {
+	font-size: 18px;
+}
+.banner-serch-form .btn-primary {
+	margin-top: 10px;
+}
+}
+@media (max-width: 690px) {
+
+/* chat */
+
+
+#panel, #flip {
+    padding: 6px;
+    
+	border:1px solid #67c3a0;
+	background-color: #17a6b6;
+	color:#fff;
+float:left;
+bottom:0;
+right:0;
+cursor:pointer;
+width:100%;
+z-index:99;
+  border-radius: 5px;
+}
+
+
+
+
+#user-panel, #user-flip {
+    padding: 6px;
+    
+    background-color: #17a6b6;
+   border:1px solid #67c3a0;
+	color:#fff;
+float:left;
+bottom:80px;
+right:0;
+width:100%;
+z-index:97;
+  border-radius: 5px;
+}
+
+
+
+#Main-room-panel, #Main-room-flip {
+   padding: 6px;
+   background-color: #17a6b6;
+   border:1px solid #67c3a0;
+	color:#fff;
+float:left;
+bottom:40px;
+right:0;
+width:100%;
+z-index:98;
+  border-radius: 5px;
+}
+#chatbox {
+    text-align:left;
+
+    margin-bottom:5px;
+
+   font-family:verdana;
+    max-height:200px;
+    width:100%;
+    border:1px solid #ACD8F0;
+    overflow:auto; }
+  
+  #chatbox-main {
+    text-align:left;
+    margin-bottom:5px;
+    max-height:200px;
+background-color:#fff;
+    border:1px solid #ACD8F0;
+	color:#000;
+    overflow:auto;
+font-family:verdana;	}
+  
+  #user-chatbox {
+    text-align:left;
+    margin:0 auto;
+    margin-bottom:1px;
+    padding:10px;
+    background:#fff;
+    height:85px;
+    width:100%;
+    border:1px solid #ACD8F0;
+    overflow:auto; 
+	font-family:verdana;}
+
+
+
+
+/* chat end */
+
+
+
+.carousel-inner {height:830px;}
+.new-event-box{float:left !important;}
+.home-form{margin:0px; padding:0px;}
+.shadow-spreater {display:none;}
+.carousel-inner > .item > img {
+display:none;
+	position: absolute;
+	top: 0;
+	left: -50px;
+	width: 100%;
+	min-width: 480px;
+}
+
+.blank{display:none;}
+.carousel .item {
+	height: 500px;
+}
+.carousel-caption {
+	top: 10px;
+	position:relative;
+	left:0px !important;
+}
+.carousel-caption hr {
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+}
+ @media (min-width: 768px) {
+/* Navbar positioning foo */
+  
+.navbar-wrapper {
+	border-top: 2px solid #00aeef;
+}
+.navbar-wrapper .container {
+	padding-right: 15px;
+	padding-left: 15px;
+}
+.navbar-wrapper .navbar {
+	padding-right: 0;
+	padding-left: 0;
+}
+/* The navbar becomes detached from the top, so we round the corners */
+  /*.navbar-wrapper .navbar {
+    border-radius: 4px;
+  }
+*/
+  /* Bump up size of carousel content */
+.carousel-caption p {
+	margin-bottom: 20px;
+	font-size: 21px;
+	line-height: 1.4;
+}
+.featurette-heading {
+	font-size: 50px;
+}
+}
+ @media (min-width: 992px) {
+.featurette-heading {
+	margin-top: 120px;
+}
+}
+
+  /* home-form */
+.blank{height:150px;}
+.home-form{background-color:#fff; padding:15px 0px; border:8px solid #54a3b9;}
+.home-form-bottom{margin-bottom:15px;}
+.home-form-bottom1{margin-bottom:25px;}
+.new-event-box{top:41px;}
+.news-home{background-color:#54a3b9; border:2px solid #54a3b9; height:164px; margin-bottom:20px; padding:10px; color:#fff;}
+.event-home{background-color:#67c3a0; border:2px solid #54a3b9; height:164px; margin-bottom:10px; padding:10px; color:#fff;}
+.dot-separator{border-bottom:1px dotted #fff; height:5px; margin-bottom:5px;}
+.notification {
+  background-color: #d5d5d5;
+  color: #000;
+padding-top:5px;
+  border: 0px solid #fff;
+  border-radius: 0px 0px 0px 0px;
+  font-size: 15px;
+ }

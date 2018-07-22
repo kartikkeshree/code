@@ -1,0 +1,364 @@
+<div ng-include src="'modules/dentists/views/layouts/header_files.html'"></div>
+<div class="mainwrapper">
+<div ng-include src="'modules/dentists/views/layouts/header.html'"></div>
+<div ng-include src="'modules/dentists/views/layouts/leftmenu.html'"></div>
+
+<div class="rightpanel">
+<ul class="breadcrumbs">
+    <li><a href="dashboard.html"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
+    <li><a href="clinic.html">Clinic</a> <span class="separator"></span></li>
+    <li>Edit Clinic</li>
+    <li class="right"><a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color
+        Skins</a>
+        <ul class="dropdown-menu pull-right skin-color">
+            <li><a href="default">Default</a></li>
+            <li><a href="navyblue">Navy Blue</a></li>
+            <li><a href="palegreen">Pale Green</a></li>
+            <li><a href="red">Red</a></li>
+            <li><a href="green">Green</a></li>
+            <li><a href="brown">Brown</a></li>
+        </ul>
+    </li>
+</ul>
+<div class="pageheader"><a href="#!/clinics" class="btn btn-primary pull-right top-buffer-20">Back</a>
+
+    <div class="pageicon"><span class="iconfa-plus"></span></div>
+    <div class="pagetitle">
+        <h5>Edit clinic timing</h5>
+
+        <h1>Clinic Timing</h1>
+    </div>
+</div>
+<!--pageheader-->
+
+<div class="maincontent">
+<div class="maincontentinner">
+<div class="widget" ng-controller="ClinicsController" ng-init="getTiming()">
+<h4 class="widgettitle">Give clinic's working days and time</h4>
+
+<div class="widgetcontent">
+<form class="stdform" data-ng-submit="clinicTime()">
+<div class="par control-group">
+    <label class="control-label">Clinic Name</label>
+
+    <div class="controls">
+        <input type="text" class="span4" placeholder="Clinic Name" name="clinic_name" data-ng-model="clinic.name"
+               readonly/>
+    </div>
+</div>
+
+
+<div class="par control-group">
+<label class="control-label">&nbsp;</label>
+
+<div class="controls">
+<table width="80%;">
+<tr>
+    <th align="left">Days</th>
+    <th>1st Shift Start Time</th>
+    <th>1st Shift End Time</th>
+    <th>2st Shift Start Time</th>
+    <th>2st Shift End Time</th>
+</tr>
+<tr>
+    <td>Monday</td>
+    <td align="center">
+        <select class="span1" name="monday_1start_time" data-ng-model="clinicTiming.mon1s">
+            <option value="">Time</option>
+            <option ng-repeat="time in timeArr" value="{{time.time | date:'HH:mm:ss'}}"
+                    ng-selected="((clinicTiming.mon1s==(time.time | date:'HH:mm:ss'))?true:false)" class="">{{time.time
+                | date:'hh:mm a'}}
+            </option>
+        </select>
+    </td>
+    <td align="center">
+        <select class="span1" name="monday_2end_time" data-ng-model="clinicTiming.mon1e">
+            <option value="">Time</option>
+            <option ng-repeat="time in timeArr" value="{{time.time | date:'HH:mm:ss'}}"
+                    ng-selected="((clinicTiming.mon1e==(time.time | date:'HH:mm:ss'))?true:false)">{{time.time |
+                date:'hh:mm a'}}
+            </option>
+        </select>
+    </td>
+    <td align="center">
+        <select class="span1" name="" data-ng-model="clinicTiming.mon2s">
+            <option value="">Time</option>
+            <option ng-repeat="time in timeArr" value="{{time.time | date:'HH:mm:ss'}}"
+                    ng-selected="((clinicTiming.mon2s==(time.time | date:'HH:mm:ss'))?true:false)">{{time.time |
+                date:'hh:mm a'}}
+            </option>
+        </select>
+    </td>
+    <td align="center">
+        <select class="span1" name="" data-ng-model="clinicTiming.mon2e">
+            <option value="">Time</option>
+            <option ng-repeat="time in timeArr" value="{{time.time | date:'HH:mm:ss'}}"
+                    ng-selected="((clinicTiming.mon2e==(time.time | date:'HH:mm:ss'))?true:false)">{{time.time |
+                date:'hh:mm a'}}
+            </option>
+        </select>
+    </td>
+</tr>
+
+<tr>
+    <td>Tuesday</td>
+    <td align="center">
+        <select class="span1" name="" data-ng-model="clinicTiming.tue1s">
+            <option value="">Time</option>
+            <option ng-repeat="time in timeArr" value="{{time.time | date:'HH:mm:ss'}}"
+                    ng-selected="((clinicTiming.tue1s==(time.time | date:'HH:mm:ss'))?true:false)">{{time.time |
+                date:'hh:mm a'}}
+            </option>
+        </select>
+    </td>
+    <td align="center">
+        <select class="span1" name="" data-ng-model="clinicTiming.tue1e">
+            <option value="">Time</option>
+            <option ng-repeat="time in timeArr" value="{{time.time | date:'HH:mm:ss'}}"
+                    ng-selected="((clinicTiming.tue1e==(time.time | date:'HH:mm:ss'))?true:false)">{{time.time |
+                date:'hh:mm a'}}
+            </option>
+        </select>
+    </td>
+    <td align="center">
+        <select class="span1" name="" data-ng-model="clinicTiming.tue2s">
+            <option value="">Time</option>
+            <option ng-repeat="time in timeArr" value="{{time.time | date:'HH:mm:ss'}}"
+                    ng-selected="((clinicTiming.tue2s==(time.time | date:'HH:mm:ss'))?true:false)">{{time.time |
+                date:'hh:mm a'}}
+            </option>
+        </select>
+    </td>
+    <td align="center">
+        <select class="span1" name="" data-ng-model="clinicTiming.tue2e">
+            <option value="">Time</option>
+            <option ng-repeat="time in timeArr" value="{{time.time | date:'HH:mm:ss'}}"
+                    ng-selected="((clinicTiming.tue2e==(time.time | date:'HH:mm:ss'))?true:false)">{{time.time |
+                date:'hh:mm a'}}
+            </option>
+        </select>
+    </td>
+</tr>
+
+<tr>
+    <td>Wednesday</td>
+    <td align="center">
+        <select class="span1" name="" data-ng-model="clinicTiming.wed1s">
+            <option value="">Time</option>
+            <option ng-repeat="time in timeArr" value="{{time.time | date:'HH:mm:ss'}}"
+                    ng-selected="((clinicTiming.wed1s==(time.time | date:'HH:mm:ss'))?true:false)">{{time.time |
+                date:'hh:mm a'}}
+            </option>
+        </select>
+    </td>
+    <td align="center">
+        <select class="span1" name="" data-ng-model="clinicTiming.wed1e">
+            <option value="">Time</option>
+            <option ng-repeat="time in timeArr" value="{{time.time | date:'HH:mm'}}"
+                    ng-selected="((clinicTiming.wed1e==(time.time | date:'HH:mm:ss'))?true:false)">{{time.time |
+                date:'hh:mm a'}}
+            </option>
+        </select>
+    </td>
+    <td align="center">
+        <select class="span1" name="" data-ng-model="clinicTiming.wed2s">
+            <option value="">Time</option>
+            <option ng-repeat="time in timeArr" value="{{time.time | date:'HH:mm:ss'}}"
+                    ng-selected="((clinicTiming.wed2s==(time.time | date:'HH:mm:ss'))?true:false)">{{time.time |
+                date:'hh:mm a'}}
+            </option>
+        </select>
+    </td>
+    <td align="center">
+        <select class="span1" name="" data-ng-model="clinicTiming.wed2e">
+            <option value="">Time</option>
+            <option ng-repeat="time in timeArr" value="{{time.time | date:'HH:mm:ss'}}"
+                    ng-selected="((clinicTiming.wed2e==(time.time | date:'HH:mm:ss'))?true:false)">{{time.time |
+                date:'hh:mm a'}}
+            </option>
+        </select>
+    </td>
+</tr>
+
+<tr>
+    <td>Thursday</td>
+    <td align="center">
+        <select class="span1" name="" data-ng-model="clinicTiming.thu1s">
+            <option value="">Time</option>
+            <option ng-repeat="time in timeArr" value="{{time.time | date:'HH:mm:ss'}}"
+                    ng-selected="((clinicTiming.thu1s==(time.time | date:'HH:mm:ss'))?true:false)">{{time.time |
+                date:'hh:mm a'}}
+            </option>
+        </select>
+    </td>
+    <td align="center">
+        <select class="span1" name="" data-ng-model="clinicTiming.thu1e">
+            <option value="">Time</option>
+            <option ng-repeat="time in timeArr" value="{{time.time | date:'HH:mm:ss'}}"
+                    ng-selected="((clinicTiming.thu1e==(time.time | date:'HH:mm:ss'))?true:false)">{{time.time |
+                date:'hh:mm a'}}
+            </option>
+        </select>
+    </td>
+    <td align="center">
+        <select class="span1" name="" data-ng-model="clinicTiming.thu2s">
+            <option value="">Time</option>
+            <option ng-repeat="time in timeArr" value="{{time.time | date:'HH:mm:ss'}}"
+                    ng-selected="((clinicTiming.thu2s==(time.time | date:'HH:mm:ss'))?true:false)">{{time.time |
+                date:'hh:mm a'}}
+            </option>
+        </select>
+    </td>
+    <td align="center">
+        <select class="span1" name="" data-ng-model="clinicTiming.thu2e">
+            <option value="">Time</option>
+            <option ng-repeat="time in timeArr" value="{{time.time | date:'HH:mm:ss'}}"
+                    ng-selected="((clinicTiming.thu2e==(time.time | date:'HH:mm:ss'))?true:false)">{{time.time |
+                date:'hh:mm a'}}
+            </option>
+        </select>
+    </td>
+</tr>
+
+<tr>
+    <td>Friday</td>
+    <td align="center">
+        <select class="span1" name="" data-ng-model="clinicTiming.fri1s">
+            <option value="">Time</option>
+            <option ng-repeat="time in timeArr" value="{{time.time | date:'HH:mm:ss'}}"
+                    ng-selected="((clinicTiming.fri1s==(time.time | date:'HH:mm:ss'))?true:false)">{{time.time |
+                date:'hh:mm a'}}
+            </option>
+        </select>
+    </td>
+    <td align="center">
+        <select class="span1" name="" data-ng-model="clinicTiming.fri1e">
+            <option value="">Time</option>
+            <option ng-repeat="time in timeArr" value="{{time.time | date:'HH:mm:ss'}}"
+                    ng-selected="((clinicTiming.fri1e==(time.time | date:'HH:mm:ss'))?true:false)">{{time.time |
+                date:'hh:mm a'}}
+            </option>
+        </select>
+    </td>
+    <td align="center">
+        <select class="span1" name="" data-ng-model="clinicTiming.fri2s">
+            <option value="">Time</option>
+            <option ng-repeat="time in timeArr" value="{{time.time | date:'HH:mm:ss'}}"
+                    ng-selected="((clinicTiming.fri2s==(time.time | date:'HH:mm:ss'))?true:false)">{{time.time |
+                date:'hh:mm a'}}
+            </option>
+        </select>
+    </td>
+    <td align="center">
+        <select class="span1" name="" data-ng-model="clinicTiming.fri2e">
+            <option value="">Time</option>
+            <option ng-repeat="time in timeArr" value="{{time.time | date:'HH:mm:ss'}}"
+                    ng-selected="((clinicTiming.fri2e==(time.time | date:'HH:mm:ss'))?true:false)">{{time.time |
+                date:'hh:mm a'}}
+            </option>
+        </select>
+    </td>
+</tr>
+
+<tr>
+    <td>Saturday</td>
+    <td align="center">
+        <select class="span1" name="" data-ng-model="clinicTiming.sat1s">
+            <option value="">Time</option>
+            <option ng-repeat="time in timeArr" value="{{time.time | date:'HH:mm:ss'}}"
+                    ng-selected="((clinicTiming.sat1s==(time.time | date:'HH:mm:ss'))?true:false)">{{time.time |
+                date:'hh:mm a'}}
+            </option>
+        </select>
+    </td>
+    <td align="center">
+        <select class="span1" name="" data-ng-model="clinicTiming.sat1e">
+            <option value="">Time</option>
+            <option ng-repeat="time in timeArr" value="{{time.time | date:'HH:mm:ss'}}"
+                    ng-selected="((clinicTiming.sat1e==(time.time | date:'HH:mm:ss'))?true:false)">{{time.time |
+                date:'hh:mm a'}}
+            </option>
+        </select>
+    </td>
+    <td align="center">
+        <select class="span1" name="" data-ng-model="clinicTiming.sat2s">
+            <option value="">Time</option>
+            <option ng-repeat="time in timeArr" value="{{time.time | date:'HH:mm:ss'}}"
+                    ng-selected="((clinicTiming.sat2s==(time.time | date:'HH:mm:ss'))?true:false)">{{time.time |
+                date:'hh:mm a'}}
+            </option>
+        </select>
+    </td>
+    <td align="center">
+        <select class="span1" name="" data-ng-model="clinicTiming.sat2e">
+            <option value="">Time</option>
+            <option ng-repeat="time in timeArr" value="{{time.time | date:'HH:mm:ss'}}"
+                    ng-selected="((clinicTiming.sat2e==(time.time | date:'HH:mm:ss'))?true:false)">{{time.time |
+                date:'hh:mm a'}}
+            </option>
+        </select>
+    </td>
+</tr>
+
+<tr>
+    <td>Sunday</td>
+    <td align="center">
+        <select class="span1" name="" data-ng-model="clinicTiming.sun1s">
+            <option value=""
+            ">Time</option>
+            <option ng-repeat="time in timeArr" value="{{time.time | date:'HH:mm:ss'}}"
+                    ng-selected="((clinicTiming.sun1s==(time.time | date:'HH:mm:ss'))?true:false)">{{time.time |
+                date:'hh:mm a'}}
+            </option>
+        </select>
+    </td>
+    <td align="center">
+        <select class="span1" name="" data-ng-model="clinicTiming.sun1e">
+            <option value="">Time</option>
+            <option ng-repeat="time in timeArr" value="{{time.time | date:'HH:mm:ss'}}"
+                    ng-selected="((clinicTiming.sun1e==(time.time | date:'HH:mm:ss'))?true:false)">{{time.time |
+                date:'hh:mm a'}}
+            </option>
+        </select>
+    </td>
+    <td align="center">
+        <select class="span1" name="" data-ng-model="clinicTiming.sun2s">
+            <option value="">Time</option>
+            <option ng-repeat="time in timeArr" value="{{time.time | date:'HH:mm:ss'}}"
+                    ng-selected="((clinicTiming.sun2s==(time.time | date:'HH:mm:ss'))?true:false)">{{time.time |
+                date:'hh:mm a'}}
+            </option>
+        </select>
+    </td>
+    <td align="center">
+        <select class="span1" name="" data-ng-model="clinicTiming.sun2e">
+            <option value="">Time</option>
+            <option ng-repeat="time in timeArr" value="{{time.time | date:'HH:mm:ss'}}"
+                    ng-selected="((clinicTiming.sun2e==(time.time | date:'HH:mm:ss'))?true:false)">{{time.time |
+                date:'hh:mm a'}}
+            </option>
+        </select>
+    </td>
+</tr>
+
+</table>
+</div>
+</div>
+<p class="stdformbutton">
+    <button class="btn btn-primary">Submit</button>
+    <button class="btn" ng-click="clinicTiming = ''">Reset</button>
+</p>
+</form>
+</div>
+<!--widgetcontent-->
+</div>
+<!--widget-->
+<div ng-include src="'modules/dentists/views/layouts/footer.html'"></div>
+<!--footer-->
+</div>
+<!--maincontentinner-->
+</div>
+<!--maincontent-->
+</div>
+</div>
+

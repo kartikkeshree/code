@@ -1,0 +1,288 @@
+<div ng-include src="'modules/dentists/views/layouts/header_files.html'"></div>
+<div class="mainwrapper" data-ng-controller="HomePageNotificationController">
+    <div ng-include src="'modules/dentists/views/layouts/header.html'"></div>
+    <div ng-include src="'modules/dentists/views/layouts/leftmenu.html'"></div>
+    <div class="rightpanel"  ng-init="find(searchVal)">
+
+        <ul class="breadcrumbs">
+            <li><a href="#/dashboard"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
+            <li>Patient</li>
+            <li class="right">
+                <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
+                <ul class="dropdown-menu pull-right skin-color">
+                    <li><a href="default">Default</a></li>
+                    <li><a href="navyblue">Navy Blue</a></li>
+                    <li><a href="palegreen">Pale Green</a></li>
+                    <li><a href="red">Red</a></li>
+                    <li><a href="green">Green</a></li>
+                    <li><a href="brown">Brown</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="pageheader">
+            <form method="post" class="searchbar right-buffer-160" ng-submit="notificationFilter()" ng-if="user[0].role_id==1">
+                <input type="text" name="keyword" placeholder="To search type and hit enter..."
+                       ng-model="notify.filterVal"/>
+            </form>
+            <form method="post" class="searchbar right-buffer-10" ng-submit="notificationFilter()" ng-if="user[0].role_id!=1">
+                <input type="text" name="keyword" placeholder="To search type and hit enter..."
+                       ng-model="notify.filterVal"/>
+            </form>
+            
+            <a class="btn btn-primary pull-right top-buffer-20 left-buffer-10"  href="#addNotification"
+               data-toggle="modal" ng-if="user[0].role_id==1" ng-click="addNewNotification()">Add New Notification</a>
+
+            <div class="pageicon"><span class="iconfa-bell" id="my-notification"></span></div>
+            <div class="pagetitle">
+                <h5>Home Page Notification</h5>
+
+                <h1>Notification</h1>
+            </div>
+        </div>
+        <!--pageheader-->
+
+        <div class="maincontent">
+            <div class="maincontentinner">
+
+
+                <!-- <h4 class="widgettitle">Table Using Colgroup</h4>-->
+                <table class="table table-bordered responsive">
+                    <colgroup>
+                        <col class="con0" style="width:10%;"/>
+                        <col class="con0" style="width:40%;"/>
+                        <col class="con1" style="width:15%;"/>	
+                        <col class="con0" style="width:15%;"/>
+                        <col class="con1" style="width:20%;"/>
+                        <col class="con1" style="width:5%;"/>
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="center">&nbsp;</th>
+                        <th class="center">Sr. No</th>
+                        <th>Description</th>
+                        <th class="center">Start Date</th>
+                        <th class="center">End Date</th>
+                       <!-- <th class="center">Status</th>-->
+                        <th class="center">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="descript in descript">
+                    	<td class="center">&nbsp;</td>
+                        <td class="center">{{$index+1}}</td>
+                       
+                        <td><a href="#viewNotification"  data-toggle="modal" ng-click="getViewNotificationId(descript.id)">{{descript.description}}</a></td>
+                        <td class="center" >{{descript.start_date | date}}</td>
+                        <td class="center">{{descript.end_date | date}}</td>
+                       <!-- <td class="center"><select class="no-bottom-margin small-select"><option>Active</option> <option>In - Active</option></select></td>-->
+                        <td class="center">
+                            <a href="#addNotification"  ng-click="editNotification(descript.id)" data-toggle="modal" >
+                                <span class="iconfa-edit large-a-icon"> </span>
+                            </a> &nbsp;
+                            <a href="javascript:void(0)" ng-click="deleteNotification(descript.id,$index)" >
+                                <span class="iconfa-trash large-a-icon"></span>
+                            </a>
+                        </td>
+                    
+                    </tr>
+                    
+                  <!--  <tr ng-repeat="patient in patients">
+                        <td class="center">&nbsp;</td>
+                        <td class="center">{{$index+1}}</td>
+                        <td>
+                            <a href="#!/viewPatientInfo/{{patient.user_id}}/{{patient.app_id}}/{{patient.clinic_id}}?val=edit">{{patient.first_name
+                                +' '+patient.last_name}}</a></td>
+                        <td>{{patient.contact_no}}</td>
+                        
+                        <td class="center">{{patient.last_visited_date | date:'medium'}}</td>
+                        <td>{{patient.email}}</td>
+                        <td>{{patient.address1}}</td>
+                        <td class="center">{{patient.area_name}}</td>
+                        <td class="center">
+                            <a href="javascript:void(0);" ng-click="editPatient(patient.app_id)">
+                                <span class="iconfa-edit large-a-icon"> </span>
+                            </a> &nbsp;
+                            <a href="javascript:void(0)"
+                               ng-click="deleteAppointMentWithParentAppId(patient.app_id,$index)">
+                                <span class="iconfa-trash large-a-icon"></span>
+                            </a>
+                        </td>
+                    </tr>-->
+
+
+                    </tbody>
+                </table>
+                <!--Table end -->
+
+
+            </div>
+            <!--maincontentinner-->
+            <div ng-include src="'modules/dentists/views/layouts/footer.html'"></div>
+            <!--footer-->
+        </div>
+        <!--maincontent-->
+
+    </div>
+    <!--rightpanel-->
+    <div aria-hidden="false" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal hide fade in"
+         id="addNotification">
+        <div class="modal-header widgettitle">
+           <!-- <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>-->
+            <h3 id="myModalLabel">Notification</h3>
+            <div ng-show="success" role="alert" class="alert alert-success topic-alert">
+                {{success}}.
+            </div>
+            <div ng-show="error" role="alert" class="alert alert-danger topic-alert">
+                {{error}}.
+            </div>
+
+        </div>
+        <form class="stdform stdform2" name="fileForm" href="#addNotification">
+            <div class="modal-body no-padding">
+               <!-- <div class="text-center">
+                    <a href="/csv/user.csv" target="_blank" class="btn btn-primary"><span
+                            class="iconfa-download-alt"></span> &nbsp;Download File</a>
+                    <p>Please Upload file in a specific format.For example you can download sample file.</p>
+                </div>
+                <div class="alert alert-success" ng-if="msg!=undefined">
+                    <button type="button" class="close" data-dismiss="alert" ng-click="clearData()">×</button>
+                    <strong></strong>{{msg}}
+                </div>
+
+                <div class="alert alert-error" ng-if="msgErr!=undefined">
+                    <button type="button" class="close" data-dismiss="alert" ng-click="clearData()">×</button>
+                    <strong></strong>{{msgErr}}
+                </div>
+
+
+                <div class="par text-center">
+                   
+                    <div data-provides="fileupload" class="fileupload fileupload-new">
+                        <div class="input-append">
+                            <div class="uneditable-input span3">
+                                <i class="iconfa-file fileupload-exists"></i>
+                                <span class="fileupload-preview"></span>
+                            </div>
+                        <span class="btn btn-file"><span class="fileupload-new">Select file</span>
+                        <span class="fileupload-exists">Select file</span>
+                        <input type="file" ng-model-instant id="fileToUpload" ng-model="filetoUp"
+                               onchange="angular.element(this).scope().uploadFile(this.files)"/>
+                        </span>
+
+                        </div>
+                    </div>
+                </div>-->
+                
+            	
+               <!-- <p>
+                   <label>Title</label>
+                   <span class="field"><textarea class="input-xlarge" placeholder="Title"  ng-model="notify.title"></textarea></span>
+                </p>-->
+                <p>
+                    <label>Description</label>
+                    <span class="field"><textarea class="input-xlarge"  placeholder="Description"  ng-model="notify.description"></textarea></span>
+
+                </p>
+                <p>
+                    <label>Start Date</label>
+                    <span class="field"><input type="text" name="date"   id="notification-start-date"  placeholder="Start Date" class="input-xlarge"  ng-model="notify.start_date"></span>
+
+                </p>
+                <p>
+                    <label>End Date</label>
+                    <span class="field"><input type="text" name="date"  id="notification-end-date"  placeholder="End Date" class="input-xlarge"   ng-model="notify.end_date"></span>
+
+                </p>
+                
+            </div>
+
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn"  ng-click="clearData(fileForm)">Close</button>
+                <button class="btn btn-primary"  ng-if="notifyVal==true" ng-click="notificationUpdate(notify.id)">Update</button>
+                <button type="submit" class="btn btn-primary" ng-if="notifyVal!=true"  ng-click="notificationSubmit()">Submit</button>
+            </div>
+
+
+        </form>
+    </div>
+    
+    <div aria-hidden="false" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal hide fade in"
+         id="viewNotification">
+        <div class="modal-header widgettitle">
+            <h3 id="myModalLabel">View Notification</h3>
+
+        </div>
+        <form class="stdform stdform2" name="fileForm" href="#viewNotification" ng-submit="notificationOk()">
+            <div class="modal-body no-padding">
+
+
+                <p>
+                   <label>Description</label>
+                   <span class="field">{{viewNotificationValues.description}}</span>
+                </p>
+                <p>
+                   <label>Start Date</label>
+                   <span class="field">{{viewNotificationValues.start_date | date}}</span>
+                </p>
+                <p>
+                   <label>End Date</label>
+                   <span class="field">{{viewNotificationValues.end_date | date}}</span>
+                </p>
+                
+            </div>
+
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn" ng-click="clearData(fileForm)">Ok</button>
+                <!--<button type="submit" class="btn btn-primary">Ok</button>-->
+            </div>
+
+
+        </form>
+
+    </div>
+
+   <!-- <div aria-hidden="false" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal hide fade in"
+         id="editNotification">
+        <div class="modal-header widgettitle">
+            <h3 id="myModalLabel">Edit Notification</h3>
+
+        </div>
+        <form class="editprofileform" name="fileForm" ng-init="findedit(searchVar)" href="#editNotification"  ng-submit="notificationUpdate(notificationValues.id)">
+            <div class="modal-body no-padding" >
+
+                <p>
+                    <label class="control-label">Description</label>
+                   &lt;!&ndash; <span class="field">{{notificationValues.description}}</span>&ndash;&gt;
+                <div class="controls">
+                    <input type="text" class="span4" placeholder="Description" ng-model="notificationValues.description"/>
+                </div>
+                </p>
+
+                <p>
+                    <label  class="control-label">Start Date</label>
+                <div class="controls">
+                    <input type="text" class="span4" id="notification-start_date" placeholder="Start Date" name="date" ng-model="notificationValues.start_date"/>
+                </div>
+                </p>
+                <p>
+                    <label  class="control-label">End Date</label>
+                <div class="controls">
+                    <input type="text" class="span4" id="notification-end-date" placeholder="End Date" ng-model="notificationValues.end_date"/>
+                </div>
+                </p>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Update</button>
+                <button data-dismiss="modal" class="btn" ng-click="clearData(fileForm)">Close</button>
+            </div>
+        </form>
+    </div>-->
+
+</div><!--mainwrapper-->
+
+
+</body>
+</html>

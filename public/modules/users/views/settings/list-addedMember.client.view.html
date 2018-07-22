@@ -1,0 +1,57 @@
+<div ng-include src="'modules/core/views/header-inside.html'"></div>
+<div class="container inside-content" data-ng-controller="SettingsController" data-ng-init="getMember()">
+    <div class="row">
+        <div class="inside-page-title top-buffer-20">
+            <h1>Family Members</h1>
+            <a href="#!/addNewMember" class="btn btn-primary btn-top pull-right">Add Member</a>
+        </div>
+        <div class="clearfix"></div>
+      
+        <div class="panel panel-default top-buffer-20" id="my-appointment">
+            <!-- Default panel contents -->
+            <div class="panel-heading custom-heading">
+                <h5>Family Members</h5>
+            </div>
+
+            <!-- Table -->
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Member Name</th>
+                    <th>Relation</th>
+                    <th>Gender</th>
+                    <th>Date of Birth</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="credential in credentials">
+                    <th scope="row">{{$index + 1}}</th>
+                    <td>{{credential.first_name +' '+credential.last_name}}</td>
+                    <td>{{credential.relation}}</td>
+                    <td>{{credential.gender}}</td>
+                    <td>{{credential.birth_date | date}}</td>
+                    <td><a href="#!/editMember/{{credential.id}}" title="Edit">
+                        <div class="edit-appointment"></div>
+                    </a><a href="javascript:void(0);" title="Delete" data-ng-click="deleteMember(credential.id,$index)">
+                        <div class="delete-appoinment"></div>
+                    </a>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+<div class="book-appointments text-center">
+    <div class="container">
+        <h1 class="text-uppercase">Doctors</h1>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
+        <a href="#!/dentistList/" class="btn btn-primary text-uppercase">Book Appointment</a>
+    </div>
+</div>
+<div ng-include src="'modules/core/views/footer.html'"></div>

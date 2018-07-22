@@ -1,0 +1,327 @@
+<div ng-include src="'modules/dentists/views/layouts/header_files.html'"></div>
+<div class="mainwrapper">
+    <div ng-include src="'modules/dentists/views/layouts/header.html'"></div>
+    <div ng-include src="'modules/dentists/views/layouts/leftmenu.html'"></div>
+    <div class="rightpanel" data-ng-controller="DentistsController" ng-init="findByUserId()">
+        <ul class="breadcrumbs" >
+            <li><a href="#!/dashboard"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
+            <li>Profile</li>
+            <li class="right"> <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
+                <ul class="dropdown-menu pull-right skin-color">
+                    <li><a href="default">Default</a></li>
+                    <li><a href="navyblue">Navy Blue</a></li>
+                    <li><a href="palegreen">Pale Green</a></li>
+                    <li><a href="red">Red</a></li>
+                    <li><a href="green">Green</a></li>
+                    <li><a href="brown">Brown</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="pageheader">
+            <div class="pageicon"><span class="iconfa-cogs"></span></div>
+            <div class="pagetitle">
+                <h5>About You</h5>
+                <h1>Profile</h1>
+            </div>
+        </div>
+        <!--pageheader-->
+
+        <div class="maincontent">
+            <div class="maincontentinner">
+                <div class="row-fluid">
+                    <div class="span5 profile-left">
+                        <div class="widgetbox profile-photo">
+                            <div class="headtitle">
+                                <!-- <div class="btn-group">
+                                     <button data-toggle="dropdown" class="btn dropdown-toggle">Action <span class="caret"></span></button>
+                                     <ul class="dropdown-menu">
+                                         <li><a href="#">Change Photo</a></li>
+                                         <li><a href="#">Remove Photo</a></li>
+                                     </ul>
+                                 </div>-->
+                                <h4 class="widgettitle">Profile Photo</h4>
+                            </div>
+                            <div class="widgetcontent">
+                                <div class="profilethumb">
+                                    <form name="userForm" data-ng-submit="updateUserProfile(userForm.$valid)">
+                                        <div class="" id="profile-image-dentist">
+                                            <img src="images/profile_images/{{authentication[0].image}}" alt="" class="img-polaroid"  ng-if="authentication[0].role_id != 1"/>
+                                            <img src="images/profile_images/{{data[0].image}}" alt="" class="img-polaroid"  ng-if="authentication[0].role_id == 1"/>
+                                        </div>
+                                        <div data-provides="fileupload" class="fileupload fileupload-new">
+                                            <div class="input-append" style="width:100%;">
+                                                <div class="uneditable-input span2"> <i class="iconfa-file fileupload-exists"></i> <span class="fileupload-preview"></span> </div>
+                                                <span class="btn btn-file"><span class="fileupload-new">Select file</span> <span class="fileupload-exists">Change</span>
+                                                    <input type="file" ng-model-instant id="fileToUpload" multiple onchange="angular.element(this).scope().uploadFile(this.files)" />
+                                                </span> <a data-dismiss="fileupload" class="btn fileupload-exists" href="#">Remove</a> </div>
+                                        </div>
+                                        <button class="btn btn-primary" type="submit">Change Photo</button>
+                                        <p style="color:green" ng-if="updateImageInfo != undefined">
+                                            {{updateImageInfo}}
+                                        </p>
+                                    </form>
+                                </div>
+                                <!--profilethumb-->
+                            </div>
+                        </div>
+                        <div class="widgetbox" >
+                            <h4 class="widgettitle">Change Password</h4>
+                            <div class="widgetcontent">
+                                <form class="custom-form-1" ng-submit="changePassword()">
+                                    <p style="color:green" ng-if="message != undefined">
+                                        {{message}}
+                                    </p>
+
+                                    <p>
+                                        <label>Current Password</label>
+                                        <span>
+                                            <input type="password" class="input-large" ng-model="chpass.curPassword" placeholder="Old Password" />
+                                        </span> </p>
+                                    <p>
+                                        <label>New Password</label>
+                                        <span>
+                                            <input type="password" class="input-large" ng-model="chpass.newPass" placeholder="New Password" />
+                                        </span> </p>
+                                    <p>
+                                        <label>Confirm Password</label>
+                                        <span>
+                                            <input type="password" class="input-large" ng-model="chpass.cpass" placeholder="Confirm password" />
+                                        </span> </p>
+                                    <p>
+                                        <button class="btn btn-primary" type="submit">Change Password</button>
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="widgetbox">
+                            <div class="headtitle">
+                                <!--<div class="btn-group">
+                                    <button class="btn dropdown-toggle" data-toggle="dropdown">Add More &lt;!&ndash;<span class="caret"></span>&ndash;&gt;</button>
+                                    &lt;!&ndash; <ul class="dropdown-menu">
+                                              <li><a href="#">Add More</a></li>
+                    
+                                              </ul>&ndash;&gt;
+                                </div>-->
+                                <h4 class="widgettitle">Specialty Information</h4>
+                            </div>
+                            <div class="widgetcontent" ng-init="getCategories()">
+                                <form class="custom-form-1 education-info" ng-submit="updateSpeciality()">
+                                    <p style="color:green"  ng-if="updateSpecialityMessage != undefined">
+                                        {{updateSpecialityMessage}}
+                                    </p>
+                                    <p style="color:red;"  ng-if="updateSpecialityError != undefined">
+                                        {{updateSpecialityError}}
+                                    </p>
+                                    <p>
+                                        <label>Category</label>
+                                        <span>
+                                            <select ng-model="prof.category_id" ng-change="changeCategory(prof.category_id)">
+                                                <option ng-repeat="cat in categories" value="{{cat.id}}">{{cat.name}}</option>
+                                            </select>
+                                        </span> </p>
+                                    <p>
+                                        <label>Specialty</label>
+                                        <span>
+                                            <select ng-model="spec.speciality"  multiple="multiple">
+                                                <option ng-repeat="spec in specs" value="{{spec.id}}" ng-selected="spec.flag">{{spec.name}}</option>
+                                            </select>
+                                        </span> </p>
+                                    <br clear="all" />
+                                    <p>
+                                        <button class="btn btn-primary" type="submit">Update</button>
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="widgetbox" ng-if="authentication[0].role_id != 3">
+                            <h4 class="widgettitle">Social Links</h4>
+                            <div class="widgetcontent">
+                                <form class="custom-form-1" ng-submit="updateSocialLinks()">
+                                    <p style="color:green"  ng-if="updateSocialLinksInfoMsg != undefined">
+                                        {{updateSocialLinksInfoMsg}}
+                                    </p>
+                                    <p>
+                                        <label>Facebook</label>
+                                        <span>
+                                            <input type="text" class="input-large" placeholder="www.facebook.com/username" ng-model="prof.facebook_url" />
+                                        </span> </p>
+                                    <p>
+                                        <label>Linkedin</label>
+                                        <span>
+                                            <input type="text" class="input-large" placeholder="www.linkedin.com/username" ng-model="prof.linkedin_url"/>
+                                        </span> </p>
+                                    <p>
+                                        <label>Google Plus</label>
+                                        <span>
+                                            <input type="text" class="input-large" placeholder="www.google.com/username" ng-model="prof.googleplus_url" />
+                                        </span> </p>
+                                    <p>
+                                        <label>Twitter</label>
+                                        <span>
+                                            <input type="text" class="input-large" placeholder="www.twitter.com/username" ng-model="prof.twitter_url"/>
+                                        </span> </p>
+                                    <p>
+                                        <label>Skype</label>
+                                        <span>
+                                            <input type="text" class="input-large" placeholder="Skype" ng-model="prof.skype_name" />
+                                        </span>
+                                    </p>
+                                    <br class="hide-767" clear="all" />
+                                    <p>
+                                        <button class="btn btn-primary" type="submit">Update</button>
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!--span5-->
+                    <div class="span7">
+                        <form class="editprofileform" ng-submit="update()">
+                            <div class="widgetbox personal-information">
+                                <h4 class="widgettitle">Personal Information</h4>
+                                <div class="widgetcontent">
+                                    <p style="color:green" ng-if="updatePersonalInfoMsg != undefined">
+                                        {{updatePersonalInfoMsg}}
+                                    </p>
+                                    <p style="color:red" ng-if="errorPersonalInfoMsg != undefined">
+                                        {{errorPersonalInfoMsg}}
+                                    </p>
+                                    <p>
+                                        <label>First Name</label>
+                                        <input type="text" name="firstname" class="input-xlarge" ng-if="authentication[0].role_id != 1" ng-model="authentication[0].first_name" />
+                                        <input type="text" name="firstname" class="input-xlarge" ng-if="authentication[0].role_id == 1"ng-model="data[0].first_name" />
+                                    </p>
+                                    <p>
+                                        <label>Last Name</label>
+                                        <input type="text" name="lastname" class="input-xlarge"   ng-if="authentication[0].role_id != 1" ng-model="authentication[0].last_name" />
+                                        <input type="text" name="lastname" class="input-xlarge"   ng-if="authentication[0].role_id == 1" ng-model="data[0].last_name" />
+                                    </p>
+                                    <p>
+                                        <label>Gender</label>
+                                        <span class="formwrapper">
+                                            <input type="radio" ng-model="authentication[0].gender"  ng-if="authentication[0].role_id != 1" value="male"><span ng-if="authentication[0].role_id != 1">Male</span> &nbsp; &nbsp;
+                                            <input type="radio" ng-model="data[0].gender"  ng-if="authentication[0].role_id == 1" value="male"><span ng-if="authentication[0].role_id == 1">Male</span>  &nbsp; &nbsp;
+                                            <input type="radio" ng-model="authentication[0].gender" ng-if="authentication[0].role_id != 1" value="female"> <span ng-if="authentication[0].role_id != 1">Female</span>
+
+                                            <input type="radio" ng-model="data[0].gender" ng-if="authentication[0].role_id == 1" value="female"> <span ng-if="authentication[0].role_id == 1">Female</span>
+                                        </span> </p>
+                                    <p>
+                                        <label>Email ID</label>
+                                        <input type="email" readonly class="input-xlarge"  ng-if="authentication[0].role_id != 1" ng-model="authentication[0].email"/>
+                                        <input type="email" readonly class="input-xlarge"  ng-if="authentication[0].role_id == 1" ng-model="data[0].email"/>
+                                    </p>
+                                    <p>
+                                        <label>Mobile</label>
+                                        <input type="text" class="input-xlarge"  ng-if="authentication[0].role_id != 1" ng-model="authentication[0].contact_no" />
+                                        <input type="text" class="input-xlarge"  ng-if="authentication[0].role_id == 1" ng-model="data[0].contact_no" />
+                                    </p>
+                                    <p>
+                                        <label>Area</label>
+                                        <!--<input type="text" class="input-xlarge" ng-model="authentication[0].area_id" />-->
+                                        <select class="span4" name="area_id"  ng-if="authentication[0].role_id != 1" data-ng-model="authentication[0].area_id">
+                                            <option value="">Select Area</option>
+                                            <option ng-repeat="area in areaList" value="{{area.id}}" ng-selected="((authentication[0].area_id==area.id)?true:false)">{{area.area_name}}</option>
+                                        </select>
+                                        <select class="span4" name="area_id"  ng-if="authentication[0].role_id == 1" data-ng-model="data[0].area_id">
+                                            <option value="">Select Area</option>
+                                            <option ng-repeat="area in areaList" value="{{area.id}}" ng-selected="((data[0].area_id==area.id)?true:false)">{{area.area_name}}</option>
+                                        </select>
+                                    </p>
+                                    <p>
+                                        <label>Address1</label>
+                                        <input type="text" class="input-xlarge"  ng-if="authentication[0].role_id != 1" ng-model="authentication[0].address1" />
+                                        <input type="text" class="input-xlarge"  ng-if="authentication[0].role_id == 1" ng-model="data[0].address1" />
+                                    </p>
+                                    <p>
+                                        <button type="submit" class="btn btn-primary">Update Info</button>
+                                    </p>
+                                </div>
+                            </div>
+                        </form>
+                        <form class="editprofileform" ng-submit="updateProfessionalInfo()" ng-if="authentication[0].role_id != 3">
+                            <div class="widgetbox" >
+                                <h4 class="widgettitle">Professional Information</h4>
+                                <div class="widgetcontent">
+                                    <p style="color:green" ng-if="updateProfessionalInfoMsg != undefined">
+                                        {{updateProfessionalInfoMsg}}
+                                    </p>
+                                    <p style="color:red" ng-if="errorProfessionalInfoMsg">
+                                        {{errorProfessionalInfoMsg}}
+                                    </p>
+                                    <p>
+                                        <label>Membership</label>
+                                        <span class="field">
+                                            <input name="tags" type="text" id="tags" class="input-large" ng-model="prof.member_of" />
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <label>Awards / Recognitions</label>
+                                        <textarea class="span8" ng-model="prof.achievement"></textarea>
+                                    </p>
+                                    <p>
+                                        <label>Experience</label>
+                                        <span class="field">
+                                            <input name="Experience" type="text" id="Experience" class="input-small" ng-model="prof.exp_year" placeholder="Year" />
+                                            <select class="uniformselect input-small" ng-model="prof.exp_month">
+                                                <option value="" selected>Month</option>
+                                                <option value="0">0</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                            </select>
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <label>Degree</label>
+                                        <input type="text" class="input-xlarge" ng-model="prof.degree" />
+                                    </p>
+                                    <p>
+                                        <label>DCI Number</label>
+                                        <input type="text" class="input-xlarge" ng-model="prof.dci_registration" />
+                                    </p>
+                                    <p>
+                                        <label>Experience Description</label>
+                                        <textarea class="span8" ng-model="prof.exp_desc"></textarea>
+                                    </p>
+                                    <p>
+                                        <label>Registrations</label>
+                                        <textarea class="span8" ng-model="prof.associated_with"></textarea>
+                                    </p>
+                                    <!--<p>
+                                        <label>Service Offered</label>
+                                                <span class="field">
+                                                <select class="uniformselect">
+                                                    <option value="">Select Service 1</option>
+                                                    <option value="">Select Service 2</option>
+                                                    <option value="">Select Service 3</option>
+                                                    <option value="">Select Service 4</option>
+                                                </select>
+                                                </span>
+                                    </p>-->
+                                    <p>
+                                        <label>About You</label>
+                                        <textarea name="about" class="span8" ng-model="prof.abt_you"></textarea>
+                                    </p>
+                                    <p>
+                                        <button type="submit" class="btn btn-primary">Update Info</button>
+                                    </p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!--span7-->
+                </div>
+            </div><!--maincontentinner-->
+            <div ng-include src="'modules/dentists/views/layouts/footer.html'"></div><!--footer-->
+        </div><!--maincontent-->
+    </div><!--rightpanel-->
+</div><!--mainwrapper-->

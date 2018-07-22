@@ -1,0 +1,48 @@
+
+<div class="footer">
+    <div class="footer-left">
+        <span>&copy; 2014.DoctorHere. All Rights Reserved.</span>
+    </div>
+    <div class="footer-right">
+        <span>Designed by: <a href="http://caprium.com/" target="_blank">Caprium Technologies</a></span>
+    </div>
+</div><!--footer-->
+
+<script type="text/javascript">
+    setTimeout(function(){
+        $('#loader-container').hide();
+    },1000);
+	
+	// add menu bar for phones and tablet {Copied from custom.js}
+ 
+	jQuery('.barmenu').click(function() {
+		  
+		  var lwidth = '260px';
+		  if(jQuery(window).width() < 340) {
+					 lwidth = '240px';
+		  }
+		  
+		  if(!jQuery(this).hasClass('open')) {
+					 jQuery('.rightpanel').css({marginLeft: lwidth},'fast');
+					 jQuery('.leftpanel').css({marginLeft: 0},'fast');
+					 jQuery(this).addClass('open');
+		  } else {
+					 jQuery('.rightpanel').css({marginLeft: 0},'fast');
+					 jQuery('.leftpanel').css({marginLeft: '-'+lwidth},'fast');
+					 jQuery(this).removeClass('open');
+		  }
+	});
+	
+	// show/hide left menu
+	jQuery(window).resize(function(){
+		  if(!jQuery('.topbar').is(':visible')) {
+		         jQuery('.rightpanel').css({marginLeft: '260px'});
+					jQuery('.leftpanel').css({marginLeft: 0});
+		  } else {
+		         jQuery('.rightpanel').css({marginLeft: 0});
+					jQuery('.leftpanel').css({marginLeft: '-260px'});
+		  }
+   });
+</script>
+
+

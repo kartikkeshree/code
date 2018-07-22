@@ -1,0 +1,99 @@
+<div ng-include src="'modules/dentists/views/layouts/header_files.html'"></div>
+<div class="mainwrapper">
+    <div ng-include src="'modules/dentists/views/layouts/header.html'"></div>
+    <div ng-include src="'modules/dentists/views/layouts/leftmenu.html'"></div>
+    <div class="rightpanel" data-ng-controller="PatientController" ng-init="find()">
+
+        <ul class="breadcrumbs">
+            <li><a href="#!/dashboard"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
+            <li>Patient</li>
+            <li class="right">
+                <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
+                <ul class="dropdown-menu pull-right skin-color">
+                    <li><a href="default">Default</a></li>
+                    <li><a href="navyblue">Navy Blue</a></li>
+                    <li><a href="palegreen">Pale Green</a></li>
+                    <li><a href="red">Red</a></li>
+                    <li><a href="green">Green</a></li>
+                    <li><a href="brown">Brown</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="pageheader">
+            <form method="post" class="searchbar right-buffer-250" ng-submit="find()">
+                <input type="text" name="keyword" placeholder="To search type and hit enter..." ng-model="search.searchVal"/>
+            </form>
+            <a class="btn btn-primary pull-right top-buffer-20 left-buffer-10" href="#!/addPatient">Add Patient</a>
+            <a class="btn btn-primary pull-right top-buffer-20 left-buffer-10" href="javascript:void(0);">Import Patient Info</a>
+
+            <div class="pageicon"><span class="iconfa-user"></span></div>
+            <div class="pagetitle">
+                <h5>All Patient List</h5>
+                <h1>Patient</h1>
+            </div>
+        </div><!--pageheader-->
+
+        <div class="maincontent">
+            <div class="maincontentinner">
+
+
+                <!-- <h4 class="widgettitle">Table Using Colgroup</h4>-->
+                <table class="table table-bordered responsive">
+                    <colgroup>
+                        <col class="con0" style="width:7%;"/>
+                        <col class="con1" style="width:15%;"/>
+                        <col class="con0" style="width:10%;"/>
+                        <col class="con1" style="width:10%;"/>
+                        <!--  <col class="con0" style="width:16%;"/>-->
+                        <col class="con1" style="width:22%;"/>
+                        <col class="con0" style="width:10%;"/>
+                        <col class="con1" style="width:10%;"/>
+
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="center">&nbsp;</th>
+                        <th class="center">Sr. No</th>
+                        <th>Patient Name</th>
+                        <th>Mobile No.</th>
+                        <!-- <th>Treatment</th>-->
+                        <th class="center">Last Visit Date</th>
+                        <th>Address</th>
+                        <th class="center">Area</th>
+                        <th class="center">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="patient in patients">
+                        <td class="center">&nbsp;</td>
+                        <td class="center">{{$index+1}}</td>
+                        <td><a href="#!/viewPatientInfo/{{patient.user_id}}/{{patient.app_id}}/{{patient.clinic_id}}?val=edit">{{patient.first_name +' '+patient.last_name}}</a></td>
+                        <td>{{patient.contact_no}}</td>
+                        <!--  <td>Teeth Checkup</td>-->
+                        <td class="center"></td>
+                        <td>{{patient.address1}}</td>
+                        <td class="center">{{patient.area_name}}</td>
+                        <td class="center">
+                            <a href="javascript:void(0);" ng-click="editPatient(patient.app_id)">
+                                <span class="iconfa-edit large-a-icon"> </span>
+                            </a>  &nbsp;
+                            <a href="javascript:void(0)" ng-click="deleteAppointMentWithParentAppId(patient.app_id,$index)">
+                                <span class="iconfa-trash large-a-icon"></span>
+                            </a>
+                        </td>
+                    </tr>
+
+
+                    </tbody>
+                </table><!--Table end -->
+            </div><!--maincontentinner-->
+            <div ng-include src="'modules/dentists/views/layouts/footer.html'"></div><!--footer-->
+        </div><!--maincontent-->
+
+    </div><!--rightpanel-->
+
+</div><!--mainwrapper-->
+
+</body>
+</html>

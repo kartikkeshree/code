@@ -1,0 +1,59 @@
+<div ng-include src="'modules/core/views/header-inside.html'"></div>
+<div class="container inside-content" data-ng-controller="GetAllBookedAppoinmentController">
+    <div class="row">
+        <div class="panel panel-default top-buffer-20" id="my-appointment">
+            <!-- Default panel contents -->
+            <div class="panel-heading custom-heading">
+                <h5>My Appointment</h5>
+                <a id="close-table" href="javascript:void(0);"><span class="caret"></span></a><a id="open-table" href="javascript:void(0);">+</a></div>
+
+            <!-- Table -->
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Doctor Name</th>
+                    <th>Date Time </th>
+                    <th>Email ID</th>
+                    <th>Mobile No.</th>
+                    <th>Appointment  Reason</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="data in pagedItems[currentPage]" data>
+                    <th scope="row">{{$index+1}}</th>
+                    <td><a href="#!/dentistDetail/{{data.dentistId}}">{{data.first_name+' '+data.last_name}}</a></td>
+                    <td>{{data.appDate}}</td>
+                    <td>{{data.email}}</td>
+                    <td>{{data.contact_no}}</td>
+                    <td>{{data.reason}}</td>
+                    <td>{{data.status}}</td>
+                    <td><a href="javascript:void(0);" title="Reschedule Appointment">
+                        <div class="edit-appointment" ng-click="editAppointmentByAppId(data.app_Id,data.app_time,data.clinic_id,data.reason)" ng-if="(data.app_time > curdate)"></div>
+                    </a><a href="javascript:void(0);" ng-click="deleteAppointmentByAppId(data.app_Id,$index,pagedItems)" title="Cancel Appointment">
+                        <div class="delete-appoinment"></div>
+                    </a></td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="pagination-section">
+            <ul class="pagination pull-right">
+                    <li class="disabled"><a aria-label="Previous" href="#" ng-click="prevPage()"><span aria-hidden="true">«</span></a></li>
+                    <li ng-class="{active: n == currentPage}" ng-repeat="n in range(pagedItems.length)" ng-click="setPage()"><a href="#" ng-bind="n + 1">1 <span class="sr-only">(current)</span></a></li>
+                    <li ng-class="{disabled: currentPage == pagedItems.length - 1}"><a aria-label="Next" href="#" ng-click="nextPage()"><span aria-hidden="true">»</span></a></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="book-appointments text-center">
+    <div class="container">
+        <h1 class="text-uppercase"><span>Doctors</span></h1>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
+        <a href="#!/dentistList/" class="btn btn-primary text-uppercase">Book Appointment</a>
+    </div>
+</div>
+<div ng-include src="'modules/core/views/footer.html'"></div>

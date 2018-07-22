@@ -1,0 +1,103 @@
+<div ng-include src="'modules/dentists/views/layouts/header_files.html'"></div>
+<div class="mainwrapper">
+    <div ng-include src="'modules/dentists/views/layouts/header.html'"></div>
+    <div ng-include src="'modules/dentists/views/layouts/leftmenu.html'"></div>
+    <div class="rightpanel" data-ng-controller="CalenderAppController" ng-init="find()">
+
+        <ul class="breadcrumbs">
+            <li><a href="#!/dashboard"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
+            <li>Appointment</li>
+            <li class="right">
+                <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
+                <ul class="dropdown-menu pull-right skin-color">
+                    <li><a href="default">Default</a></li>
+                    <li><a href="navyblue">Navy Blue</a></li>
+                    <li><a href="palegreen">Pale Green</a></li>
+                    <li><a href="red">Red</a></li>
+                    <li><a href="green">Green</a></li>
+                    <li><a href="brown">Brown</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="pageheader">
+            <form method="post" class="searchbar" ng-submit="find()">
+                <input type="text" name="keyword" placeholder="To search type and hit enter..." ng-model="search.searchVal"/>
+            </form>
+            <!--<a href="patient_form.html" class="btn btn-info pull-right top-buffer-20 left-buffer-10">Add Appointment</a>-->
+            <div class="pageicon"><span class="iconfa-calendar"></span></div>
+            <div class="pagetitle">
+                <h5>All appointment Summary</h5>
+                <h1>Appointment</h1>
+            </div>
+        </div><!--pageheader-->
+
+        <div class="maincontent">
+            <div class="maincontentinner">
+
+
+                <!-- <h4 class="widgettitle">Table Using Colgroup</h4>-->
+                <table class="table table-bordered responsive">
+                    <colgroup>
+                        <col class="con0" style="width:7%;"/>
+                        <col class="con1" style="width:13%;"/>
+                        <col class="con0" style="width:15%;"/>
+                        <col class="con1" style="width:15%;"/>
+                        <col class="con0" style="width:15%;"/>
+                        <col class="con1" style="width:15%;"/><!--
+                        <col class="con0" style="width:20%;"/>-->
+
+
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="center">&nbsp;</th>
+                        <th class="center">Sr. No</th>
+                        <th>Patient Name</th>
+                        <th>Date</th>
+                        <th class="center">Mobile No.</th>
+                        <th>Reason</th>
+                        <th class="center">Status</th><!--
+                        <th class="center">Action</th>-->
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="appointment in appointments">
+                        <td class="center">&nbsp;</td>
+                        <td class="center">{{$index+1}}</td>
+                        <td><!--<a href="#!/viewPatientInfo/{{appointment.user_id}}/{{appointment.app_id}}/{{appointment.clinic_id}}?val=edit">-->{{appointment.first_name+' '+appointment.last_name}}<!--</a>--></td>
+                        <td>{{appointment.app_time | date}}&nbsp;{{appointment.app_time | date:'hh:mm a'}}</td>
+                        <td class="center">{{appointment.contact_no}}</td>
+                        <td>{{appointment.reason}}</td>
+                        <td class="center">{{appointment.status}}</td>
+                        <!--<td class="center">
+                            <select ng-model="appointment.status" ng-change="updateAppointMentStatus(appointment)">
+                                <option value="">Select Status</option>
+                                <option value="Pending" ng-selected="(appointment.status=='Pending')?true:false">Pending</option>
+                                <option value="Approved" ng-selected="(appointment.status=='Approved')?true:false">Approved</option>
+                                <option value="Visited" ng-selected="(appointment.status=='Visited')?true:false">Visited</option>
+                                <option value="Reject"  ng-selected="(appointment.status=='Reject')?true:false">Reject</option>
+                            </select>
+                        </td>-->
+                       <!-- <td class="center">
+                            <a href="javascript:void(0);" ng-click="editPatient(appointment.app_id)">
+                                <span class="iconfa-edit large-a-icon"></span>
+                            </a>  &nbsp;
+                            <a href="javascript:void(0);" ng-click="deleteAppointmentByAppId(appointment.app_id,$index)">
+                                <span class="iconfa-trash large-a-icon"></span>
+                            </a>
+                        </td>-->
+                    </tr>
+
+
+
+                    </tbody>
+                </table><!--Table end -->
+
+
+            </div><!--maincontentinner-->
+            <div ng-include src="'modules/dentists/views/layouts/footer.html'"></div><!--footer-->
+        </div><!--maincontent-->
+
+    </div><!--rightpanel-->
+</div><!--mainwrapper-->

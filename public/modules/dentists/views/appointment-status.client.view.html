@@ -1,0 +1,88 @@
+<div ng-include src="'modules/dentists/views/layouts/header_files.html'"></div>
+<div class="mainwrapper">
+    <div ng-include src="'modules/dentists/views/layouts/header.html'"></div>
+    <div ng-include src="'modules/dentists/views/layouts/leftmenu.html'"></div>
+    <div class="rightpanel" data-ng-controller="DentistAppointmentController" ng-init="findAppointmentStatus()">
+
+        <ul class="breadcrumbs">
+            <li><a href="#!/dashboard"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
+            <li>Appointment Status</li>
+            <li class="right">
+                <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
+                <ul class="dropdown-menu pull-right skin-color">
+                    <li><a href="default">Default</a></li>
+                    <li><a href="navyblue">Navy Blue</a></li>
+                    <li><a href="palegreen">Pale Green</a></li>
+                    <li><a href="red">Red</a></li>
+                    <li><a href="green">Green</a></li>
+                    <li><a href="brown">Brown</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="pageheader">
+            <!--  <form method="post" class="searchbar" ng-submit="findAppointmentStatus()">
+                 <input type="text" name="keyword" placeholder="To search type and hit enter..." ng-model="search.val"/>
+             </form> -->
+            <div class="pageicon"><span class="iconfa-laptop"></span></div>
+            <div class="pagetitle">
+                <h5>All Appointment Status</h5>
+                <h1>Appointment Status</h1>
+            </div>
+        </div><!--pageheader-->
+
+        <div class="maincontent">
+            <div class="maincontentinner">
+
+
+                <!-- <h4 class="widgettitle">Table Using Colgroup</h4>-->
+                <table class="table table-bordered responsive">
+                    <colgroup>
+                        <col class="con0" style="width:7%;"/>
+                        <col class="con1" style="width:13%;"/>
+                        <col class="con0" style="width:13%;"/>
+                        <col class="con1" style="width:13%;"/>
+                        <col class="con0" style="width:13%;"/>
+                        <col class="con1" style="width:13%;"/>
+                        <col class="con0" style="width:13%;"/>
+
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th class="center">&nbsp;</th>
+                            <th class="center">Sr. No</th>
+                            <th class="center">Pending</th>
+                            <th class="center">Approved</th>
+                            <th class="center">Deleted</th>
+                            <th class="center">Rejected</th>
+                            <th class="center">Visited</th>
+                            <th class="center">Completed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="center">&nbsp;</td>
+                            <td class="center">{{$index + 1}}</td>
+                            <td class="center" ng-if = "appointments_status_pending > 0"><a href="#!/viewAppointStatusInfo/Pending">{{appointments_status_pending}}</a></td>
+                            <td class="center" ng-if = "appointments_status_pending == undefined">0</td>
+                            <td class="center" ng-if = "appointments_status_Approved > 0"><a href="#!/viewAppointStatusInfo/Approved">{{appointments_status_Approved}}</a></td>
+                            <td class="center" ng-if = "appointments_status_Approved == undefined">0</td>
+                            <td class="center" ng-if = "appointments_status_Deleted > 0"><a href="#!/viewAppointStatusInfo/Deleted">{{appointments_status_Deleted}}</a></td>
+                            <td class="center" ng-if = "appointments_status_Deleted == undefined">0</td>
+                            <td class="center" ng-if = "appointments_status_Rejected > 0"><a href="#!/viewAppointStatusInfo/Rejected">{{appointments_status_Rejected}}</a></td>
+                            <td class="center" ng-if = "appointments_status_Rejected == undefined">0</td>
+                            <td class="center" ng-if = "appointments_status_Visited > 0"><a href="#!/viewAppointStatusInfo/Visited">{{appointments_status_Visited}}</a></td>
+                            <td class="center" ng-if = "appointments_status_Visited == undefined">0</td>
+                            <td class="center" ng-if = "appointments_status_Completed > 0"><a href="#!/viewAppointStatusInfo/Completed">{{appointments_status_Completed}}</a></td>
+                            <td class="center" ng-if = "appointments_status_Completed == undefined">0 </td>
+                        </tr>
+                    </tbody>
+                </table><!--Table end -->
+
+
+            </div><!--maincontentinner-->
+            <div ng-include src="'modules/dentists/views/layouts/footer.html'"></div>
+        </div><!--maincontent-->
+
+    </div><!--rightpanel-->
+</div><!--mainwrapper-->

@@ -1,0 +1,125 @@
+<div ng-include src="'modules/core/views/header-inside.html'"></div>
+
+
+<div class="container inside-content" data-ng-controller="ClassifiedsController" ng-init="find('',authentication[0].id,'','','')">
+   <div class="inside-page-title top-buffer-20">
+    <h1>My Classified</h1>
+    <button class="btn btn-primary pull-right" id="add-topic">Post Ad</button>
+    </div>
+    <div class="clearfix"></div>
+
+    <div role="alert" class="alert alert-success topic-alert" ng-show="msgVal">
+        <strong>Well done!</strong>Your Ad has been posted successfully.Your Ad needs admin approval before being posted.
+    </div>
+    <div role="alert" class="alert alert-danger topic-alert" ng-if="error!=undefined">
+        <strong></strong>{{error}}
+    </div>
+
+    <div class="post-new-topic-form">
+    <form role="form" class="form-horizontal post-new-topic" data-ng-submit="create()" novalidate>
+
+    <h4 class="new-post-title">Post New Ad</h4>
+    <div class="form-group">
+          <label class="col-sm-3 control-label">Ad Title</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" placeholder="Ad Title" data-ng-model="title">
+          </div>
+        </div>
+        <div class="form-group" ng-init="getCategory()">
+          <label class="col-sm-3 control-label">Select Category</label>
+          <div class="col-sm-9">
+              <select class="form-control no-padding-input" data-ng-model="category">
+                  <option ng-selected="true">Select Category</option>
+                  <option ng-repeat="category in categories" value="{{category.id}}">{{category.name}}</option>
+              </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Ad Description</label>
+          <div class="col-sm-9">
+            <textarea placeholder="Ad Description" class="form-control" data-ng-model="description" id="description"></textarea>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-9">
+            <button class="btn btn-primary" type="submit">Add Post</button>
+            <button class="btn btn-default" type="reset" id="cancel-topic">Cancel</button>
+          </div>
+        </div>
+      </form>
+    </div>
+   <div class="panel panel-default top-buffer-20">
+      <!-- Default panel contents -->
+      <div class="panel-heading custom-heading">
+        <h5>My Classified</h5>
+        <form method="post" class="searchbar" data-ng-submit="classifiedFilter('',authentication[0].id,'','','')">
+                 <input type="text" data-ng-model="filterVal" placeholder="Enter keyword &amp; hit enter" class="pull-right form-control no-padding-input small-input-text">
+                 <input type="submit" class="hidden">
+        </form>
+       </div>
+
+      <!-- Table -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Classified Title</th>
+            <th>Date Time </th>
+            <th>Comments</th>
+
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr ng-if="classifieds.length < 1">
+            <td>No classified yet!</td>
+        </tr>
+          <tr ng-repeat="classified in classifieds">
+            <th scope="row">{{$index+1}}</th>
+            <td><a href="#!/classifieds/{{classified.id}}">{{classified.title}}</a></td>
+            <td>{{classified.created_date | date:'dd MMM yyyy - H:mm a'}}</td>
+            <td>{{classified.cmtCnt}}</td>
+            <td>{{(classified.cStatus == 'Yes')?'Approved':'Pending'}}</td>
+            <td><a href="#!/classifieds/{{classified.id}}" title="Edit">
+              <div class="edit-appointment"></div>
+            </a><a ng-click="publishStatus(classified.id, 'delete', $index)" href="javascript:void(0);" title="Delete">
+              <div class="delete-appoinment"></div>
+              </a></td>
+          </tr>
+
+
+        </tbody>
+      </table>
+       <!-- Pagination Section -->
+       <div class="pagination-section" ng-if="classifieds.length > 0">
+           <ul class="pagination pull-right">
+               <li ng-class="{disabled: currentPage == 1}"><a aria-label="Previous" href="javascript:void(0);" ng-click="prevPage('',authentication[0].id,'','','')"><span aria-hidden="true">«</span></a></li>
+               <li ng-class="{active: n == currentPage}" ng-repeat="n in pagedItems" ng-click="setPage('',authentication[0].id,'','','')"><a href="javascript:void(0);" ng-bind="n">1<span class="sr-only">(current)</span></a></li>
+               <li ng-class="{disabled: currentPage == pagedItems.length}"><a aria-label="Next" href="javascript:void(0);"  ng-click="nextPage('',authentication[0].id,'','','')"><span aria-hidden="true">»</span></a></li>
+           </ul>
+       </div>
+       <!-- End -->
+    </div>
+
+</div>
+<div class="book-appointments text-center">
+  <div class="container">
+    <h1 class="text-uppercase"><span>Doctors</span></h1>
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
+      <a href="#!/dentistList/" class="btn btn-primary text-uppercase">Book Appointment</a>
+  </div>
+</div>
+
+<div ng-include src="'modules/core/views/footer.html'"></div>
+<script type="text/javascript">
+
+$('#add-topic').click(function(){
+		$('.post-new-topic-form').addClass('new-post-topic-height-classified');
+});
+$('#cancel-topic').click(function(){
+		$('.post-new-topic-form').removeClass('new-post-topic-height-classified');
+});
+
+</script>

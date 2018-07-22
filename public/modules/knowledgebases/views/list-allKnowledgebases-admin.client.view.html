@@ -1,0 +1,75 @@
+<div ng-include src="'modules/dentists/views/layouts/header_files.html'"></div>
+<div class="mainwrapper" data-ng-controller="KnowledgebasesAdminController" data-ng-init="findKnowBase()">
+    <div ng-include src="'modules/dentists/views/layouts/header.html'"></div>
+    <div ng-include src="'modules/dentists/views/layouts/leftmenu.html'"></div>
+    <div class="rightpanel">
+    <ul class="breadcrumbs">
+        <li><a href="dashboard.html"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
+        <li>Knowledge Base</li>
+        <li class="right">
+            <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
+            <ul class="dropdown-menu pull-right skin-color">
+                <li><a href="default">Default</a></li>
+                <li><a href="navyblue">Navy Blue</a></li>
+                <li><a href="palegreen">Pale Green</a></li>
+                <li><a href="red">Red</a></li>
+                <li><a href="green">Green</a></li>
+                <li><a href="brown">Brown</a></li>
+            </ul>
+        </li>
+    </ul>
+
+    <div class="pageheader">
+        <form method="post" class="searchbar right-buffer-160" data-ng-submit="findKnowBase()">
+            <input type="text" name="keyword" placeholder="To search type and hit enter..." data-ng-model="search.searchVal"/>
+        </form>
+        <a href="#!/knowledgeBaseForm" class="btn btn-primary pull-right top-buffer-20 left-buffer-10">Add Knowledge Base</a>
+        <div class="pageicon"><span class="iconfa-user-md"></span></div>
+        <div class="pagetitle">
+            <h5>All Knowledge Base Summary</h5>
+            <h1>Knowledge Base</h1>
+        </div>
+    </div><!--pageheader-->
+
+    <div class="maincontent">
+        <div class="maincontentinner">
+
+
+            <!-- <h4 class="widgettitle">Table Using Colgroup</h4>-->
+            <table class="table table-bordered responsive">
+                <colgroup>
+                    <col class="con0" style="width:7%;"/>
+                    <col class="con1" style="width:15%;"/>
+                    <col class="con0" style="width:10%;"/>
+                    <col class="con1" style="width:58%;"/>
+                    <col class="con0" style="width:10%;"/>
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="center">&nbsp;</th>
+                    <th class="center">Sr. No</th>
+                    <th>Title</th>
+                    <th>Publish date</th>
+                    <th>Description</th>
+                    <th class="center">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="knowledgeBase in knowledgeBases">
+                    <td class="center">&nbsp;</td>
+                    <td class="center">{{$index+1}}</td>
+                    <td>{{knowledgeBase.title}}</td>
+                    <td>{{knowledgeBase.created_date | date}}</td>
+                    <td><div style="height: 129px;overflow: auto;">{{knowledgeBase.description}}</div></td>
+                    <td class="center"><a href="Javascript:void(0)" data-ng-click="deleteWikiData(knowledgeBase.id)"><span class="iconfa-trash large-a-icon"></span></a></td>
+                </tr>
+
+                </tbody>
+            </table><!--Table end -->
+        </div><!--maincontentinner-->
+        <div ng-include src="'modules/dentists/views/layouts/footer.html'"></div>
+    </div><!--maincontent-->
+
+</div><!--rightpanel-->
+
+</div><!--mainwrapper-->

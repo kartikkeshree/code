@@ -1,0 +1,681 @@
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '`clinic_id` = '17', `user_id` = 72, `reason` = 'fdgdg', `app_time` = '2015-3-30 ' at line 1
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Error: ER_BAD_FIELD_ERROR: Unknown column 'u.user_id' in 'on clause'
+Error: ER_BAD_FIELD_ERROR: Unknown column 'u.user_id' in 'on clause'
+Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'user AS u JOIN appointment AS app ON u.id = app.user_id JOIN clinic as c ON c.id' at line 1
+function toString() { [native code] }
+TypeError: Object 1443676264848 has no method 'getFullYear'
+Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''71', '72', '73'' at line 1
+Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''71'' at line 1
+Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''71'' at line 1
+TypeError: Object 71,72,73 has no method 'substring'
+TypeError: Object 71,72,73 has no method 'substr'
+ReferenceError: body is not defined
+Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''72', '73', `user_id` = 12, `created_date` = '2015-3-31 15:22'' at line 1
+Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''72', '73', `user_id` = 12, `created_date` = '2015-3-31 15:26'' at line 1
+Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''71', '72', '73'' at line 1
+Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''72', '73', `user_id` = 12, `created_date` = '2015-3-31 15:35'' at line 1
+Error: ER_BAD_FIELD_ERROR: Unknown column 'type' in 'field list'
+Error: No recipients defined
+Error: No recipients defined
+Error: No recipients defined
+Error: No recipients defined
+Error: No recipients defined
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?' at line 1
+Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Error: ER_BAD_FIELD_ERROR: Unknown column 'user_id' in 'field list'
+Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'JOIN user AS u dentist as d ON u.id = d.user_id JOIN package AS p ON p.dentist_i' at line 1
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+ReferenceError: req is not defined
+Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''74', `name` = 'testttt', `type` = 'Sms', `sms_email_txt` = 'tetgsdjghdfjh', `de' at line 1
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Error: ER_EMPTY_QUERY: Query was empty
+Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '? AND type = "Sms" status !="Pending"' at line 1
+Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '? AND type = "Sms" AND status !="Pending"' at line 1
+Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '? AND type = "Sms" AND status !="Pending"' at line 1
+Package not available for this user
+Package not available for this user
+You don't have any SMS packagePlease request for SMS package
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+You don't have any SMS package, Please request for SMS package 
+You have only 2 SMS to be send
+You don't have any SMS package, Please request for SMS package 
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Error: ER_BAD_NULL_ERROR: Column 'user_id' cannot be null
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+TypeError: Cannot call method 'split' of undefined
+TypeError: Cannot read property 'length' of undefined
+TypeError: Cannot read property 'length' of undefined
+Required Campaign type,Required SMS/Email Text,Please select atleast one user
+Required Campaign type,Required SMS/Email Text,Please select atleast one user
+Required Campaign type,Required SMS/Email Text,Please select atleast one user
+Required Campaign type,Required SMS/Email Text,Please select atleast one user
+Required SMS/Email Text,Please select atleast one user
+Please select atleast one user
+Please use minimum 2 characters for Campaign name
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Please select valid SMS/Email Text
+Please select valid SMS/Email Text
+Please select valid SMS/Email Text
+Please select valid SMS/Email Text
+Please select valid SMS/Email Text
+Please select valid SMS/Email Text
+Please select valid campaign type
+Error: getaddrinfo ENOTFOUND
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Error: ER_NO_SUCH_TABLE: Table 'doctorhere.dentist' doesn't exist
+Error: ER_NO_SUCH_TABLE: Table 'doctorhere.dentist' doesn't exist
+Error: ER_NO_SUCH_TABLE: Table 'doctorhere.dentist' doesn't exist
+Error: ER_NO_SUCH_TABLE: Table 'doctorhere.dentist' doesn't exist
+Error: ER_NO_SUCH_TABLE: Table 'doctorhere.dentist' doesn't exist
+Error: ER_NO_SUCH_TABLE: Table 'doctorhere.dentist' doesn't exist
+Error: ER_NO_SUCH_TABLE: Table 'doctorhere.dentist' doesn't exist
+Error: ER_NO_SUCH_TABLE: Table 'doctorhere.dentist' doesn't exist
+Error: ER_NO_SUCH_TABLE: Table 'doctorhere.dentist' doesn't exist
+Error: ER_NO_SUCH_TABLE: Table 'doctorhere.dentist' doesn't exist
+Error: ER_NO_SUCH_TABLE: Table 'doctorhere.dentist' doesn't exist
+Error: ER_NO_SUCH_TABLE: Table 'doctorhere.dentist' doesn't exist
+Error: ER_NO_SUCH_TABLE: Table 'doctorhere.dentist' doesn't exist
+Error: connect ECONNREFUSED
+Error: ER_NO_SUCH_TABLE: Table 'doctorhere.dentist' doesn't exist
+true
+Error: ER_NO_SUCH_TABLE: Table 'doctorhere.dentist' doesn't exist
+true
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+Sending sms error is 
+-10005
+Invalid Sender ID
+
+true
+true
+Error: connect ECONNREFUSED
+Sending sms error is 
+-10002
+Invalid Username Or Password
+
+Sending sms error is 
+-10002
+Invalid Username Or Password
+
+Error: connect ECONNREFUSED
+true
+true
+Sending sms error is 
+-10002
+Invalid Username Or Password
+
+Sending sms error is 
+-10002
+Invalid Username Or Password
+
+TypeError: Object searched has no method 'getConnection'
+    at Object.exports.addEvent (D:\node\doctors_here\app\controllers\core.server.controller.js:42:6)
+    at exports.search (D:\node\doctors_here\app\controllers\dentists.server.controller.js:277:18)
+    at Layer.handle [as handle_request] (D:\node\doctors_here\node_modules\express\lib\router\layer.js:82:5)
+    at next (D:\node\doctors_here\node_modules\express\lib\router\route.js:100:13)
+    at Route.dispatch (D:\node\doctors_here\node_modules\express\lib\router\route.js:81:3)
+    at Layer.handle [as handle_request] (D:\node\doctors_here\node_modules\express\lib\router\layer.js:82:5)
+    at D:\node\doctors_here\node_modules\express\lib\router\index.js:233:24
+    at Function.proto.process_params (D:\node\doctors_here\node_modules\express\lib\router\index.js:311:12)
+    at D:\node\doctors_here\node_modules\express\lib\router\index.js:227:12
+    at Function.match_layer (D:\node\doctors_here\node_modules\express\lib\router\index.js:294:3)
+TypeError: Object searched has no method 'getConnection'
+    at Object.exports.addEvent (D:\node\doctors_here\app\controllers\core.server.controller.js:42:6)
+    at exports.search (D:\node\doctors_here\app\controllers\dentists.server.controller.js:277:18)
+    at Layer.handle [as handle_request] (D:\node\doctors_here\node_modules\express\lib\router\layer.js:82:5)
+    at next (D:\node\doctors_here\node_modules\express\lib\router\route.js:100:13)
+    at Route.dispatch (D:\node\doctors_here\node_modules\express\lib\router\route.js:81:3)
+    at Layer.handle [as handle_request] (D:\node\doctors_here\node_modules\express\lib\router\layer.js:82:5)
+    at D:\node\doctors_here\node_modules\express\lib\router\index.js:233:24
+    at Function.proto.process_params (D:\node\doctors_here\node_modules\express\lib\router\index.js:311:12)
+    at D:\node\doctors_here\node_modules\express\lib\router\index.js:227:12
+    at Function.match_layer (D:\node\doctors_here\node_modules\express\lib\router\index.js:294:3)
+TypeError: Object searched has no method 'getConnection'
+    at Object.exports.addEvent (D:\node\doctors_here\app\controllers\core.server.controller.js:42:6)
+    at exports.search (D:\node\doctors_here\app\controllers\dentists.server.controller.js:277:18)
+    at Layer.handle [as handle_request] (D:\node\doctors_here\node_modules\express\lib\router\layer.js:82:5)
+    at next (D:\node\doctors_here\node_modules\express\lib\router\route.js:100:13)
+    at Route.dispatch (D:\node\doctors_here\node_modules\express\lib\router\route.js:81:3)
+    at Layer.handle [as handle_request] (D:\node\doctors_here\node_modules\express\lib\router\layer.js:82:5)
+    at D:\node\doctors_here\node_modules\express\lib\router\index.js:233:24
+    at Function.proto.process_params (D:\node\doctors_here\node_modules\express\lib\router\index.js:311:12)
+    at D:\node\doctors_here\node_modules\express\lib\router\index.js:227:12
+    at Function.match_layer (D:\node\doctors_here\node_modules\express\lib\router\index.js:294:3)
+TypeError: Object searched has no method 'getConnection'
+    at Object.exports.addEvent (D:\node\doctors_here\app\controllers\core.server.controller.js:42:6)
+    at exports.search (D:\node\doctors_here\app\controllers\dentists.server.controller.js:277:18)
+    at Layer.handle [as handle_request] (D:\node\doctors_here\node_modules\express\lib\router\layer.js:82:5)
+    at next (D:\node\doctors_here\node_modules\express\lib\router\route.js:100:13)
+    at Route.dispatch (D:\node\doctors_here\node_modules\express\lib\router\route.js:81:3)
+    at Layer.handle [as handle_request] (D:\node\doctors_here\node_modules\express\lib\router\layer.js:82:5)
+    at D:\node\doctors_here\node_modules\express\lib\router\index.js:233:24
+    at Function.proto.process_params (D:\node\doctors_here\node_modules\express\lib\router\index.js:311:12)
+    at D:\node\doctors_here\node_modules\express\lib\router\index.js:227:12
+    at Function.match_layer (D:\node\doctors_here\node_modules\express\lib\router\index.js:294:3)
+TypeError: Object searched has no method 'getConnection'
+    at Object.exports.addEvent (D:\node\doctors_here\app\controllers\core.server.controller.js:42:6)
+    at exports.search (D:\node\doctors_here\app\controllers\dentists.server.controller.js:277:18)
+    at Layer.handle [as handle_request] (D:\node\doctors_here\node_modules\express\lib\router\layer.js:82:5)
+    at next (D:\node\doctors_here\node_modules\express\lib\router\route.js:100:13)
+    at Route.dispatch (D:\node\doctors_here\node_modules\express\lib\router\route.js:81:3)
+    at Layer.handle [as handle_request] (D:\node\doctors_here\node_modules\express\lib\router\layer.js:82:5)
+    at D:\node\doctors_here\node_modules\express\lib\router\index.js:233:24
+    at Function.proto.process_params (D:\node\doctors_here\node_modules\express\lib\router\index.js:311:12)
+    at D:\node\doctors_here\node_modules\express\lib\router\index.js:227:12
+    at Function.match_layer (D:\node\doctors_here\node_modules\express\lib\router\index.js:294:3)
+TypeError: Object searched has no method 'getConnection'
+    at Object.exports.addEvent (D:\node\doctors_here\app\controllers\core.server.controller.js:42:6)
+    at exports.search (D:\node\doctors_here\app\controllers\dentists.server.controller.js:277:18)
+    at Layer.handle [as handle_request] (D:\node\doctors_here\node_modules\express\lib\router\layer.js:82:5)
+    at next (D:\node\doctors_here\node_modules\express\lib\router\route.js:100:13)
+    at Route.dispatch (D:\node\doctors_here\node_modules\express\lib\router\route.js:81:3)
+    at Layer.handle [as handle_request] (D:\node\doctors_here\node_modules\express\lib\router\layer.js:82:5)
+    at D:\node\doctors_here\node_modules\express\lib\router\index.js:233:24
+    at Function.proto.process_params (D:\node\doctors_here\node_modules\express\lib\router\index.js:311:12)
+    at D:\node\doctors_here\node_modules\express\lib\router\index.js:227:12
+    at Function.match_layer (D:\node\doctors_here\node_modules\express\lib\router\index.js:294:3)
+TypeError: Object searched has no method 'getConnection'
+    at Object.exports.addEvent (D:\node\doctors_here\app\controllers\core.server.controller.js:42:6)
+    at exports.search (D:\node\doctors_here\app\controllers\dentists.server.controller.js:277:18)
+    at Layer.handle [as handle_request] (D:\node\doctors_here\node_modules\express\lib\router\layer.js:82:5)
+    at next (D:\node\doctors_here\node_modules\express\lib\router\route.js:100:13)
+    at Route.dispatch (D:\node\doctors_here\node_modules\express\lib\router\route.js:81:3)
+    at Layer.handle [as handle_request] (D:\node\doctors_here\node_modules\express\lib\router\layer.js:82:5)
+    at D:\node\doctors_here\node_modules\express\lib\router\index.js:233:24
+    at Function.proto.process_params (D:\node\doctors_here\node_modules\express\lib\router\index.js:311:12)
+    at D:\node\doctors_here\node_modules\express\lib\router\index.js:227:12
+    at Function.match_layer (D:\node\doctors_here\node_modules\express\lib\router\index.js:294:3)
+TypeError: Object searched has no method 'getConnection'
+    at Object.exports.addEvent (D:\node\doctors_here\app\controllers\core.server.controller.js:42:6)
+    at exports.search (D:\node\doctors_here\app\controllers\dentists.server.controller.js:277:18)
+    at Layer.handle [as handle_request] (D:\node\doctors_here\node_modules\express\lib\router\layer.js:82:5)
+    at next (D:\node\doctors_here\node_modules\express\lib\router\route.js:100:13)
+    at Route.dispatch (D:\node\doctors_here\node_modules\express\lib\router\route.js:81:3)
+    at Layer.handle [as handle_request] (D:\node\doctors_here\node_modules\express\lib\router\layer.js:82:5)
+    at D:\node\doctors_here\node_modules\express\lib\router\index.js:233:24
+    at Function.proto.process_params (D:\node\doctors_here\node_modules\express\lib\router\index.js:311:12)
+    at D:\node\doctors_here\node_modules\express\lib\router\index.js:227:12
+    at Function.match_layer (D:\node\doctors_here\node_modules\express\lib\router\index.js:294:3)
+Sending sms error is 
+-10002
+Invalid Username Or Password
+
+Sending sms error is 
+-10002
+Invalid Username Or Password
+
+true
+Sending sms error is 
+-10002
+Invalid Username Or Password
+
+Sending sms error is 
+-10002
+Invalid Username Or Password
+
+Sending sms error is 
+-10002
+Invalid Username Or Password
+
+Sending sms error is 
+-10002
+Invalid Username Or Password
+
+Sending sms error is 
+-10002
+Invalid Username Or Password
+
+Sending sms error is 
+-10002
+Invalid Username Or Password
+
+Sending sms error is 
+-10002
+Invalid Username Or Password
+
+Sending sms error is 
+-10002
+Invalid Username Or Password
+
+Sending sms error is 
+-10002
+Invalid Username Or Password
+
+Sending sms error is 
+-10002
+Invalid Username Or Password
+
+Sending sms error is 
+-10002
+Invalid Username Or Password
+
+Sending sms error is 
+-10002
+Invalid Username Or Password
+
+true
+true
+Sending sms error is 
+-10002
+Invalid Username Or Password
+
+Sending sms error is 
+-10002
+Invalid Username Or Password
+
+true
+true
+true
+true
+true
+true
+true
+You have only 10 SMS to send
+You have only 10 SMS to send
+Sending sms error is 
+-10002
+Invalid Username Or Password
+
+Sending sms error is 
+-10002
+Invalid Username Or Password
+
+Sending sms error is 
+-10002
+Invalid Username Or Password
+
+Sending sms error is 
+-10002
+Invalid Username Or Password
+
+Sending sms error is 
+-10002
+Invalid Username Or Password
+
+Sending sms error is 
+-10002
+Invalid Username Or Password
+
+Error: ER_BAD_FIELD_ERROR: Unknown column 'clinic_id' in 'field list'
+Sending sms error is 
+-10002
+Invalid Username Or Password
+
+Sending sms error is 
+-10002
+Invalid Username Or Password
+
+Sending sms error is 
+-10002
+Invalid Username Or Password
+
+Sending sms error is 
+-10002
+Invalid Username Or Password
+
+Error: connect ECONNREFUSED
+Error: connect ECONNREFUSED
+ReferenceError: validate is not defined
+    at exports.saveBlockedTime (D:\doctorHere\app\controllers\appointments.server.controller.js:417:9)
+    at Layer.handle [as handle_request] (D:\doctorHere\node_modules\express\lib\router\layer.js:82:5)
+    at next (D:\doctorHere\node_modules\express\lib\router\route.js:100:13)
+    at Route.dispatch (D:\doctorHere\node_modules\express\lib\router\route.js:81:3)
+    at Layer.handle [as handle_request] (D:\doctorHere\node_modules\express\lib\router\layer.js:82:5)
+    at D:\doctorHere\node_modules\express\lib\router\index.js:235:24
+    at Function.proto.process_params (D:\doctorHere\node_modules\express\lib\router\index.js:313:12)
+    at D:\doctorHere\node_modules\express\lib\router\index.js:229:12
+    at Function.match_layer (D:\doctorHere\node_modules\express\lib\router\index.js:296:3)
+    at next (D:\doctorHere\node_modules\express\lib\router\index.js:190:10)
+true
+true

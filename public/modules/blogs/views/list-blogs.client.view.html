@@ -1,0 +1,66 @@
+<div ng-include src="'modules/core/views/header-inside.html'"></div>
+<div class="container inside-content" data-ng-controller="BlogsController" ng-init="find('blog','')">
+    <div class="row">
+        <div class="col-xs-12 col-sm-8">
+            <div class="post-section" ng-if="blog_data.length < 1">
+                <div class="top-buffer-20 no-bottom-buffer">
+                        <div><div><h3>No blog yet!</h3></div></div>
+                </div>
+            </div>
+            <div class="post-section" ng-repeat="blogs in blog_data">
+                <div class="page-header top-buffer-20 no-bottom-buffer">
+                    <div class="row">
+                        <div class="image-page-header">
+                            <a href="javascript:void(0);">
+                                <img alt="{{blogs.title}}" title="{{blogs.title}}" src="{{blogs.image}}">
+                            </a>
+                        </div>
+                    </div>
+                    <h2>{{blogs.title}}</h2>
+                    <small class="pull-left">By {{blogs.first_name + ' ' + blogs.last_name}}.</small>
+                    <small class="pull-right well-box">{{blogs.createdDate}}</small></div>
+                <div class="post-content">{{blogs.description}}
+                    <div class="post-action">
+                        <a href="#!/blogDetails/{{blogs.id}}" class="btn btn-primary pull-left">Read More</a>
+                        <div class="pull-right top-buffer-5">
+                            <span class='st_facebook_hcount' displayText='Facebook'></span>
+                            <span class='st_twitter_hcount' displayText='Tweet'></span>
+                            <span class='st_linkedin_hcount' displayText='LinkedIn'></span>
+                            <span class='st_pinterest_hcount' displayText='Pinterest'></span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+			<!-- Pagination Section -->
+			<div class="pagination-section" ng-if="blog_data.length > 0">
+				<ul class="pagination pull-right">
+					<li ng-class="{disabled: currentPage == 1}"><a aria-label="Previous" href="javascript:void(0);" ng-click="prevPage('blog','')"><span aria-hidden="true">«</span></a></li>
+					<li ng-class="{active: n == currentPage}" ng-repeat="n in pagedItems" ng-click="setPage('blog','')"><a href="javascript:void(0);" ng-bind="n">1<span class="sr-only">(current)</span></a></li>
+					<li ng-class="{disabled: currentPage == pagedItems.length}"><a aria-label="Next" href="javascript:void(0);"  ng-click="nextPage('blog','')"><span aria-hidden="true">»</span></a></li>
+				</ul>
+			</div>
+		<!-- End -->
+		<br />
+        </div>
+        <div class="col-xs-12 col-sm-4 top-buffer-20 bottom-buffer">
+            <div class="page-header no-top-margin">
+                <h4>Recent Post</h4></div>
+            <ul class="blog-ul" ng-init="recentBlogs()">
+                <li ng-if="recentBlogs.length < 1">No Post yet!</li>
+                <li ng-repeat="blog in recentBlogs"><a class="text-info" href="#!/blogDetails/{{blog.id}}">{{blog.title}}</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="book-appointments text-center">
+    <div class="container">
+        <h1 class="text-uppercase"><span>Doctors</span></h1>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text. </p>
+        <a class="btn btn-primary text-uppercase" href="#!/dentistList/">Book Appointment</a>
+    </div>
+</div>
+<div ng-include src="'modules/core/views/footer.html'"></div>
+<script type="text/javascript">
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+</script>

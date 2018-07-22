@@ -1,0 +1,177 @@
+<div ng-include src="'modules/core/views/header-inside.html'"></div>
+<div class="container inside-content" data-ng-controller="ForumsController" ng-model="replyCommentValue" ng-init="findOne()">
+    <div class="row">
+        <div class="col-xs-12 top-buffer-20">
+            <div class="inside-page-title" ng-show="isOwner">
+                <h1>Forum</h1>
+                <button class="btn btn-primary pull-right" id="add-topic">Update Query</button>
+            </div>
+            <div class="clearfix"></div>
+            <div ng-show="success" role="alert" class="alert alert-success topic-alert">
+                <strong>Well done!</strong> {{success}}.
+            </div>
+            <div ng-show="error" role="alert" class="alert alert-danger topic-alert">
+                <strong>Error!</strong> {{error}}.
+            </div>
+            <div class="post-new-topic-form">
+                <form role="form" class="form-horizontal post-new-topic" data-ng-submit="update()">
+
+                    <h4 class="new-post-title">Post New Query</h4>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Query Title / Subject</label>
+
+                        <div class="col-sm-9">
+                            <input type="text" data-ng-model="forum_detail_data[0].question" placeholder="Query Title / Subject" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Query Description</label>
+
+                        <div class="col-sm-9">
+                            <textarea class="form-control" placeholder="Query Description" data-ng-model="forum_detail_data[0].description"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <button class="btn btn-primary" type="submit">Post Query</button>
+                            <button class="btn btn-default" type="button" id="cancel-topic">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="clearfix"></div>
+            <div class="panel panel-default forum-section">
+
+                <div class="media">
+                    <div class="media-left" href="javascript:void(0);">
+                        <img src="{{forum_detail_data[0].image}}" class="x-120">
+
+                        <div class="text-center top-buffer-10 text-primary"><strong>{{forum_detail_data[0].first_name + '
+                                            '+forum_detail_data[0].last_name}}</strong></div>
+                        <div class="text-center"></div>
+                    </div>
+                    <div class="media-body full-width-container">
+                        <h4 class="text-primary top-bottom-buffer-15"><span class="well-box text-muted">Query</span>{{forum_detail_data[0].question}}
+                        </h4>
+                        <hr/>
+                        <p>{{forum_detail_data[0].description}}</p>
+
+                    </div>
+                </div>
+                <hr/>
+                <div class="media comment-sec" ng-init="getComments()">
+                    <div ng-repeat="forum_comment_data in forum_comment_data" data-ng-init="i = 1">
+                        <a class="media-left" href="javascript:void(0);">
+                            <img src="{{forum_comment_data.image}}" class="x-48">
+                        </a>
+
+                        <div class="media-body full-width-container" >
+                            <h4 class="media-heading">{{forum_comment_data.first_name + ' ' +
+                                                    forum_comment_data.last_name}}
+                                <span>{{forum_comment_data.createdDate}}</span><br>
+                                <span><button class="btn btn-primary"  id="delete-comment" ng-click="deleteForumComment(forum_comment_data.id,$index)">Delete</button></span>
+                            </h4>
+                            {{forum_comment_data.answer}}
+
+
+                            <div class="comment-action" ng-if="authentication[0].role_id == 2"><a
+                                    href="javascript:void(0);" ng-click="replyComment(forum_comment_data)">Reply</a>
+                            </div>
+                            <form class="form-horizontal" role="form" ng-show="isSelected(forum_comment_data)"
+                                  data-ng-submit="submitReplyComment(forum_comment_data.id, forum_comment_data.user_id)"
+                                  novalidate="">
+                                <hr/>
+                                <h3 class="post-comment-title">Reply on this comment.</h3>
+
+                                <div class="form-group">
+
+                                    <div class="col-sm-12">
+                                        <textarea placeholder="Comment" class="form-control"
+                                                  ng-model="$parent.replyCommentValue" required></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-9">
+                                        <button type="submit" class="btn btn-default">Submit</button>
+                                        <button type="button" class="btn btn-default" ng-click="closeComment(this)">
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div class="media">
+                                <!--ng-init="getReplyOnAnswer(forum_comment_data.id,forum_comment_data.user_id,$index)" -->
+                                <div ng-repeat="forum_comment_list in forum_comment_list"
+                                     ng-if="forum_comment_list.ref_id == forum_comment_data.id">
+                                    <a class="media-left" href="javascript:void(0);">
+                                        <img src="{{forum_comment_list.image}}" class="x-48">
+                                    </a>
+
+                                    <div class="media-body full-width-container" >
+                                        <h4 class="media-heading">{{forum_comment_list.first_name + ' ' +
+                                                                    forum_comment_list.last_name}}
+                                            <span>{{forum_comment_list.created_date}}</span><br>
+                                            <span><button class="btn btn-primary" ng-if="isOwner == 'admin'" id="delete-comment" ng-click="deleteForumCommentReply(forum_comment_list.id,$index)">Delete</button></span>
+                                        </h4>
+                                        {{forum_comment_list.description}}
+                                        <div class="comment-action" ng-if="authentication[0].role_id == 1">
+                                            <!--<a href="javascript:void(0);">Reply</a> -->
+                                            <!--&nbsp; <a href="javascript:void(0);">Delete</a>--></div>
+                                    </div>
+                                    <hr/>
+                                </div>
+                            </div>
+
+
+                            <br/><br/>
+                        </div>
+
+                    </div>
+
+                    <form class="form-horizontal" role="form" data-ng-submit="addComment()"
+                          ng-if="authentication[0].role_id = 2" novalidate="">
+                        <h3 class="post-comment-title">Post Your Comment</h3>
+
+                        <div class="form-group">
+
+                            <div class="col-sm-12">
+                                <textarea id="forum_ans" placeholder="Comment" class="form-control"
+                                          ng-model="forum_ans.answer" required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-9">
+                                <button type="submit" class="btn btn-default">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+    <div class="book-appointments text-center">
+        <div class="container">
+            <h1 class="text-uppercase">Doctors</h1>
+
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text. </p>
+            <a class="btn btn-primary text-uppercase" href="#!/dentistList/">Book Appointment</a>
+        </div>
+    </div>
+    <div ng-include src="'modules/core/views/footer.html'"></div>
+</div>
+<script type="text/javascript">
+    $('#add-topic').click(function () {
+        $('.post-new-topic-form').addClass('new-post-topic-height');
+    });
+    $('#cancel-topic').click(function () {
+        $('.post-new-topic-form').removeClass('new-post-topic-height');
+    });
+</script>

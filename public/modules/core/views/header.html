@@ -1,0 +1,77 @@
+<!--<div ng-include src="'modules/core/views/loader.html'"></div>-->
+<div data-ng-controller="LoaderController"> </div>
+<div class="navbar-wrapper"  data-ng-controller="HeaderController">
+  <nav role="navigation" class="navbar navbar-default navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+        <a href="/#!/home" class="navbar-brand"><img src="/modules/core/images/logo.png" title="Doctor Forum" alt="Doctor Forum" /></a> </div>
+      <div class="row">
+        <div class="navbar-collapse collapse pull-right col-xs-12" id="navbar">
+          <ul class="nav navbar-nav">
+            <li ui-route="/our_company" ng-class="{active: $uiRoute}"> <a aria-expanded="false" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">About us <span class="caret"></span></a>
+              <ul role="menu" class="dropdown-menu">
+                <li><a href="#!/our_company">Our Company</a></li>
+                <li><a href="#!/faqs">FAQ</a></li>
+                <!--<li><a href="#">Something else here</a></li>
+                                    <li class="divider"></li>
+                                    <li class="dropdown-header">Nav header</li>
+                                    <li><a href="#">Separated link</a></li>
+                                    <li><a href="#">One more separated link</a></li>-->
+              </ul>
+            </li>
+            <li ui-route="/listClassifieds" ng-class="{active: $uiRoute}"><a aria-expanded="false" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">Community <span class="caret"></span></a>
+              <ul role="menu" class="dropdown-menu">
+                <li><a href="#!/listClassifieds">Classified</a></li>
+                <li><a href="#!/forums">Forum</a></li>
+                <li><a href="#!/knowledgebases">Knowledgebase</a></li>
+                <!--<li class="divider"></li>
+                                    <li class="dropdown-header">Nav header</li>
+                                    <li><a href="#">Separated link</a></li>
+                                    <li><a href="#">One more separated link</a></li>-->
+              </ul>
+            </li>
+			<li ui-route="/events" ng-class="{active: $uiRoute}"><a href="#!/events">Event</a></li>
+			<li ui-route="/bolgs" ng-class="{active: $uiRoute}"><a href="#!/blogs">Blog</a></li>
+            <li ui-route="/contact" ng-class="{active: $uiRoute}"><a href="#!/contact">Contact</a></li>
+            <li ng-if="authentication[0].id ==undefined"> <a aria-expanded="false" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">Register<span class="caret"></span></a>
+              <ul role="menu" class="dropdown-menu">
+                <li ui-route="/signup" ng-class="{active: $uiRoute}"><a href="/#!/signup">User Registration</a></li>
+                <li ui-route="/signUpDentist" ng-class="{active: $uiRoute}"><a href="/#!/signUpDentist">Doctor Registration</a></li>
+              </ul>
+            </li>
+            <!-- if not logged in show 'sign in' --> 
+            <!-- <li ui-route="/signin" ng-class="{active: $uiRoute}"><a href="/#!/signin">Sign In</a></li>-->
+            <li ng-if="authentication[0].id ==undefined"><a href="javascript:void(0);" data-reveal-id="login" id="loginUser">Sign In</a></li>
+            <!-- if logged in show user's settings menu -->
+            <li ng-if="authentication[0].id > 0"><a aria-expanded="false" role="button" data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);" id="displayName">{{authentication[0].display_name}}<span class="caret"></span></a>
+          	<ul role="menu" class="dropdown-menu">
+                <li ng-if="authentication[0].role_id==5"><a href="#!/myAppointment">My Appointment</a></li>
+                <li ng-if="authentication[0].role_id==5"><a href="#!/dentistList/">Book An Appointment</a></li>
+            <!-- <li><a href="javascript:void(0);">My Query</a></li>
+                <li><a href="javascript:void(0);">My Rating</a></li>-->
+                <li ng-if="authentication[0].role_id!=1"><a href="#!/my-blogs">My Blog</a></li>
+				<!-- <li ng-if="authentication[0].role_id == 2"><a href="#!/my-events">My Event</a></li> -->
+                <li ng-if="authentication[0].role_id!=1"><a href="#!/my-forum">My Forum</a></li>
+                <li ng-if="authentication[0].role_id!=1"><a href="#!/my-classified">My Classified</a></li>
+				<li ng-if="authentication[0].role_id==2"><a href="#!/myAppointment">My Appointment</a></li>
+                <li ng-if="authentication[0].role_id==5"><a href="/#!/settings/profile">My Profile</a></li>
+                <!--<li ng-if="authentication[0].role_id==5"><a href="#!/addNewMember">Add a new member</a></li>-->
+                <li ng-if="authentication[0].role_id==5"><a href="#!/listMember">My members</a></li>
+                <li ng-if="authentication[0].role_id==5"><a href="/#!/settings/password">Change Password</a></li>
+                <li><a href="#!/dashboard" ng-if="authentication[0].role_id==2">Console</a></li>
+                <li><a href="#!/dentists" ng-if="authentication[0].role_id==1">Console</a></li>
+                <!--data-ng-repeat="module in allModules" /listPatient,/dentistAppointmentList,/-->
+                <li><a href="#!/{{val}}" ng-if="authentication[0].role_id==3">Console</a></li>
+                <li class="divider"></li>
+                <!-- &lt;!&ndash;<li class="dropdown-header">Nav header</li>&ndash;&gt;-->
+                <li><a href="javascript:void(0);" ng-click="signOut()">Logout</a></li>
+              </ul>
+            </li>
+            <!---->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>

@@ -1,0 +1,177 @@
+<script type="text/javascript" src="modules/dentists/js/jquery-ui-1.9.2.min.js"></script>
+<div ng-include src="'modules/core/views/header-inside.html'"></div>
+<div class="search-content inner-cont top-buffer-90" data-ng-controller="AppointmentsController" ng-init="findOne('appointment')">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 top-buffer-15">
+                <div class="detials-page-bg  top-buffer-5">
+                    <div class="book-appointments-content">
+                        <h4 class="side-title big-title">Book An Appointment
+                            <span class="pull-right"><small>Change Date - <input type="text" class="app-date" id="appointment-date" ng-model="selectedDate" name="date" /></small></span>
+
+                        </h4>
+                         <ul class="table-week-view" ng-repeat="times in arrCalTimes">
+                            <li class="btn-primary btn-sm">{{times.days}}</li>
+                            <li ng-repeat="time in times.times" style="">
+                                <div class="btn-default btn-sm disabled" ng-if="(time.flag == true && time.editedTimeFlag == false)"  >
+                                    {{((time.dt.getHours() > 12) ? time.dt.getHours() - 12 : time.dt.getHours())}}:{{(time.dt.getMinutes() == 0 ? '00' : time.dt.getMinutes())}} {{((time.dt.getHours() >= 12) ? 'PM' : 'AM')}}
+                                </div>
+                                <div class="btn-default btn-sm"  ng-if="(time.flag == false && time.editedTimeFlag == false)" ng-click="selectApptTimeValue(time.dt.getTime(), $event)">
+                                    {{((time.dt.getHours() > 12) ? time.dt.getHours() - 12 : time.dt.getHours())}}:{{(time.dt.getMinutes() == 0 ? '00' : time.dt.getMinutes())}} {{((time.dt.getHours() >= 12) ? 'PM' : 'AM')}}
+                                </div>
+                                <div class="btn-default btn-sm active"  ng-if="(time.flag == true && time.editedTimeFlag == true)" ng-click="selectApptTimeValue(time.dt.getTime(), $event)">
+                                    {{((time.dt.getHours() > 12) ? time.dt.getHours() - 12 : time.dt.getHours())}}:{{(time.dt.getMinutes() == 0 ? '00' : time.dt.getMinutes())}} {{((time.dt.getHours() >= 12) ? 'PM' : 'AM')}}
+                                </div>
+                            </li>
+                        </ul>
+
+
+                        <div class="col-xs-12 text-center blank-box">
+                            <a href="javascript:void(0);" id="show-btn" class="show">Show More</a>
+                            <a href="javascript:void(0);" id="hide-btn" class="hide">Less</a>
+                            <span class="btn btn-default btn-sm pull-left" ng-if="((prev != undefined) && (prev != currrentDate))" data-ng-click="getAppointmentsNextWeek(prev,clinic_id,'prev','create')">Prev Week <!--{{prev +'>'+ currrentDate}}--></span>
+                            <span class="btn btn-default btn-sm pull-right" ng-if="next <= next3monthdate" data-ng-click="getAppointmentsNextWeek(next,clinic_id,'next','create')">Next Week <!--{{prev +'<='+ currrentDate}}--></span>
+                        </div>
+                        <div class="clearfix"></div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-xs-12 col-sm-8">
+
+                <div class="detials-page-bg  top-buffer-5" >
+                    <div class="book-appointments-content">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="big-date-icon"></div>
+                                <h5>on <span class="text-dg-black" id="selectedDate">Select date time</span></h5>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="big-time-icon"></div>
+                                <h5>at <span class="text-dg-black" id="selectedDateTime"></span></h5>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <!-- <a href="javascript:void(0);" class="btn btn-default top-buffer-15 btn-sm">Change Date &amp; Time</a>--> </div>
+                </div>
+                <div class="detials-page-bg  top-buffer-5" data-ng-controller="BookAppoinmentController">
+                    <div class="book-appointments-content">
+                        <div class="row side-title"> 
+						
+						<div class="col-xs-6"><h4>Enter Your Contact Details</h4></div>
+                            <div class="col-xs-5 pull-right" data-ng-init="getMember()"><h5 style="margin-right:10px;">Select Member</h5>
+                                <!-- <select class="form-control-select-box " data-ng-model="member.id">
+                                    <option  data-ng-repeat="member in credentials" value="{{member.id}}">{{member.first_name+' '+member.last_name}}</option>
+                                </select> -->
+								<select class="form-control-select-box " ng-change="selectMember(member.id)" data-ng-model="member.id">
+									<option value="">Me</option>
+									<option data-ng-repeat="member in credentials" ng-if="credentials!=undefined" value="{{member.id}}" ng-selected="(mem_id == member.id) ? true : false ">{{member.first_name+' '+member.last_name}}
+									</option>
+								</select>
+                            </div> </div>
+
+
+                        <form role="form" class="form-horizontal book-app-form top-buffer-20" data-ng-submit="bookedAppointment()" novalidate>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">First Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" required placeholder="First Name" class="form-control" ng-model="member.first_name" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3  control-label">Last Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" required placeholder="Last Name" class="form-control"  ng-model="member.last_name" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Email</label>
+                                <div class="col-sm-9">
+                                    <input type="email" required placeholder="Email" class="form-control" ng-model="member.email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Mobile</label>
+                                <div class="col-sm-9">
+                                    <input type="text" required placeholder="Mobile" class="form-control" ng-model="member.contact_no">
+                                </div>
+                            </div>
+                            <div class="form-group" ><!--ng-if="buttonText!='Update Appointment'"-->
+                                <label class="col-sm-3 control-label">Appointment Reason</label>
+                                <div class="col-sm-9">
+                                    <textarea class="form-control" placeholder="Appointment Reason" ng-model="reason">{{reason}}</textarea>
+                                </div>
+                            </div>
+                            <!--<div class="form-group" ng-if="statusDiv==true">
+                                <label class="col-sm-3 control-label">Status</label>
+                                <div class="col-sm-9">
+                                   <select ng-model="authentication[0].appStatus">
+                                       <option value="Pending" ng-selected="((status=='Pending')?true:false)">Pending</option>
+                                       <option value="Approve" ng-selected="((status=='Approve')?true:false)">Approved</option>
+                                       <option value="Reject" ng-selected="((status=='Reject')?true:false)">Reject</option>
+                                   </select>
+                                </div>
+                            </div>-->
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <button class="btn btn-primary" type="submit">{{buttonText}}</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-xs-12 text-center bottom-buffer"> <a href="javascript:void(0);" onclick="javascript:history.go(-1);">Go back to my result</a> </div>
+            </div>
+            <div class="col-xs-12 col-sm-4" data-ng-controller="GetDentistData" >
+                <div class="detials-page-bg  top-buffer-5" ng-repeat="result in result">
+                    <div class="search-result">
+                        <div class="row">
+                            <div class="col-xs-4 col-cu-3 col-sm-3 col-md-3"> <a class="thumbnail" href="javascript:void(0)">
+                                <img alt="dentist photo" src="/images/profile_images/{{result.image}}" ng-if="result.image!=undefined">
+                                <img alt="dentist photo" src="/modules/core/images/default-pic.jpg" ng-if="result.image==undefined">
+                            </a> </div>
+                            <div class="col-xs-8 col-cu-9 col-sm-9 col-md-9 search-result-content">
+                                <div class="row no-margin-right">
+                                    <h3><a href="#!/dentistDetail/{{result.dentistId}}">DR. {{result.first_name +" "+result.last_name}}</a></h3>
+                                    <div class="rating no-margin-left">
+                                        <div class="star"></div>
+                                        <div class="star"></div>
+                                        <div class="star"></div>
+                                        <div class="star"></div>
+                                        <div class="blank-star"></div>
+                                        <div class="rated-count pull-left">410 Users Rated</div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <ul class="keyskills">
+                                        <li><span class="user-icon"></span>{{result.degree}}</li>
+                                        <li><span class="exp-icon"></span>{{result.experience/12 | number :0}}{{(((result.experience%12)==0)?'':'+')}} years</li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="detials-page-bg  top-buffer-5" ng-repeat="result in result">
+                    <div class="search-result">
+                        <div class="search-result-content">
+                            <h4 class="side-title">Doctor Clinic Address</h4>
+                            <div class="dentist-address"><span class="area-icon"></span> Location : <strong>{{result.address}}</strong></div>
+                            <div class="day-availability"> <span class="time-icon"></span> {{WeekDays[result.startDay - 1]}} - {{WeekDays[result.endDay - 1]}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="book-appointments text-center">
+    <div class="container">
+        <h1 class="text-uppercase"><span>Doctors</span></h1>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text. </p>
+        <a href="#!/dentistList/" class="btn btn-primary text-uppercase">Book Appointment</a>
+    </div>
+</div>
+<div ng-include src="'modules/core/views/footer.html'"></div>
+

@@ -1,0 +1,132 @@
+<link rel="stylesheet" href="modules/dentists/css/jquery-ui.css" type="text/css"/>
+<style>
+    .ui-autocomplete { 
+        cursor:pointer; 
+        height:120px; 
+        overflow-y:scroll;
+    }    
+</style>
+<div ng-include src="'modules/dentists/views/layouts/header_files.html'"></div>
+<div class="mainwrapper">
+    <div ng-include src="'modules/dentists/views/layouts/header.html'"></div>
+    <div ng-include src="'modules/dentists/views/layouts/leftmenu.html'"></div>
+    <div class="rightpanel" data-ng-controller="DentistAppointmentController" ng-init="findTodayAppointments()">
+
+        <ul class="breadcrumbs">
+            <li><a href="#!/dashboard"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
+            <li>Dashboard</li>
+            <li class="right">
+                <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
+                <ul class="dropdown-menu pull-right skin-color">
+                    <li><a href="default">Default</a></li>
+                    <li><a href="navyblue">Navy Blue</a></li>
+                    <li><a href="palegreen">Pale Green</a></li>
+                    <li><a href="red">Red</a></li>
+                    <li><a href="green">Green</a></li>
+                    <li><a href="brown">Brown</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="pageheader">
+            <form method="post" class="searchbar" ng-submit="findTodayAppointments()">
+                <input type="text" name="keyword" placeholder="To search type and hit enter..." ng-model="search.val"/>
+            </form>
+            <div class="pageicon"><span class="iconfa-laptop"></span></div>
+            <div class="pagetitle">
+                <h5>Current Appointments</h5>
+                <h1>Dashboard</h1>
+            </div>
+        </div><!--pageheader-->
+
+        <div class="maincontent">
+            <div class="maincontentinner">
+
+
+                <!-- <h4 class="widgettitle">Table Using Colgroup</h4>-->
+                <table class="table table-bordered responsive">
+                    <colgroup>
+                        <col class="con0" style="width:7%;"/>
+                        <col class="con1" style="width:13%;"/>
+                        <col class="con0" style="width:10%;"/>
+                        <col class="con1" style="width:10%;"/>
+                        <col class="con0" style="width:10%;"/>
+                        <col class="con1" style="width:10%;"/>
+                        <col class="con0" style="width:20%;"/>
+
+
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th class="center">&nbsp;</th>
+                            <th class="center">Sr. No</th>
+                            <th>Patient Name</th>
+                            <th class="center">Date</th>
+                            <th>Mobile No.</th>
+                            <th>Reason</th>
+                            <th class="center">Status</th>
+                            <th class="center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="appointment in appointments">
+                            <td class="center">&nbsp;</td>
+                            <td class="center">{{$index + 1}}</td>
+                            <td><a href="#!/viewProfile/{{appointment.user_id}}">{{appointment.first_name + ' ' + appointment.last_name}}</a></td>
+                            <td>{{appointment.app_time| date}}&nbsp;{{appointment.app_time| date:'hh:mm a'}}</td>
+                            <td class="center">{{appointment.contact_no}}</td>
+                            <td>{{appointment.reason}}</td>
+                            <td class="center">{{appointment.status}}</td>
+                            <td class="center">
+                                <a href="#!/editPatient?val=edit&app_id={{appointment.app_id}}" title="Edit" >
+                                    <span class="iconfa-edit large-a-icon"></span>
+                                </a>  &nbsp;
+                                <a href="javascript:void(0);" ng-click="deleteAppointmentByAppId(appointment.app_id, $index)" title="Delete">
+                                    <span class="iconfa-trash large-a-icon"></span>
+                                </a>&nbsp;
+                                <a href="#referToDoctor" data-toggle="modal" ng-click="setDentistData(appointment.user_id)" title="Refer to a Doctor">
+                                    <span class="iconfa-share large-a-icon"></span>
+                                </a> 
+                            </td>
+                        </tr>
+
+
+
+                    </tbody>
+                </table><!--Table end -->
+
+
+            </div><!--maincontentinner-->
+            <div ng-include src="'modules/dentists/views/layouts/footer.html'"></div>
+        </div><!--maincontent-->
+        <!--#Refer To doctor popup start-->
+        <div aria-hidden="false" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal hide fade in" id="referToDoctor">
+            <div class="modal-header widgettitle">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
+                <h3 id="myModalLabel">Refer To Doctor</h3>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-success" ng-if="msg != unddefined">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong></strong> {{msg}}</div>
+                <form class="stdform">
+                    <div class="par">
+                        <label>To doctor</label>
+                        <span class="field">
+                            <input type="text" id="tbCountries" />    
+                        </span>  </div>
+                    <p>
+                        <label>Reasons</label>
+                        <span class="field">
+                            <textarea name="date" class="" ng-model="refer.reason" rows="5" cols="50"/></textarea>
+                        </span> </p>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn">Close</button>
+                <button class="btn btn-primary" ng-click="referToDoctor()">Submit</button>
+            </div>
+        </div>
+        <!--#Refer To Doctor end -->
+    </div><!--rightpanel-->
+</div><!--mainwrapper-->

@@ -1,0 +1,45 @@
+<div class="leftpanel" data-ng-controller="HeaderController">
+
+    <div class="leftmenu">
+        <ul class="nav nav-tabs nav-stacked">
+            <li class="nav-header">Navigation</li>
+            <li ng-if="authentication[0].role_id == 2" ui-route="/dashboard" ng-class="{active: $uiRoute}"><a ng-href="#!/dashboard"><span class="iconfa-laptop"></span> Dashboard</a></li>
+            <!--            <li ng-if="authentication[0].role_id==2 || authentication[0].role_id==1"ui-route="/homeNotification" ng-class="{active: $uiRoute}"><a href="#!/homeNotification"><span class="iconfa-bell"></span>Home Page Notification</a></li>-->
+            <li ng-if="authentication[0].role_id == 1" ui-route="/dentists" ng-class="{active: $uiRoute}"><a href="#!/dentists"><span class="iconfa-user"></span> Doctors</a></li>
+
+            <li ng-if="authentication[0].role_id == 2" ui-route="/allStatus" ng-class="{active: $uiRoute}"><a href="#!/allStatus"><span class="iconfa-calendar"></span>Status</a></li>
+            <li ng-if="authentication[0].role_id == 1" ui-route="/allAdminStatus" ng-class="{active: $uiRoute}"><a href="#!/allAdminStatus"><span class="iconfa-calendar"></span>Status</a></li>
+
+
+            <li  ui-route="/listPatient" ng-class="{active: $uiRoute}" ng-if="(patVal == true || datVal == true) && authentication[0].role_id == 3">
+                <a  ng-href="#!/listPatient"><span class="iconfa-user"></span> Patient</a>
+            </li>
+
+            <li ui-route="/listPatient" ng-class="{active: $uiRoute}" ng-if="authentication[0].role_id == 1 || authentication[0].role_id == 2"><a  ng-href="#!/listPatient"><span class="iconfa-user"></span> Patient</a></li>
+
+            <li  ui-route="/dentistAppointmentList" ng-class="{active: $uiRoute}" ng-if="appVal == true && authentication[0].role_id == 3">
+                <a  ng-href="#!/dentistAppointmentList"><span class="iconfa-user"></span> Appointment</a>
+            </li>
+            <li ng-if="authentication[0].role_id == 2" ui-route="/dentistAppointmentList" ng-class="{active: $uiRoute}"><a ng-href="#!/dentistAppointmentList"><span class="iconfa-calendar"></span> Appointment</a></li>
+
+            <li ng-if="authentication[0].role_id == 2" ui-route="/calender" ng-class="{active: $uiRoute}"><a href="#!/calender"><span class="iconfa-calendar"></span> Calendar</a></li>
+            <li ng-if="authentication[0].role_id == 2 || authentication[0].role_id == 1" ui-route="/clinics" ng-class="{active: $uiRoute}"><a ng-href="#!/clinics"><span class="iconfa-globe"></span> Clinic</a></li>
+            <li ui-route="/staffs" ng-class="{active: $uiRoute}" ng-if="authentication[0].role_id == 2"><a href="#!/staffs"><span class="iconfa-user-md"></span> Staff</a></li>
+            <li ui-route="/listEvents" ng-class="{active: $uiRoute}" ng-if="authentication[0].role_id == 2 || authentication[0].role_id == 1"><a href="#!/listEvents"><span class="iconfa-bullhorn"></span> Event</a></li>
+            <li ng-if="authentication[0].role_id == 1" ui-route="/manage-blog" ng-class="{active: $uiRoute}"><a href="#!/manage-blog"><span class="iconfa-pencil"></span>Blog</a></li>
+            <li ng-if="authentication[0].role_id == 1" ui-route="/manage-classified" ng-class="{active: $uiRoute}"><a href="#!/manage-classified"><span class="iconfa-pencil"></span>Classified</a></li>
+            <!--<li ui-route="/manage-classified" ng-class="{active: $uiRoute}"><a href="#!/manage-classified"  ng-if="authentication[0].role_id==2"><span class="iconfa-pencil"></span>Classified</a></li>-->
+            <li ng-if="authentication[0].role_id == 1" ui-route="/manage-forum" ng-class="{active: $uiRoute}"><a href="#!/manage-forum"><span class="iconfa-pencil"></span>Forum</a></li>
+            <li ng-if="authentication[0].role_id == 1" ui-route="/listAllKnowledgeBase" ng-class="{active: $uiRoute}"><a href="#!/listAllKnowledgeBase"><span class="iconfa-pencil"></span>Knowledge Base</a></li>
+
+            <li  ui-route="/campaignList" ng-class="{active: $uiRoute}" ng-if="campVal == true && authentication[0].role_id == 3">
+                <a href="#!/campaignList"><span class="iconfa-user"></span> Campaign</a>
+            </li>
+            <li ng-if="authentication[0].role_id == 2"  ui-route="/campaignList" ng-class="{active: $uiRoute}"><a href="#!/campaignList"><span class="iconfa-bullhorn"></span>Campaign</a></li>
+            <li ng-if="authentication[0].role_id == 2"  ui-route="/packageRequest" ng-class="{active: $uiRoute}"><a href="#!/packageRequest"><span class="iconfa-bullhorn"></span>Sms Package Request</a></li>
+            <li ng-if="authentication[0].role_id == 1 || authentication[0].role_id == 2"  ui-route="/package" ng-class="{active: $uiRoute}"><a href="#!/package"><span class="iconfa-bullhorn"></span>Sms Packages</a></li>
+
+        </ul>
+    </div><!--leftmenu-->
+
+</div><!-- leftpanel -->

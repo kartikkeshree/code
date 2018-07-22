@@ -1,0 +1,111 @@
+<section data-ng-controller="FaqsController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1 data-ng-bind="faq.name"></h1>
+	</div>
+	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == faq.user._id))">
+		<a class="btn btn-primary" href="/#!/faqs/{{faq._id}}/edit">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+	</div>
+	<small>
+		<em class="text-muted">
+			Posted on
+			<span data-ng-bind="faq.created | date:'mediumDate'"></span>
+			by
+			<span data-ng-bind="faq.user.displayName"></span>
+		</em>
+	</small>
+
+</section>
+<!--<section data-ng-controller="FaqsController" data-ng-init="findOne()">
+<div data-ride="carousel" class="carousel slide inner-page" id="myCarousel">
+	<div role="listbox" class="carousel-inner"> <a id="open-map" href="javascript:void(0)">Show Map</a>
+		<div class="item active"> <img src="images/banner.jpg" alt="Banner Image" title="Dentist Forum" />
+			<div class="container">
+				<div class="carousel-caption">
+					<h1>Currently 5,000 Dentists in all over India.</h1>
+					<hr />
+					<form class="banner-serch-form col-xs-12">
+						<div class="row">
+							<div class="col-tn-6 col-xs-4 col-sm-offset-1"><span class="user-icon"></span>
+								<input type="text" class="form-control" placeholder="Dentist Name, Speciality">
+							</div>
+							<div class="col-tn-6 col-xs-3"><span class="area-icon"></span>
+								<input type="text" class="form-control" placeholder="Area">
+							</div>
+							<div class="col-tn-12 col-xs-3"><a role="button" href="#" class="btn btn-primary">Search</a></div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="shadow-spreater"></div>
+		</div>
+	</div>
+</div>
+<div class="google-map hide" id="inner-page-map">
+	<div class="change-location">Please Choose Your Location - <a href="javascript:void(0)">Pune</a></div>
+	<div class="close-map"><a id="close-map" href="javascript:void(0)">Close</a></div>
+	<div class="map-section-shadow"></div>
+	<iframe class="inner-iframe-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d242118.0689479398!2d73.86296739999999!3d18.52461645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf2e67461101%3A0x828d43bf9d9ee343!2sPune%2C+Maharashtra%2C+India!5e0!3m2!1sen!2s!4v1418710888923"></iframe>
+</div>
+<div class="container inner-cont">
+	<div class="row">
+		<div class="page-header">
+			<h2>FAQ</h2>
+			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+		</div>
+		<div class="col-sm-6 col-xs-12 top-buffer-15 bottom-buffer according-section">
+			<h3>Label 1</h3>
+			<div id="Accordion1" class="Accordion" tabindex="0">
+				<div class="AccordionPanel">
+					<div class="AccordionPanelTab">Question 1.</div>
+					<div class="AccordionPanelContent">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</div>
+				</div>
+				<div class="AccordionPanel">
+					<div class="AccordionPanelTab">Question 2.</div>
+					<div class="AccordionPanelContent">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</div>
+				</div>
+				<div class="AccordionPanel">
+					<div class="AccordionPanelTab">Question 3.</div>
+					<div class="AccordionPanelContent">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</div>
+				</div>
+				<div class="AccordionPanel">
+					<div class="AccordionPanelTab">Question 4.</div>
+					<div class="AccordionPanelContent">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6 col-xs-12 top-buffer-15 bottom-buffer according-section">
+			<h3>Label 2</h3>
+			<div id="Accordion2" class="Accordion" tabindex="0">
+				<div class="AccordionPanel">
+					<div class="AccordionPanelTab">Question 1.</div>
+					<div class="AccordionPanelContent">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</div>
+				</div>
+				<div class="AccordionPanel">
+					<div class="AccordionPanelTab">Question 2.</div>
+					<div class="AccordionPanelContent">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</div>
+				</div>
+				<div class="AccordionPanel">
+					<div class="AccordionPanelTab">Question 3.</div>
+					<div class="AccordionPanelContent">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</div>
+				</div>
+				<div class="AccordionPanel">
+					<div class="AccordionPanelTab">Question 4.</div>
+					<div class="AccordionPanelContent">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="book-appointments text-center">
+	<div class="container">
+		<h1 class="text-uppercase">Smart <span>Whitening</span></h1>
+		<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text. </p>
+		<div class="btn btn-primary text-uppercase">Book Appointments</div>
+	</div>
+</div>-->
+</section>

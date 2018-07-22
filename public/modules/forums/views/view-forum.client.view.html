@@ -1,0 +1,55 @@
+<div ng-include src="'modules/core/views/header-inside.html'"></div>
+
+<div class="container inside-content" data-ng-controller="ForumsController" ng-init="find('forum','')">
+    <div class="row">
+        <div class="col-xs-12 top-buffer-20">
+            <div class="clearfix"></div>
+            <div class="panel panel-default forum-section">
+                <!-- Table -->
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th style="width:7%" class="text-center">#</th>
+                        <th style="width:63%">Recent Query</th>
+                        <th style="width:20%">Posted By</th>
+                        <th style="width:10%" class="text-center">Comments</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-if = "forum_data.length < 1">
+                        <th></th>
+                        <th class="text-primary">No query yet!</th>
+                    </tr>
+                    <tr ng-repeat="forum_data in forum_data">
+                        <th scope="row" class="text-center">{{$index+1}}</th>
+                        <td class="text-primary"><strong><a href="javascript:void(0);" ng-click="getForumDetails(forum_data.id)">{{forum_data.question}} </a></strong><div class="date-box">Posted : {{forum_data.createdDate}}</div></td>
+                        <td>{{forum_data.first_name+" "+forum_data.last_name}}</td>
+                        <td class="text-center"><h3>{{forum_data.cmtCnt}}</h3></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+				<!-- Pagination Section -->
+                <div class="pagination-section" ng-if="forum_data.length > 0">
+                    <ul class="pagination pull-right">
+                        <li ng-class="{disabled: currentPage == 1}"><a aria-label="Previous" href="javascript:void(0);" ng-click="prevPage('forum','')"><span aria-hidden="true">«</span></a></li>
+                        <li ng-class="{active: n == currentPage}" ng-repeat="n in pagedItems" ng-click="setPage('forum','')"><a href="javascript:void(0);" ng-bind="n">1<span class="sr-only">(current)</span></a></li>
+                        <li ng-class="{disabled: currentPage == pagedItems.length}"><a aria-label="Next" href="javascript:void(0);"  ng-click="nextPage('forum','')"><span aria-hidden="true">»</span></a></li>
+                    </ul>
+                </div>
+				<!-- End -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="book-appointments text-center">
+    <div class="container">
+        <h1 class="text-uppercase">Doctors</h1>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text. </p>
+        <a class="btn btn-primary text-uppercase" href="#!/dentistList/">Book Appointment</a>
+    </div>
+</div>
+<div ng-include src="'modules/core/views/footer.html'"></div>
+<script type="text/javascript">
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+</script>

@@ -1,0 +1,316 @@
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2 col-xs-6">
+                <h4 class="text-dg-black">Useful Links</h4>
+                <ul>
+                    <!--<li><a href="javascript:void(0);">Privacy</a></li>
+                    <li><a href="javascript:void(0);">Policy</a></li>-->
+                    <li><a href="#!/termAndCondition">Terms &amp; Conditions</a></li>
+                    <!-- <li><a href="javascript:void(0);">Careers</a></li>-->
+                    <li><a href="#!/contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-2 col-xs-6">
+                <h4 class="text-dg-black">Community</h4>
+                <ul>
+                    <li><a href="#!/listClassifieds">Classified</a></li>
+                    <li><a href="#!/forums">Forum</a></li>
+                    <li><a href="#!/knowledgebases">Knowledgebase</a></li>
+                    <li><a href="#!/blogs">Blog</a></li>
+					<li><a href="#!/events">Event</a></li>
+                    <!-- <li><a href="javascript:void(0);">Testimonials</a></li>-->
+                </ul>
+            </div>
+            <div class="col-sm-2 col-xs-6">
+                <h4 class="text-dg-black">Get To Know Us</h4>
+                <ul>
+                    <li><a href="#!/our_company">About DoctorHere</a></li>
+                    <li><a href="#!/faqs">FAQ</a></li>
+                    <!--<li><a href="javascript:void(0);">Our Team</a></li>
+                    <li><a href="javascript:void(0);">News &amp; Events</a></li>-->
+                </ul>
+            </div>
+            <!-- <div class="col-sm-2 col-xs-6">
+                 <h4 class="text-dg-black">More Links</h4>
+                 <ul>
+                     <li><a href="javascript:void(0);">Articles</a></li>
+                     &lt;!&ndash;<li><a href="javascript:void(0);">Policy</a></li>&ndash;&gt;
+                    &lt;!&ndash; <li><a href="javascript:void(0);">Terms &amp; Conditions</a></li>&ndash;&gt;
+                    &lt;!&ndash; <li><a href="javascript:void(0);">Careers</a></li>&ndash;&gt;
+                     <li><a href="#!/contact">Contact</a></li>
+                 </ul>
+             </div>-->
+            <div class="col-sm-4 col-xs-6">
+                <h4 class="text-dg-black">Social Media</h4>
+                <div class="facebook-icon"></div>
+                <div class="linkedin-icon"></div>
+                <div class="google-icon"></div>
+                <div class="twitter-icon"></div>
+                <div class="pinterest-icon"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="sub-footer">
+    <div class="container">
+        <p class="pull-left">Copyrights © 2015 DoctorHere.</p>
+        <p class="pull-right">Powered By <a href="#">Caprium Technologies</a></p>
+    </div>
+</div>
+<div id="login" class="reveal-modal" data-ng-controller="AuthenticationController">
+
+    <h1>Login  </h1>
+    <div class="errorEmail">{{error}}</div>
+    <br clear="all">
+    <div class="PopUpCont">
+        <form role="form" class="form-horizontal" data-ng-submit="signin()">
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Email ID</label>
+                <div class="col-sm-9"> <span class="email-id form-icon"></span>
+                    <input type="email" id="email" name="email" class="form-control" data-ng-model="credentials.email" placeholder="Email" style="text-transform: ">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Password</label>
+                <div class="col-sm-9"> <span class="password-icon form-icon"></span>
+                    <input type="password" data-ng-model="credentials.password" id="password" name="password" placeholder="Password" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <button class="btn btn-primary" type="submit">Login</button>
+                    <a href="javascript:void(0);" ng-click="showForgot = true;" class="forgot-link">Forgot Password</a>
+                </div>
+            </div>
+            <div id="forgot-section" ng-show="showForgot">
+                <hr/>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Email</label>
+                    <div class="col-sm-9"> <span class="email-id form-icon"></span>
+                        <input type="text" name="email" class="form-control" data-ng-model="credentials.forgotEmail" placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <button class="btn btn-primary" type="button" ng-click="askForPasswordReset()">Send</button>
+                        <button class="btn btn-default" type="button" ng-click="showForgot = false;">Cancel</button>
+                    </div>
+                </div>
+                <div data-ng-show="success" class="text-center text-success">
+                    <strong>{{success}}</strong>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer"><a href="/#!/signup">Register as a User </a> | <a href="/#!/signUpDentist">Register as a Doctor</a> </div>
+    <a class="close-reveal-modal">&#215;</a> </div>
+
+
+<!-- Chat Code -->	
+
+<div ng-controller="ChatController" >
+
+<div id="flip" style="text-indent:10px; line-height: 28px;" class="online-user" ng-show="(signInVal == undefined)?true:false">Members online({{users.length}}) <a class="xg_info chatTitle" href="#"></a>
+    <a class="volume" title="Volume" data-volume=""></a>
+    <a class="status" href="#" title="Options"></a> </div>
+    <div id="flip" style="text-indent:10px; line-height: 28px;" class="online-user" ng-show="(signInVal != undefined)?true:false"><a href="javascript:void(0);" data-reveal-id="login" id="loginUser" style="color: #fff">{{signInVal}}</a></div>
+
+<div id="panel" ng-show="(signInVal == undefined)?true:false">
+    <div class="online-members online-user"> Members online ({{users.length}}) <p class="logout" ><b>-</b></p></div>
+    
+    <div id="chatbox"> 
+        <ul>
+            <li ng-repeat="user in users" data-socket="{{user.id}}" ng-click="personalChat(user.socketId, user.name, user.id)">
+               <img class="avtar" src="{{user.image}}" >
+                {{user.name}}
+            </li>
+        </ul>
+    </div></div>
+
+<div id="Main-room-flip" style="text-indent:10px; line-height: 25px;" class="mainroom-user online-user-main" ng-show="(signInVal == undefined)?true:false">Main-Room </div>
+
+<div id="Main-room-panel">
+    <div class="online-members online-user-main" > Main Room
+	<p class="logout" ><b>-</b></p>
+	</div>
+    <div id="chatbox-main"> 
+
+        <div class="liveuser" ng-repeat="message in messages" ng-class="{alert: message.user == &quot;chatroom&quot;}">
+            <div style="float:left; margin-right:10px; margin-bottom:20px;"><img ng-if="message.image" class="avtar-main" src="{{message.image}}"></div>
+
+                <b ng-if="(message.user != '')">{{message.user}}</b><br>{{message.text}}
+            <span class="pull-right date">{{message.date | date:"hh:mm a"}}</span></div> 
+    </div>
+    <form name="message" action="" ng-submit="sendMessage()">
+        <input size="45" ng-model="messageChat"/>
+    </form>
+
+</div>
+
+
+
+<div id="user-panel" style="{{($index == 1)?'right: 774px;':(($index == 2)?'right: 1000px;':'')}}" class="chatWindow-{{$index}}" ng-repeat="chat in chatWindows">
+
+<div id="user-chat">
+       <div id="user-menu" >
+            <p class="welcome">{{chat.name}}<b></b></p>
+            <p class="logout user exit" ng-click="closeWindow($index, chat)"><b>X</b></p>
+            <div style="clear:both"></div>
+        </div>
+    <div id="user-chatbox" class="userChatBox-{{$index}}">
+            <div class="liveuser" ng-repeat="message in chat.privateMessages">
+            <div style="float:left; margin-right:10px; margin-bottom:20px;"><img class="avtar-main" src="{{message.image}}"></div>
+                <b >{{message.user}}</b><br>{{message.text}}
+            <span class="pull-right date">{{message.date | date:"hh:mm a"}}</span></div> 
+        </div>
+        
+        <form name="message" ng-submit="sendPrivateMessage($index, chat.socketId, chat.userid)">
+            <input name="usermsg" class="usermsg" type="text" id="msgText-{{$index}}" size="63" ng-model="chat.message" />
+        </form>
+    </div></div>
+<!--
+<div id="user-panel" style="display: none; right:774px;" class="chatWindow-1"><div id="user-chat">
+       <div id="user-menu">
+            <p class="welcome">{{chatWindows[1].name}}<b></b></p>
+            <p class="logout user exit"><b>X</b></p>
+            <div style="clear:both"></div>
+        </div>
+        <div id="user-chatbox">
+            <div class="liveuser" ng-repeat="message in privateMessages">
+            <div style="float:left; margin-right:10px; margin-bottom:20px;"><img class="avtar-main" src="{{message.image}}"></div>
+
+                <b >{{message.user}}</b><br>{{message.text}}
+            <span class="pull-right date">{{message.date | date:"hh:mm a"}}</span></div> 
+            
+        </div>
+        
+        <form name="message" ng-submit="sendPrivateMessage()">
+            <input name="usermsg" type="text" id="usermsg" size="63" ng-model="chat.message" />
+        </form>
+    </div></div>
+
+<div id="user-panel" style="display: none;  right:1000px" class="chatWindow-2"><div id="user-chat">
+       <div id="user-menu">
+            <p class="welcome">{{chatWindows[2].name}}<b></b></p>
+            <p class="logout user exit"><b>X</b></p>
+            <div style="clear:both"></div>
+        </div>
+        <div id="user-chatbox">
+            <div class="liveuser" ng-repeat="message in privateMessages">
+            <div style="float:left; margin-right:10px; margin-bottom:20px;"><img class="avtar-main" src="{{message.image}}"></div>
+
+                <b >{{message.user}}</b><br>{{message.text}}
+            <span class="pull-right date">{{message.date | date:"hh:mm a"}}</span></div> 
+            
+        </div>
+        
+        <form name="message" ng-submit="sendPrivateMessage()">
+            <input name="usermsg" type="text" id="usermsg" size="63" ng-model="chat.message" />
+        </form>
+    </div></div>
+-->
+</div>
+ 
+
+<!-- Chat Code end  -->	
+
+<!-- Chat-mobile  -->
+
+
+<!-- Chat-mobile end  -->
+<!-- Bootstrap core JavaScript
+    ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!-- new  
+<link href="/modules/core/css/calender-new.css" rel="stylesheet">
+<script src="/modules/core/js/jscal2.js"></script>
+<script src="/modules/core/js/en.js"></script>-->
+<!-- end  -->
+<link href="/modules/core/css/bootstrap.min.css" rel="stylesheet">
+<link href="/modules/core/css/style.css" rel="stylesheet" type="text/css">
+<link href="/modules/core/css/jquery.ui.css" rel="stylesheet" type="text/css">
+<!-- Custom styles for this template -->
+<link href="/modules/core/css/carousel.css" rel="stylesheet">
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
+<!--<script src="/modules/core/js/bootstrap.min.js"></script>
+<script src="/modules/core/js/docs.min.js"></script>-->
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<!--<script src="/modules/core/js/ie10-viewport-bug-workaround.js"></script>-->
+<!-- Bootstrap core JavaScript
+    ================================================== -->
+<script type="text/javascript">
+                        setTimeout(function () {
+                            $('#loader-container').hide();
+                        }, 2000);
+                        $('#close-map').click(function () {
+                            $('#inner-page-map').removeClass('show');
+                            $('#inner-page-map').addClass('hide');
+
+                        });
+                        $('#open-map').click(function () {
+                            $('#inner-page-map').removeClass('hide');
+                            $('#inner-page-map').addClass('show');
+
+                        });
+
+                        /*
+                         $('#add-topic').click(function(){
+                         $('.post-new-topic-form').addClass('new-post-topic-height');
+                         });
+                         $('#cancel-topic').click(function(){
+                         $('.post-new-topic-form').removeClass('new-post-topic-height');
+                         });
+                         */
+
+                        var Accordion1 = new Spry.Widget.Accordion("Accordion1");
+                        var Accordion2 = new Spry.Widget.Accordion("Accordion2");
+</script>
+<script type="text/javascript">
+    $('#close-map').click(function () {
+        $('#inner-page-map').removeClass('show');
+        $('#inner-page-map').addClass('hide');
+
+    });
+    $('#open-map').click(function () {
+        $('#inner-page-map').removeClass('hide');
+        $('#inner-page-map').addClass('show');
+
+    });
+
+    $('#show-btn').click(function () {
+        $('#more-app-date').removeClass('hide');
+        $('#more-app-date').addClass('show');
+        $('#show-btn').removeClass('show');
+        $('#show-btn').addClass('hide');
+        $('#hide-btn').addClass('show');
+        $('.table-week-view').addClass('table-week-view-height');
+
+
+    });
+    $('#hide-btn').click(function () {
+        $('#more-app-date').removeClass('show');
+        $('#more-app-date').addClass('hide');
+        $('#show-btn').removeClass('hide');
+        $('#show-btn').addClass('show');
+        $('#hide-btn').removeClass('show');
+        $('.table-week-view').removeClass('table-week-view-height');
+
+    });
+
+    $(".online-user").click(function () {
+        $("#panel").slideToggle("slow");
+    });
+//    $(".user").click(function () {
+//        $("#user-panel").slideToggle("slow");
+//    });
+    $(".online-user-main").click(function () {
+        $("#Main-room-panel").slideToggle("slow");
+        $("#chatbox-main").scrollTop($("#chatbox-main")[0].scrollHeight + 100);
+    });
+
+   
+</script>
+
+

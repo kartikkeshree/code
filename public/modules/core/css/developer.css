@@ -1,0 +1,68 @@
+.errorEmail{
+    color: #FF0A5B;position: relative;text-align: center;top: -20px;margin-bottom: 0px
+}
+
+.inside-top-border {
+    border-top: 1px solid #eee;
+}
+[ng\:cloak], [ng-cloak], .ng-cloak {
+    display: none !important;
+}
+
+.profileLoading {
+    background: url("../images/bx_loader.gif") no-repeat scroll center center rgba(0, 0, 0, 0);
+    border: 1px solid #ccc;
+    height: 123px;
+    width: 123px;
+    margin: 0 0 20px 131px;
+}
+.clinicLoading {
+    background: url("../images/bx_loader.gif") no-repeat scroll center center rgba(0, 0, 0, 0);
+    border: 1px solid #ccc;
+    height: 80px;
+    width: 80px;
+    float: left;
+}
+.clinic-image {width:80px; float: left; height: 80px; border: 1px solid #ccc;vertical-align:middle;text-align:center;position:relative;margin-right:6px;}
+.clinic-image img{max-height: 80px !important;
+    max-width: 80px !important;
+    vertical-align: middle;width:auto;height:auto;}
+.clinic-image1 {width:80px; float: left; height: 80px; border: 1px solid #ccc;vertical-align:middle;text-align:center;position:relative;margin-right:6px;}
+.clinic-image1 img {
+  max-height: 50px !important;
+  max-width: 80px !important;
+  vertical-align: middle;
+  width: auto;
+  height: auto;
+  cursor: pointer;
+}
+.errorShow{color: #FF0000;}
+.popup_loader_img {
+    position: absolute;
+    content: " ";
+    background: #fff url("../images/preloader_img.gif") center center no-repeat !important;
+    height: 130px;
+    width: 130px;
+    top: 50%;
+    left: 50%;
+    margin: -65px 0 0 -65px;
+    border-radius: 50%;
+    z-index:99999;
+}
+
+.upload-thumb-perview {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+.remove-upload {
+	background:url(../images/remove-icon.png) rgba(0, 0, 0, 0.3) no-repeat center center;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    z-index: 9999;
+	display:none;
+	cursor:pointer;
+}
+
+.clinic-image:hover .remove-upload{display:block}

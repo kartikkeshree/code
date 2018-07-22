@@ -1,0 +1,74 @@
+<div ng-include src="'modules/dentists/views/layouts/header_files.html'"></div>
+<script type="text/javascript" src="modules/dentists/js/jquery-ui-1.9.2.min.js"></script>
+<div class="mainwrapper" data-ng-controller="PackageController">
+    <div ng-include src="'modules/dentists/views/layouts/header.html'"></div>
+    <div ng-include src="'modules/dentists/views/layouts/leftmenu.html'"></div>
+<div class="rightpanel">
+    <ul class="breadcrumbs">
+
+		<li><a href="#!/dashboard"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
+        <li>Sms Package Request</li>
+        <li class="right"> <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
+            <ul class="dropdown-menu pull-right skin-color">
+                <li><a href="default">Default</a></li>
+                <li><a href="navyblue">Navy Blue</a></li>
+                <li><a href="palegreen">Pale Green</a></li>
+                <li><a href="red">Red</a></li>
+                <li><a href="green">Green</a></li>
+                <li><a href="brown">Brown</a></li>
+            </ul>
+        </li>
+    </ul>
+    <div class="maincontent">
+        <div class="maincontentinner">
+            <div class="widget">
+                <h4 class="widgettitle">Fill all fields</h4>
+                <div class="widgetcontent">
+                    <form class="stdform" action="" method="post" data-ng-submit="smsPackageRequest();">
+                        
+                        <div class="par control-group" data-ng-show="error">
+                                <label class="control-label">&nbsp;</label>
+                                <div class="controls errorShow">
+                                    <strong>{{error}}</strong>
+                                </div>
+                            </div>
+                        
+                        <div class="par control-group">
+                            <label class="control-label">No of Required Sms.*</label>
+                            <div class="controls">
+                                <input type="text" class="span4" placeholder="No of Required Sms" ng-model="packages.allocated"/>
+                            </div>
+                        </div>
+
+                        <div class="par">
+                            <label>From Date*</label>
+                <span class="field">
+                <input id="package-start-date" type="text" name="date"  class="input-small" data-ng-model="packages.start_date"/>
+                </span> </div>
+
+                        <div class="par">
+                            <label>To Date*</label>
+                <span class="field">
+                <input id="datepicker1" type="text" name="date" data-ng-model="packages.end_date" class="input-small" />
+                </span> </div>
+
+                        <p class="stdformbutton">
+                            <button class="btn btn-primary">Submit</button>
+                            <button class="btn" type="reset">Cancel</button>
+                        </p>
+                    </form>
+                </div>
+                <!--widgetcontent-->
+            </div>
+            <!--widget-->
+
+        </div>
+        <!--maincontentinner-->
+        <div ng-include src="'modules/dentists/views/layouts/footer.html'"></div><!--footer-->
+    </div>
+    <!--maincontent-->
+
+</div>
+<!--rightpanel-->
+
+</div>

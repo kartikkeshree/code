@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calender | Dentist Forum</title>
+    <script type="text/javascript" src="modules/dentists/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="modules/dentists/js/fullcalendar.min.js"></script>
+    <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="modules/dentists/js/excanvas.min.js"></script><![endif]-->
+</head>
+<body>
+<div ng-include src="'modules/dentists/views/layouts/header_files.html'"></div>
+<div class="mainwrapper" data-ng-controller="CalenderController" data-ng-init="findApp()">
+    <div ng-include src="'modules/dentists/views/layouts/header.html'"></div>
+    <div ng-include src="'modules/dentists/views/layouts/leftmenu.html'"></div>
+    <div class="rightpanel">
+
+        <ul class="breadcrumbs">
+            <li><a href="dashboard.html"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
+            <li>Calendar</li>
+
+            <li class="right">
+                <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
+                <ul class="dropdown-menu pull-right skin-color">
+                    <li><a href="default">Default</a></li>
+                    <li><a href="navyblue">Navy Blue</a></li>
+                    <li><a href="palegreen">Pale Green</a></li>
+                    <li><a href="red">Red</a></li>
+                    <li><a href="green">Green</a></li>
+                    <li><a href="brown">Brown</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="pageheader">
+
+            <div class="pageicon"><span class="iconfa-calendar"></span></div>
+            <div class="pagetitle">
+                <h5>Calendar</h5>
+                <h1>Calendar</h1>
+            </div>
+        </div><!--pageheader-->
+
+        <div class="maincontent">
+            <div class="maincontentinner">
+                <div id='calendar'></div>
+
+
+            </div><!--maincontentinner-->
+
+            <div ng-include src="'modules/dentists/views/layouts/footer.html'"></div>
+            <!--footer-->
+
+        </div><!--maincontent-->
+
+
+    </div><!--rightpanel-->
+
+</div><!--mainwrapper-->
+
+</body>
+</html>

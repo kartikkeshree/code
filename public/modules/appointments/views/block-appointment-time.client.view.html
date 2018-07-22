@@ -1,0 +1,79 @@
+<script type="text/javascript" src="modules/dentists/js/jquery-ui-1.9.2.min.js"></script>
+<div ng-include src="'modules/core/views/header-inside.html'"></div>
+<div class="search-content inner-cont top-buffer-90" data-ng-controller="AppointmentsController" ng-init="blockTime('appointment')">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 top-buffer-15">
+                <div class="detials-page-bg  top-buffer-5">
+                    <div class="book-appointments-content">
+                        <h4 class="side-title big-title">Block Appointment Slots :
+                            <small>Click on the slots to select</small>
+                            <span class="pull-right"><small>Change Date - <input type="text" class="app-date" id="appointment-date" ng-model="selectedDate" name="date" /></small></span>
+
+                        </h4>
+                        <ul class="table-week-view" ng-repeat="times in arrCalTimes">
+                            <li class="btn-primary btn-sm" ng-click="selectDay($event)" data-active="false">{{times.days}}</li>
+                            <li ng-repeat="time in times.times" style="">
+                                <div class="btn-default btn-sm disabled" ng-if="(time.flag == true && time.editedTimeFlag == false)" id="{{time.dt.getTime()}}" >
+                                    {{((time.dt.getHours() > 12) ? time.dt.getHours() - 12 : time.dt.getHours())}}:{{(time.dt.getMinutes() == 0 ? '00' : time.dt.getMinutes())}} {{((time.dt.getHours() >= 12) ? 'PM' : 'AM')}}
+                                </div>
+                                <div class="btn-default btn-sm"  ng-if="(time.flag == false && time.editedTimeFlag == false)" ng-click="addToBlock(time.dt.getTime(), $event)" data-time="{{time.dt.getTime()}}" id="{{time.dt.getTime()}}">
+                                    {{((time.dt.getHours() > 12) ? time.dt.getHours() - 12 : time.dt.getHours())}}:{{(time.dt.getMinutes() == 0 ? '00' : time.dt.getMinutes())}} {{((time.dt.getHours() >= 12) ? 'PM' : 'AM')}}
+                                </div>
+                                <div class="btn-default btn-sm active"  ng-if="(time.flag == true && time.editedTimeFlag == true)" ng-click="addToBlock(time.dt.getTime(), $event)" id="{{time.dt.getTime()}}">
+                                    {{((time.dt.getHours() > 12) ? time.dt.getHours() - 12 : time.dt.getHours())}}:{{(time.dt.getMinutes() == 0 ? '00' : time.dt.getMinutes())}} {{((time.dt.getHours() >= 12) ? 'PM' : 'AM')}}
+                                </div>
+                            </li>
+                        </ul>
+
+
+                        <div class="col-xs-12 text-center blank-box">
+                            <a href="javascript:void(0);" id="show-btn" class="show">Show More</a>
+                            <a href="javascript:void(0);" id="hide-btn" class="hide">Less</a>
+                            <span class="btn btn-default btn-sm pull-left" ng-if="((prev != undefined) && (prev != currrentDate))" data-ng-click="getAppointmentsNextWeek(prev, clinic_id, 'prev', 'block')">Prev Week <!--{{prev +'>'+ currrentDate}}--></span>
+                            <span class="btn btn-default btn-sm pull-right" ng-if="next <= next3monthdate" data-ng-click="getAppointmentsNextWeek(next, clinic_id, 'next', 'block')">Next Week <!--{{prev +'<='+ currrentDate}}--></span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-8">
+                <div class="detials-page-bg  top-buffer-5" data-ng-controller="BookAppoinmentController">
+                    <div class="book-appointments-content">
+                        <div class="row side-title"> 
+                            <div class="col-xs-6"><h4>Give reason to block</h4></div>
+                        </div>
+                        <form role="form" class="form-horizontal book-app-form top-buffer-20" data-ng-submit="saveBlockedTime()" novalidate>
+                            <div class="form-group" data-ng-show="message">
+                                <label class="col-sm-3 control-label">&nbsp;</label>
+                                <div class="col-sm-9 errorShow">
+                                    <strong>{{message}}</strong>
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <label class="col-sm-3 control-label">Reason</label>
+                                <div class="col-sm-9">
+                                    <textarea class="form-control" placeholder="Reason" ng-model="block.reason">{{reason}}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <button class="btn btn-primary" type="submit">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="book-appointments text-center">
+    <div class="container">
+        <h1 class="text-uppercase"><span>Doctors</span></h1>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text. </p>
+        <a href="#!/dentistList/" class="btn btn-primary text-uppercase">Book Appointment</a>
+    </div>
+</div>
+<div ng-include src="'modules/core/views/footer.html'"></div>
+

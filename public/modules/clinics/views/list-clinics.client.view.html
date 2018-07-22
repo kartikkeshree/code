@@ -1,0 +1,113 @@
+<div ng-include src="'modules/dentists/views/layouts/header_files.html'"></div>
+<div class="mainwrapper">
+    <div ng-include src="'modules/dentists/views/layouts/header.html'"></div>
+    <div ng-include src="'modules/dentists/views/layouts/leftmenu.html'"></div>
+    <div class="rightpanel" data-ng-controller="ClinicsController">
+
+        <ul class="breadcrumbs">
+            <li><a href="#!/dentistHome"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
+            <li>Clinic</li>
+            <li class="right">
+                <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
+                <ul class="dropdown-menu pull-right skin-color">
+                    <li><a href="default">Default</a></li>
+                    <li><a href="navyblue">Navy Blue</a></li>
+                    <li><a href="palegreen">Pale Green</a></li>
+                    <li><a href="red">Red</a></li>
+                    <li><a href="green">Green</a></li>
+                    <li><a href="brown">Brown</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="pageheader" >
+            <form method="post" class="searchbar right-buffer-90" data-ng-submit="clinicFilter()">
+                <input type="text" name="keyword" data-ng-model="filterVal" placeholder="To search type and hit enter..."/>
+                <input type="submit" class="hidden">
+            </form>
+            <a href="#!/clinics/create" class="btn btn-primary pull-right top-buffer-20 left-buffer-10">Add Clinic</a>
+
+            <div class="pageicon"><span class="iconfa-globe"></span></div>
+            <div class="pagetitle">
+                <h5>All Clinic Summary</h5>
+                <h1>Clinic</h1>
+            </div>
+        </div>
+        <!--pageheader-->
+
+        <div class="maincontent">
+            <div class="maincontentinner" ng-init="find()">
+
+                <!-- <h4 class="widgettitle">Table Using Colgroup</h4>-->
+                <table class="table table-bordered responsive">
+                    <colgroup>
+                        <col class="con0" style="width:7%;"/>
+                        <col class="con1" style="width:13%;"/>
+                        <col class="con0" style="width:10%;"/>
+                        <col class="con1" style="width:20%;"/>
+                        <col class="con0" style="width:15%;" ng-show="(user[0].role_id==1)"/>
+                        <col class="con1" style="width:15%;"/>
+                        <col class="con0" style="width:10%;"/>
+                        <col class="con1" style="width:10%;"/>
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="center">&nbsp;</th>
+                        <th class="center">Sr. No</th>
+                        <th>Clinic Name</th>
+                        <th>Mobile No.</th>
+                        <th>Address</th>
+                        <th class="center" ng-show="(user[0].role_id==1)">Doctor</th>
+                        <th class="center">Clinic Time</th>
+                        <th class="center" ng-if="user[0].role_id==2">Status</th>
+                        <th class="center" ng-if="user[0].role_id==1">Is Publish</th>
+                        <th class="center">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-if="clinics.length < 1">
+                        <td></td>
+                        <td colspan="8">No clinic yet!</td>
+                    </tr>
+                    <tr ng-repeat="clinic in clinics">
+                        <td class="center">&nbsp;</td>
+                        <td class="center">{{$index + 1}}</td>
+                        <td>{{clinic.name}}</td>
+                        <td>{{clinic.contact_no}}</td>
+                        <td>{{clinic.address +', '+ clinic.area_name +', '+ clinic.city}}</td>
+                        <td class="center" ng-show="(user[0].role_id==1)"><a href="javascript:void(0);">{{clinic.first_name +' '+ clinic.last_name}}</a><br/>{{clinic.email}}</td>
+                        <td class="center">{{((clinic.startTime != 'not')?(clinic.startTime | date:'hh:mm a') + ' - ' + (clinic.endTime | date:'hh:mm a'):'Not Available')}}<br/><a href="#!/clinics/{{clinic.id}}/editTiming">Change</a></td>
+                        <td class="center" ng-if="(user[0].role_id==2)">{{clinic.status}}</td>
+                        <td class="center" ng-if="(user[0].role_id==1)">
+                            <select name="selection"  class="" style="width: 100%;" ng-change="changeStatus(clinic.id, item);" data-ng-model="item">
+                                <option value="Rejected" ng-selected="((clinic.status=='Rejected')?true:false)">No</option>
+                                <option value="Approved" ng-selected="((clinic.status=='Approved')?true:false)">Yes</option>
+                            </select>
+                        </td>
+                        <td class="center"><a href="#!/clinics/{{clinic.id}}/edit" title="Edit Clinic Detail"><span class="iconfa-edit large-a-icon"></span></a>
+                            &nbsp; <a href="javascript:void(0);" ng-click="remove(clinic.id, $index)" title="Delete Clinic"><span class="iconfa-trash large-a-icon"></span></a>
+                            &nbsp; <a href="#!/clinic/blockTime/{{clinic.id}}" title="Block Clinic Timings"><span class="iconfa-ban-circle large-a-icon"></span></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!--Table end -->
+			<!-- Pagination Section -->
+			<div class="pagination-admin pull-right" ng-if="clinics.length > 0">
+				<ul class="pagination pull-right">
+					<li ng-class="{disabled: currentPage == 1}"><a aria-label="Previous" href="javascript:void(0);" ng-click="prevPage()"><span aria-hidden="true">«</span></a></li>
+					<li ng-class="{active: n == currentPage}" ng-repeat="n in pagedItems" ng-click="setPage()"><a href="javascript:void(0);" ng-bind="n">1<span class="sr-only">(current)</span></a></li>
+					<li ng-class="{disabled: currentPage == pagedItems.length}"><a aria-label="Next" href="javascript:void(0);"  ng-click="nextPage()"><span aria-hidden="true">»</span></a></li>
+				</ul>
+			</div>
+			<!-- End -->
+            </div>
+            <!--maincontentinner-->
+            <div ng-include src="'modules/dentists/views/layouts/footer.html'"></div>
+        </div>
+        <!--maincontent-->
+
+    </div>
+    <!--rightpanel-->
+</div>
+<!--mainwrapper-->

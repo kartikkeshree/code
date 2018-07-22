@@ -1,0 +1,85 @@
+
+<div ng-include src="'modules/core/views/header.html'"></div>
+<section class="container inside-content">
+    <div class="container"  data-ng-controller="EventsController">
+        <div class="row">
+            <div class="col-md-6"> 
+                <h2>Events</h2><br />
+            </div>
+            <div class="col-md-6 pull-right"> 
+                <h4 class="pull-right">
+                    <a class="btn btn-primary" href="javascript:void(0);" ng-click="findEvents('current', '', 1)">Current Events</a>  
+                    <a class="btn btn-primary" href="javascript:void(0);" ng-click="findEvents('upcoming', '', 1)">Upcoming Events</a>  
+                    <a class="btn btn-primary" href="javascript:void(0);" ng-click="findEvents('past', '', 1)"> Past Events </a>  
+                    <a class="btn btn-primary" href="javascript:void(0);" ng-click="findEvents('my', '', 1)" ng-if="(user[0].id && user[0].role_id == '2')">  My Events</a> 
+                </h4>
+            </div>
+            <br />
+        </div>
+        <hr>
+
+        <div class="col-md-8" ng-init="findEvents('current', '', 1)"> 
+            <div ng-if="events.length < 1">
+                <div class="row">
+                    No result found !!</div>
+                <hr>
+            </div>
+            <div ng-repeat="event in events">
+                <div class="row">
+                    <div class="col-md-2"><img class="img-responsive" src="{{event.image}}"> </div>
+                    <div class="col-md-10">
+                        <h4>{{((event.start_datetime != 'not')?(event.start_datetime | date:'dd-MM-yy, hh:mm a') + ' - ' + (event.end_datetime | date:'dd-MM-yy, hh:mm a'):'Not Available')}}</h4><h5>@ {{event.address}}</h5><br />
+                        <h3 class="text-dg-blue">{{event.title}}</h3> 
+                        <p>{{event.description}}</P>
+                    </div></div>
+                <hr>
+            </div>
+            <!-- Pagination Section -->
+            <div class="pagination-section" ng-if="events.length > 0">
+                <ul class="pagination pull-right">
+                    <li ng-class="{disabled: currentPage == 1}"><a aria-label="Previous" href="javascript:void(0);" ng-click="prevPageList(listType)"><span aria-hidden="true">«</span></a></li>
+                    <li ng-class="{active: n == currentPage}" ng-repeat="n in pagedItems" ng-click="setPageList(listType)"><a href="javascript:void(0);" ng-bind="n">1<span class="sr-only">(current)</span></a></li>
+                    <li ng-class="{disabled: currentPage == pagedItems.length}"><a aria-label="Next" href="javascript:void(0);"  ng-click="nextPageList(listType)"><span aria-hidden="true">»</span></a></li>
+                </ul>
+            </div>
+            <!-- End -->
+        </div>
+
+        <div class="col-md-4"> 
+            <div class="col-md-12"> <h3 class="text-dg-blue">Featured Events</h3>
+                <hr>
+                <ul style="list-style:none; cursor:pointer;">
+                    <li><h5><a href="javascript:void(0);" ng-click="findEvents('current', '', 1)">Current Events</a></h5></li><br />
+                    <li><h5><a href="javascript:void(0);" ng-click="findEvents('upcoming', '', 1)">Upcoming Events</a></h5></li><br />
+                    <li><h5><a href="javascript:void(0);" ng-click="findEvents('past', '', 1)"> Past Events </a></h5></li><br />
+                    <li ng-if="(user[0].id && user[0].role_id == '2')"><h5><a href="javascript:void(0);" ng-click="findEvents('my', '', 1)">  My Events</a></h5></li></ul>
+                <hr>
+            </div>
+            <div class="col-md-12"> <h3 class="text-dg-blue">Calender</h3>
+                <hr>
+
+                <div id="event-start-date" ng-init="showCalendar()">
+                </div>
+                <!--   <input type="text" class="app-date" id="event-start-date" name="date">-->
+            </div>
+
+        </div>
+    </div>
+
+    <br /><br /><br /><br />
+
+
+</section>
+<div ng-include src="'modules/core/views/footer.html'"></div>
+<!--<script>
+    Calendar.setup({
+        cont: "sample2",
+        disabled: function (date) {
+            if (date.getDay() == 5) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    });
+</script>-->

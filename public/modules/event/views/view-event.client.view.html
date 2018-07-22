@@ -1,0 +1,92 @@
+<div ng-include src="'modules/dentists/views/layouts/header_files.html'"></div>
+<div data-ng-controller="EventsController" ng-init="findOne()">
+    <div class="mainwrapper">
+        <div ng-include src="'modules/dentists/views/layouts/header.html'"></div>
+        <div ng-include src="'modules/dentists/views/layouts/leftmenu.html'"></div>
+        <div class="rightpanel">
+            <ul class="breadcrumbs">
+                <li><a href="#!/dashboard"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
+                <!-- <li><a href="#!/list">Dashboard</a> <span class="separator"></span></li>-->
+                <li><a href="#!/listEvents">Events List</a> <span class="separator"></span></li>
+                <li>Event Details</li>
+                <li class="right"> <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
+                    <ul class="dropdown-menu pull-right skin-color">
+                        <li><a href="default">Default</a></li>
+                        <li><a href="navyblue">Navy Blue</a></li>
+                        <li><a href="palegreen">Pale Green</a></li>
+                        <li><a href="red">Red</a></li>
+                        <li><a href="green">Green</a></li>
+                        <li><a href="brown">Brown</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="pageheader"> <a href="javascript:void(0)" class="btn btn-primary pull-right top-buffer-20" onclick="javascript:history.go(-1)">Back</a>
+                <div class="pageicon"><span class="iconfa-user"></span></div>
+                <div class="pagetitle">
+                    <h5>Event Details</h5>
+                    <h1>{{event.title}}</h1>
+                </div>
+            </div>
+            <!--pageheader-->
+
+            <div class="maincontent">
+                <div class="maincontentinner">
+                    <div class="widget">
+                        <h4 class="widgettitle">Details</h4>
+                        <div class="widgetcontent">
+                            <form class="stdform" action="" method="post">
+                                <div class="bottom-bor">
+                                    <div class="view-left">Event Title</div>
+                                    <div class="right-view">{{event.title}}</div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="bottom-bor">
+                                    <div class="view-left">Event Description</div>
+                                    <div class="right-view">{{event.description}}</div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="bottom-bor">
+                                    <div class="view-left">Event Address</div>
+                                    <div class="right-view">{{event.address}}</div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="bottom-bor">
+                                    <div class="view-left">Event Start Time</div>
+                                    <div class="right-view">{{event.start_datetime| date:'dd/MM/yyyy H:mm a'}}</div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="bottom-bor">
+                                    <div class="view-left">Event End Time</div>
+                                    <div class="right-view">{{event.end_datetime| date:'dd/MM/yyyy H:mm a'}}</div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="bottom-bor" ng-if="((event.image != '' && event.image !== null)?true:false)">
+                                    <div class="view-left">Image</div>
+                                    <div class="right-view"><img src="images/event_images/{{event.image}}" style="max-height: 200px; max-width: 200px;"> </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="bottom-bor">
+                                    <div class="view-left">Status</div>
+                                    <div class="right-view">{{event.status}}</div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </form>
+                            <p class="stdformbutton btn-left">
+                                <button class="btn btn-primary " type="reset" onclick="javascript:history.go(-1)">Back</button>
+                            </p>
+                        </div>
+                        <!--widgetcontent-->
+                    </div>
+                    <!--widget-->
+                </div> <!--maincontentinner-->
+                <div ng-include src="'modules/dentists/views/layouts/footer.html'"></div>
+                <!--footer-->
+            </div>
+            <!--maincontent-->
+        </div>
+        <!--rightpanel-->
+    </div>
+    <!--mainwrapper-->
+</div>
+</body>
+</html>

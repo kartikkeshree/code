@@ -1,0 +1,246 @@
+<div ng-include src="'modules/core/views/header.html'"></div>
+<section data-ng-controller="HomeController">
+    <div data-ride="carousel" class="carousel slide" id="myCarousel">
+
+        <div role="listbox" class="carousel-inner">
+            <div class="item active"> <img src="modules/core/images/banner.jpg" alt="" title="Doctorhere" />
+                <div class="container" >
+                    <!--<div class="home-page-notification">
+                      <marquee scrollamount="3">testing</marquee>
+                     </div>-->
+
+					 <div class="col-sm-4 blank" style="margin-top:319px;" >
+                    <img src="modules/core/images/5000-drs.jpg" width="120%" alt="" title="Doctorhere" />
+					</div>
+                   <div class="col-sm-4 col-xs-12">
+                    <div ng-include src="'modules/core/views/search.html'"></div>
+					</div>
+					
+
+                
+                    <div class="col-sm-4 col-xs-11 pull-right new-event-box">
+                        <div class="col-sm-12 news-home">
+                            <h3 class="text-uppercase" ng-init="findNews()">News</h3>
+                            <marquee direction="up" scrollamount="1" height="96px" onmouseover="this.stop()" onmouseout="this.start()">
+                                <div ng-if="activity.length < 1">
+                                    <h5 class="media-heading">No any current activity !!</h5>
+                                    <div class="dot-separator"></div>
+                                </div>
+                                <div ng-repeat="activity in activity">
+                                    <p>{{activity.message}}</p>
+                                    <div class="dot-separator"></div>
+                                </div>
+                            </marquee>
+                        </div>
+                        <div class="col-sm-12 event-home" style="overflow: hidden;">
+                            <h3 class="text-uppercase" ng-init="findEvents('current')">Events</h3>
+                            <marquee direction="up" scrollamount="2" height="96px" onmouseover="this.stop()" onmouseout="this.start()">
+                                <div ng-if="events.length < 1">
+                                    <h5 class="media-heading">No any current event !!</h5>
+                                    <div class="dot-separator"></div>
+                                </div>
+                                <div ng-repeat="event in events">
+                                    <img alt="News-Events" class="img" style="width:50px; float:left; margin-right:10px; margin-bottom:5px; height: 40px;" src="{{event.image}}">
+                                    <h5 class="media-heading">{{event.title| limitTo:30}} {{(event.title.length > 30)?'..':''}}</h5>
+                                    <p>{{event.description| limitTo:50}}......</p>
+                                    <div class="dot-separator"></div>
+                                </div>
+                            </marquee>
+                            <a href="#!/events"><h4 class="media-heading pull-right">Read More..</h4></a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="shadow-spreater"></div>
+            </div>
+        </div>
+        <div class="container-fluid" style=" padding:0px;" data-ng-init="getNotificationDescription()">
+            <div class="col-lg-12 col-xs-12 notification "> 
+                <marquee scrollamount="4">
+                    <span data-ng-repeat="notification in notifications" ng-show="{{$index + 1}}">
+                        <span ng-show="($index != 0)"> | </span> {{notification.description}}
+                    </span>
+                </marquee>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="google-map">
+        <div class="change-location">Please Choose Your Location - <a href="#">Pune</a></div>
+        <div class="map-section-shadow"></div>
+        <iframe class="iframe-map" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d121069.05634361373!2d73.84408502084187!3d18.510455421892956!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf2e67461101%3A0x828d43bf9d9ee343!2sPune%2C+Maharashtra%2C+India!5e0!3m2!1sen!2sus!4v1417601232032"></iframe>
+    </div>-->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-xs-12">
+                <div class="row">
+                    <div class="col-xs-12 col-lg-4 top-buffer">
+                        <div class="icon-cont pull-left">
+                            <div class="icon-bg"></div>
+                            <div class="teeth-icon"></div>
+                        </div>
+                        <div class="pull-left cont-description">
+                            <h3 class="text-dg-blue">For Doctors only!</h3>
+                            <p>DoctorsForum.in is dedicated for Doctors. This is the 
+                                best and unique way to search for Doctors with various specialties and 
+                                Experience in Pune and PCMC.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-lg-4 top-buffer">
+                        <div class="icon-cont pull-left">
+                            <div class="icon-bg"></div>
+                            <div class="location-icon"></div>
+                        </div>
+                        <div class="pull-left cont-description">
+                            <h3 class="text-dg-blue">Locate easily.</h3>
+                            <p>Locate Doctors close to your place using Google Maps. Check how far the Doctor is located.</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-4 top-buffer bottom-buffer">
+                        <div class="icon-cont pull-left">
+                            <div class="icon-bg"></div>
+                            <div class="appointments-icon"></div>
+                        </div>
+                        <div class="pull-left cont-description">
+                            <h3 class="text-dg-blue">Online Appointments.</h3>
+                            <p>We offer one of the best online appointment booking 
+                                system. This system not only confirms your appointment but also</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-xs-12">
+                <div class="row">
+                    <div class="col-xs-12 top-buffer">
+                        <div class="panel panel-default">
+                            <h4 class="panel-heading">Services Categories<small class="pull-right"><a href="#" class="text-size-small">See All</a></small></h4>
+                            <div class="panel-body services-list-view">
+                                <div class="row">
+                                    <ul class="col-xs-6 col-sm-4">
+                                        <li><a href="#">Aesthetic Crown And Bridges</a></li>
+                                        <li><a href="#">Aesthetic Doctorry</a></li>
+                                        <li><a href="#">Artificial Teeth</a></li>
+                                        <li><a href="#">Bleaching</a></li>
+                                        <li><a href="#">Bps Dentures</a></li>
+                                        <li><a href="#">Braces</a></li>
+                                        <li><a href="#">Bps Dentures</a></li>
+
+
+                                    </ul>
+                                    <ul class="col-xs-6 col-sm-4">
+                                        <li><a href="#">Conservative Doctorry</a></li>
+                                        <li><a href="#">Crowns And Bridges</a></li>
+                                        <li><a href="#">Dentures</a></li>
+                                        <li><a href="#">Conservative Doctorry</a></li>
+                                        <li><a href="#">Crowns And Bridges</a></li>
+                                        <li><a href="#">Aesthetic Crown And Bridges</a></li>
+
+                                    </ul>
+                                    <ul class="col-xs-6 col-sm-4">
+                                        <li><a href="#">Conservative Doctorry</a></li>
+                                        <li><a href="#">Crowns And Bridges</a></li>
+                                        <li><a href="#">Dentures</a></li>
+                                        <li><a href="#">Conservative Doctorry</a></li>
+                                        <li><a href="#">Crowns And Bridges</a></li>
+                                        <li><a href="#">Aesthetic Crown And Bridges</a></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> </div>
+    <div class="full-width-gray-cont">
+        <div class="container">
+            <h3 class="pull-left text-uppercase text-dg-black">Our Doctors</h3>
+            <div class="navigation pull-right">
+                <div class="btn btn-default" ng-click="findDentist('-1')"> &lt; </div>
+                <div class="btn btn-default" ng-click="findDentist('+1')"> &gt; </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row top-bottom-buffer-15" ng-init = "findDentist()">
+                <div class="col-sm-4 col-md-3 col-tn-6" ng-repeat="dentist in allDentists">
+                    <div class="thumbnail">
+                        <div ng-if="dentist.image == undefined" style="background:url('images/profile_images/{{dentist.image}}') no-repeat; background-position:center center; background-size:cover; width:100%; height:225px;"></div>
+                        <div ng-if="dentist.image != undefined" style="background:url('images/profile_images/{{dentist.image}}') no-repeat; background-position:center center; background-size:cover; width:100%; height:225px;"></div>
+                        <!--<img alt="Doctor Pic" src="modules/core/images/1001.jpg" ng-if="dentist.image == undefined">
+                        <img class="our-doctors" alt="Doctor Pic" src="images/profile_images/{{dentist.image}}" ng-if="dentist.image != undefined">-->
+                        <div class="social-network-doctors">
+                            <a href ="{{dentist.facebook_url}}" target="_blank"><div class="facebook-small-icon" ng-if ="dentist.facebook_url != undefined && dentist.facebook_url != ''"></div></a>
+                            <a href ="{{dentist.googleplus_url}}" target="_blank"><div class="google-small-icon" ng-if ="dentist.googleplus_url != undefined && dentist.googleplus_url != ''"></div></a>
+                            <a href ="{{dentist.twitter_url}}" target="_blank"><div class="twitter-small-icon" ng-if ="dentist.twitter_url != undefined && dentist.twitter_url != ''"></div></a>
+                            <a href ="{{dentist.linkedin_url}}" target="_blank"><div class="linkedin-small-icon" ng-if ="dentist.linkedin_url != undefined && dentist.linkedin_url != ''"></div></a>
+                        </div>
+                        <div class="caption">
+                            <h4><a href="#!/dentistDetail/{{dentist.id}}">Dr. {{dentist.first_name + " " + dentist.last_name}}</a></h4>
+                            <!--                            <p ng-repeat = "val in dentist.val">{{val}}</p>-->
+                            <p>{{ val}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="book-appointments text-center">
+        <div class="container">
+            <h1 class="text-uppercase"><span>Doctors</span></h1>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
+            <a href="#!/dentistList/" class="btn btn-primary text-uppercase">Book Appointment</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-xs-12 top-buffer-15 articles">
+                <h3 class="text-uppercase text-dg-black">Articles</h3>
+                <div class="media"> <a href="#" class="media-left"> <img alt="Article" src="modules/core/images/article.jpg"> </a>
+                    <div class="media-body">
+                        <h4 class="media-heading text-primary">Praesent vestibulum molestie</h4>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+                        <a href="#">Read More</a> </div>
+                </div>
+                <div class="media"> <a href="#" class="media-left"> <img alt="Article" src="modules/core/images/article-2.jpg"> </a>
+                    <div class="media-body">
+                        <h4 class="media-heading text-primary">Praesent vestibulum molestie</h4>
+                        <p>Ipsum has been the industry's standard dummy text ever since the 1500s,  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                        <a href="#">Read More</a> </div>
+                </div>
+                <div class="media"> <a href="#" class="media-left"> <img alt="Article" src="modules/core/images/article.jpg"> </a>
+                    <div class="media-body">
+                        <h4 class="media-heading text-primary">Praesent vestibulum molestie</h4>
+                        <p>Lorem Ipsum has been the industry's Lorem Ipsum is simply dummy text of the printing and typesetting industry.  standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the printing and typesetting industry.  standard dummy text ever since the 1500s</p>
+                        <a href="#">Read More</a> </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xs-12 top-buffer-15 news-events">
+                <h3 class="text-uppercase text-dg-black">News &amp; Events</h3>
+                <div class="media"> <a href="#" class="media-left"> <img alt="News-Events" src="modules/core/images/news-events-1.jpg"> </a>
+                    <div class="media-body">
+                        <h4 class="media-heading text-primary">Praesent vestibulum molestie</h4>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+                    </div>
+                </div>
+                <div class="media"> <a href="#" class="media-left"> <img alt="News-Events" src="modules/core/images/news-events-2.jpg"> </a>
+                    <div class="media-body">
+                        <h4 class="media-heading text-primary">Praesent vestibulum molestie</h4>
+                        <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+                    </div>
+                </div>
+                <div class="media"> <a href="#" class="media-left"> <img alt="News-Events" src="modules/core/images/news-events-1.jpg"> </a>
+                    <div class="media-body">
+                        <h4 class="media-heading text-primary">Praesent vestibulum molestie</h4>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+                    </div>
+                </div>
+                <div class="media"> <a href="#" class="media-left"> <img alt="News-Events" src="modules/core/images/news-events-2.jpg"> </a>
+                    <div class="media-body">
+                        <h4 class="media-heading text-primary">Praesent vestibulum molestie</h4>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-include src="'modules/core/views/footer.html'"></div>
+</section>

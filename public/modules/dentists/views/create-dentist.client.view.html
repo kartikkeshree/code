@@ -1,0 +1,163 @@
+<div ng-include src="'modules/dentists/views/layouts/header_files.html'"></div>
+<div class="mainwrapper">
+    <div ng-include src="'modules/dentists/views/layouts/header.html'"></div>
+    <div ng-include src="'modules/dentists/views/layouts/leftmenu.html'"></div>
+    <div class="rightpanel">
+        <ul class="breadcrumbs">
+            <li><a href="#!/dentistHome"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
+            <li><a href="#!/dentists">Dentist</a> <span class="separator"></span></li>
+            <li>Add Dentist</li>
+            <li class="right"><a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color
+                Skins</a>
+                <ul class="dropdown-menu pull-right skin-color">
+                    <li><a href="default">Default</a></li>
+                    <li><a href="navyblue">Navy Blue</a></li>
+                    <li><a href="palegreen">Pale Green</a></li>
+                    <li><a href="red">Red</a></li>
+                    <li><a href="green">Green</a></li>
+                    <li><a href="brown">Brown</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="pageheader"><a href="javascript:void(0);" class="btn btn-primary pull-right top-buffer-20" onclick="javascript:history.go(-1);">Back</a>
+
+            <div class="pageicon"><span class="iconfa-plus"></span></div>
+            <div class="pagetitle">
+                <h5>Add new dentist</h5>
+
+                <h1>Add Dentist</h1>
+            </div>
+        </div>
+        <!--pageheader-->
+
+        <div class="maincontent">
+            <div class="maincontentinner">
+                <div class="widget" ng-controller="DentistsController" ng-init="findOne()">
+                    <h4 class="widgettitle">Fill all fields</h4>
+
+                    <div class="widgetcontent">
+                        <form class="stdform">
+
+                            <div class="par control-group" data-ng-show="error">
+                                <label class="control-label">&nbsp;</label>
+                                <div class="controls errorShow">
+                                    <strong>{{error}}</strong>
+                                </div>
+                            </div>
+
+                            <div class="par control-group">
+                                <label class="control-label">Dentist First Name*</label>
+                                <div class="controls">
+                                    <input type="text" class="span4" placeholder="First Name" name="first_name" data-ng-model="dentist.first_name" />
+                                </div>
+                            </div>
+
+                            <div class="par control-group">
+                                <label class="control-label">Dentist Last Name*</label>
+                                <div class="controls">
+                                    <input type="text" class="span4" placeholder="Last Name" name="last_name" data-ng-model="dentist.last_name" />
+                                </div>
+                            </div>
+                            <div class="par control-group">
+                                <label class="control-label">Email*</label>
+                                <div class="controls">
+                                    <input type="text" class="span4" placeholder="Email" name="email" data-ng-model="dentist.email" />
+                                </div>
+                            </div>
+
+                            <div class="par control-group">
+                                <label class="control-label">Gender*</label>
+                                <div class="controls">
+                                    <input type="radio" name="gender" value="male" ng-model="dentist.gender" ng-checked="true"/> Male &nbsp;
+                                    <input type="radio" name="gender" value="female" ng-model="dentist.gender"/> Female
+                                </div>
+                            </div>
+                            <!--<div class="par">
+                                <label>Clinic Photo</label>
+                                <div data-provides="fileupload" class="fileupload fileupload-new">
+                                    <div class="input-append">
+                                        <div class="uneditable-input span3">
+                                            <i class="iconfa-file fileupload-exists"></i>
+                                            <span class="fileupload-preview"></span>
+                                        </div>
+                                        <span class="btn btn-file"><span class="fileupload-new">Select file</span>
+                                        <span class="fileupload-exists">Change</span>
+                                        <input type="file" multiple>
+                                        <input type="file" ng-model-instant id="fileToUpload" multiple onchange="angular.element(this).scope().uploadFile(this.files)" style="margin: -32px 0 0 50px;" />
+                                        </span>
+                                        <a data-dismiss="fileupload" class="btn fileupload-exists" href="#">Remove</a>
+                                        <br/>
+                                        <div class="media-left" id="clinic-image-container" style="margin-top: 5px; height: 107px;" ng-show="((images.length > 0)?true:false)">
+                                            <div style="width:80px; float: left;" ng-repeat="image in images">
+                                                <img src="/images/clinic_images/{{image.image}}" width="75px;" height="100px;" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>-->
+
+                            <div class="par control-group">
+                                <label class="control-label">Address 1</label>
+                                <div class="controls">
+                                    <textarea class="span4" placeholder="Dentist Address" name="dentist_address" data-ng-model="dentist.address1"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="par control-group">
+                                <label class="control-label">Area*</label>
+                                <div class="controls"><span class="area-icon form-icon"></span>
+                                    <select class="span4" name="area_id" data-ng-model="dentist.area_id">
+                                        <option value="">Select Area</option>
+                                        <option ng-repeat="area in areaList" value="{{area.id}}" ng-selected="((dentist.area_id==area.id)?true:false)">{{area.area_name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="par control-group">
+                                <label class="control-label">City*</label>
+                                <div class="controls">
+                                    <input type="text" class="span4" placeholder="City" name="dentist_city" data-ng-model="dentist.city"/>
+                                </div>
+                            </div>
+
+                            <div class="par control-group">
+                                <label class="control-label">State*</label>
+                                <div class="controls">
+                                    <input type="text" class="span4" placeholder="State" name="dentist_state" data-ng-model="dentist.state"/>
+                                </div>
+                            </div>
+
+                            <div class="par control-group">
+                                <label class="control-label">Zip Code*</label>
+
+                                <div class="controls">
+                                    <input type="text" class="span4" placeholder="Zip Code" name="dentist_zip" data-ng-model="dentist.zip"/>
+                                </div>
+                            </div>
+                            <div class="par control-group">
+                                <label class="control-label">Mobile No.*</label>
+
+                                <div class="controls">
+                                    <input type="text" class="span4" placeholder="Mobile No." name="dentist_contact_no" data-ng-model="dentist.contact_no"/>
+                                </div>
+                            </div>
+
+                            <p class="stdformbutton">
+                                <button class="btn btn-primary" ng-click="create()">Save</button>
+                                <button class="btn" type="reset">Cancel</button>
+                            </p>
+                        </form>
+                    </div>
+                    <!--widgetcontent-->
+                </div>
+                <!--widget-->
+                
+            </div>
+            <!--maincontentinner-->
+            <div ng-include src="'modules/dentists/views/layouts/footer.html'"></div>
+                <!--footer-->
+        </div>
+        <!--maincontent-->
+    </div>
+</div>

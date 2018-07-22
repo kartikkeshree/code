@@ -1,0 +1,328 @@
+
+<div ng-include src="'modules/dentists/views/layouts/header_files.html'"></div>
+<div class="mainwrapper">
+    <div ng-include src="'modules/dentists/views/layouts/header.html'"></div>
+    <div ng-include src="'modules/dentists/views/layouts/leftmenu.html'"></div>
+    <div class="rightpanel" data-ng-controller="PatientController" ng-init="findone()" >
+    <ul class="breadcrumbs">
+        <li><a href="#!/dashboard"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
+        <li><a href="#!/listPatient">Patient</a> <span class="separator"></span></li>
+        <li  ng-if="duser!=undefined"><a href="javascript:void(0)">{{duser.first_name+' '+duser.last_name}}</a> <span class="separator"></span></li>
+        <li>Profile Details</li>
+        <li class="right"> <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
+            <ul class="dropdown-menu pull-right skin-color">
+                <li><a href="default">Default</a></li>
+                <li><a href="navyblue">Navy Blue</a></li>
+                <li><a href="palegreen">Pale Green</a></li>
+                <li><a href="red">Red</a></li>
+                <li><a href="green">Green</a></li>
+                <li><a href="brown">Brown</a></li>
+            </ul>
+        </li>
+    </ul>
+    <div class="pageheader"> <a href="#!/listPatient" class="btn btn-primary pull-right top-buffer-20">Back</a>
+        <div class="pageicon"><span class="iconfa-user"></span></div>
+        <div class="pagetitle">
+            <h5>Patient Details</h5>
+           <!-- <h1>John Smith</h1>-->
+        </div>
+    </div>
+    <!--pageheader-->
+
+    <div class="maincontent">
+        <div class="maincontentinner">
+            <div class="widget">
+                <h4 class="widgettitle">Fill all fields</h4>
+                <div class="widgetcontent">
+                    <form class="stdform" action="" method="post">
+                        <!--<div class="par control-group">
+                            <label class="control-label">Patient ID</label>
+                            <div class="controls">
+                                <input type="text" class="span4" value="654758" disabled ng-model/>
+                            </div>
+                        </div>-->
+                        <div class="par control-group" data-ng-show="error">
+                            <label class="control-label">&nbsp;</label>
+                            <div class="controls errorShow">
+                                <strong>{{error}}</strong>
+                            </div>
+                        </div>
+                        <div class="par control-group"  ng-if="val=='edit'">
+                            <label class="control-label">Patient Id</label>
+                            <div class="controls">
+                                <input type="text" class="span4" ng-model="duser.patient_id" readonly/>
+                            </div>
+                        </div>
+
+                        <div class="par control-group">
+                            <label class="control-label">First Name*</label>
+                            <div class="controls">
+
+                                <input type="text" class="span4" placeholder="First Name" ng-model="duser.first_name"/>
+                            </div>
+                        </div>
+
+                        <div class="par control-group">
+                            <label class="control-label">Last Name*</label>
+                            <div class="controls">
+                                <input type="text" class="span4" placeholder="Last Name" ng-model="duser.last_name"/>
+                            </div>
+                        </div>
+
+                        <div class="par control-group">
+                            <label class="control-label">Select Clinic*</label>
+                            <div class="controls">
+                                <select ng-model="duser.clinic_id">
+                                    <option value="">Select Clinic</option>
+                                    <option ng-repeat="clinic in clinics" value="{{clinic.id}}" ng-selected="((duser.clinic_id==clinic.id)?true:false)">{{clinic.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <p>
+                            <label>Reason</label>
+                <span class="field">
+                <textarea placeholder="Reason" class="span5" ng-model="duser.reason">{{duser.reason}}</textarea>
+                </span> </p>
+                        <div class="par">
+                            <label>Appointment Date*</label>
+                <span class="field">
+                <input id="appointmentDate" type="text" name="date" class="input-small" ng-model="duser.app_date" ng-change="getAvailableAppointmentsTime()" /><!--ng-change="getAvailableAppointmentsTime()"-->
+                &nbsp;{{wait}} {{appErr}}</span> </div>
+                        <div class="par">
+                            <label>Select Time*</label>
+        <span class="field">
+        <select ng-model="duser.appTime">
+             <!--<option value="{{duser.appTime | date:'HH:mm'}}" ng-selected="true" ng-if="duser!=undefined">{{duser.appTime  | date:'hh:mm a'}}</option>-->
+             <option ng-repeat="time in times" value="{{time.dt | date:'HH:mm'}}" ng-selected="((duser.appTime==time.dt)?true:false)">{{time.dt | date:'hh:mm a'}}</option>
+        </select>
+        </span> </div>
+                        <div class="par">
+                            <label>Date of Birth</label>
+                <span class="field">
+                    <select type="text"  class="input-small" ng-model="duser.year">
+                        <option ng-selected=true>Year</option>
+                        <option ng-repeat="year in years" value="{{year}}" ng-selected="(duser.year==year?true:false)">{{year}}</option>
+                    </select>
+                    <select type="text"  class="input-small" ng-model="duser.month" >
+                        <option ng-selected=true>Month</option>
+                        <option ng-repeat="month in months" value="{{$index}}" ng-selected="(duser.month==month?true:false)">{{month}}</option>
+                    </select>
+                    <select type="text"  class="input-small" ng-model="duser.date">
+                        <option ng-selected=true>Date</option>
+                        <option ng-repeat="date in dates" value="{{date}}" ng-selected="(duser.date==date?true:false)">{{date}}</option>
+                    </select>
+
+
+                </span> </div>
+                        <div class="par control-group">
+                            <label class="control-label">Email ID*</label>
+                            <div class="controls">
+                                <input type="email" class="span4" placeholder="Email ID" ng-model="duser.email"/>
+                            </div>
+                        </div>
+                        <div class="par control-group">
+                            <label class="control-label">Mobile No.*</label>
+                            <div class="controls">
+                                <input type="text" class="span4" placeholder="Mobile No." ng-model="duser.contact_no"/>
+                            </div>
+                        </div>
+                        <div class="par control-group">
+                            <label class="control-label">Address 1*</label>
+                            <div class="controls">
+                                <textarea placeholder="Address1" class="span5" ng-model="duser.address1">{{duser.address1}}</textarea>
+                            </div>
+                        </div>
+                        <div class="par control-group">
+                            <label class="control-label">Address 2</label>
+                            <div class="controls">
+                                <textarea placeholder="Address2" class="span5" ng-model="duser.address2">{{duser.address2}}</textarea>
+                            </div>
+                        </div>
+                        <div class="par control-group">
+                            <label class="control-label">Area*</label>
+                            <div class="controls">
+                                <select ng-model="duser.area_id">
+                                    <option value="">Select Area*</option>
+                                    <option ng-repeat="area in areaList" value="{{area.id}}" ng-selected="((duser.area_id==area.id)?true:false)">{{area.area_name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="par control-group">
+                            <label class="control-label">City*</label>
+                            <div class="controls">
+                                <input type="text" class="span4" placeholder="City" ng-model="duser.city"/>
+                            </div>
+                        </div>
+                        <div class="par control-group">
+                            <label class="control-label">State*</label>
+                            <div class="controls">
+                                <input type="text" class="span4" placeholder="State" ng-model="duser.state"/>
+                            </div>
+                        </div>
+                        <div class="par control-group">
+                            <label class="control-label">Zip Code</label>
+                            <div class="controls">
+                                <input type="text" class="span4" placeholder="Zip Code" ng-model="duser.zip"/>
+                            </div>
+                        </div>
+                        <p class="stdformbutton">
+                            <button class="btn btn-primary" ng-click="updateUserWithAppointment()" ng-if="val=='edit'" >Update</button>
+                            <button class="btn btn-primary" ng-click="addUserWithAppointment()" ng-if="val==undefined"  >Submit</button>
+                            <button class="btn" type="reset">Reset</button>
+                        </p>
+                    </form>
+                </div>
+                <!--widgetcontent-->
+            </div>
+            <!--widget-->
+
+           
+
+        </div>
+        <!--maincontentinner-->
+         <div ng-include src="'modules/dentists/views/layouts/footer.html'"></div><!--footer-->
+    </div>
+    <!--maincontent-->
+
+</div>
+<!--rightpanel-->
+
+</div>
+<!--mainwrapper-->
+
+<script type="text/javascript">
+
+    jQuery('#edit-reason').click(function(){
+        jQuery('#reason-textarea').removeAttr("disabled");
+    });
+
+    jQuery('#update-reason').click(function(){
+        jQuery('#reason-textarea').attr("disabled", "disabled");
+        jQuery('#reason-textarea').css("height", "60px");
+    });
+
+    jQuery('#edit-perception').click(function(){
+        jQuery('#perception-textarea').removeAttr("disabled");
+    });
+
+    jQuery('#update-perception').click(function(){
+        jQuery('#perception-textarea').attr("disabled", "disabled");
+        jQuery('#perception-textarea').css("height", "240px");
+    });
+
+</script>
+<!--<script type="text/javascript">
+    jQuery(document).ready(function() {
+        
+      // simple chart
+		var flash = [[0, 11], [1, 9], [2,12], [3, 8], [4, 7], [5, 3], [6, 1]];
+		var html5 = [[0, 5], [1, 4], [2,4], [3, 1], [4, 9], [5, 10], [6, 13]];
+      var css3 = [[0, 6], [1, 1], [2,9], [3, 12], [4, 10], [5, 12], [6, 11]];
+			
+		function showTooltip(x, y, contents) {
+			jQuery('<div id="tooltip" class="tooltipflot">' + contents + '</div>').css( {
+				position: 'absolute',
+				display: 'none',
+				top: y + 5,
+				left: x + 5
+			}).appendTo("body").fadeIn(200);
+		}
+	
+			
+		var plot = jQuery.plot(jQuery("#chartplace"),
+			   [ { data: flash, label: "Flash(x)", color: "#6fad04"},
+              { data: html5, label: "HTML5(x)", color: "#06c"},
+              { data: css3, label: "CSS3", color: "#666"} ], {
+				   series: {
+					   lines: { show: true, fill: true, fillColor: { colors: [ { opacity: 0.05 }, { opacity: 0.15 } ] } },
+					   points: { show: true }
+				   },
+				   legend: { position: 'nw'},
+				   grid: { hoverable: true, clickable: true, borderColor: '#666', borderWidth: 2, labelMargin: 10 },
+				   yaxis: { min: 0, max: 15 }
+				 });
+		
+		var previousPoint = null;
+		jQuery("#chartplace").bind("plothover", function (event, pos, item) {
+			jQuery("#x").text(pos.x.toFixed(2));
+			jQuery("#y").text(pos.y.toFixed(2));
+			
+			if(item) {
+				if (previousPoint != item.dataIndex) {
+					previousPoint = item.dataIndex;
+						
+					jQuery("#tooltip").remove();
+					var x = item.datapoint[0].toFixed(2),
+					y = item.datapoint[1].toFixed(2);
+						
+					showTooltip(item.pageX, item.pageY,
+									item.series.label + " of " + x + " = " + y);
+				}
+			
+			} else {
+			   jQuery("#tooltip").remove();
+			   previousPoint = null;            
+			}
+		
+		});
+		
+		jQuery("#chartplace").bind("plotclick", function (event, pos, item) {
+			if (item) {
+				jQuery("#clickdata").text("You clicked point " + item.dataIndex + " in " + item.series.label + ".");
+				plot.highlight(item.series, item.datapoint);
+			}
+		});
+    
+        
+        //datepicker
+        jQuery('#datepicker').datepicker();
+        
+        // tabbed widget
+        jQuery('.tabbedwidget').tabs();
+        
+        
+    
+    });
+    
+</script>-->
+<div aria-hidden="false" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal hide fade in" id="nextAppointment">
+    <div class="modal-header widgettitle">
+        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
+        <h3 id="myModalLabel">Schedule Next Appointment</h3>
+    </div>
+    <div class="modal-body">
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Well done!</strong> You successfully Scheduled Next Appointment. Book another or close this. </div>
+        <form class="stdform">
+            <div class="par">
+                <label>Select Time</label>
+        <span class="field">
+        <div class="input-append bootstrap-timepicker">
+            <input id="timepicker12" type="text" class="input-small" />
+            <span class="add-on"><i class="iconfa-time"></i></span> </div>
+        </span> </div>
+            <div class="par">
+                <label>Select Date</label>
+        <span class="field">
+        <input id="datepicker2" type="text" name="date" class="input-small" />
+        </span> </div>
+            <p>
+                <label>Status</label>
+        <span class="field">
+        <select name="selection"  class="uniformselect">
+            <option value="">Pending</option>
+            <option value="1">Visited</option>
+        </select>
+        </span> </p>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button data-dismiss="modal" class="btn">Close</button>
+        <button class="btn btn-primary">Schedule Appointment</button>
+    </div>
+</div>
+<!--#Schedule Next Appointment -->
+</body>
+</html>
+

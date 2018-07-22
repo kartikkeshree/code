@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Campaign Form | Dentist Forum</title>
+       <link rel="stylesheet" href="modules/dentists/css/style.default.css" type="text/css" />
+        <!-- <script type="text/javascript" src="modules/dentists/js/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript" src="modules/dentists/js/jquery-ui-1.9.2.min.js"></script>
+        <script type="text/javascript" src="modules/dentists/js/jquery-migrate-1.1.1.min.js"></script>
+        <script type="text/javascript" src="modules/dentists/js/jquery.uniform.min.js"></script>
+        <script type="text/javascript" src="modules/dentists/js/jquery.cookie.js"></script>
+        <script type="text/javascript" src="modules/dentists/js/chosen.jquery.min.js"></script>
+        <script type="text/javascript" src="modules/dentists/js/custom.js"></script>
+        <script type="text/javascript" src="modules/dentists/js/forms.js"></script>-->
+        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
+    </head>
+
+    <body>
+        <div class="mainwrapper">
+            <div ng-include src="'modules/dentists/views/layouts/header.html'"></div>
+            <div ng-include src="'modules/dentists/views/layouts/leftmenu.html'"></div>
+            <div class="rightpanel" data-ng-controller="CampaignController" >
+                <ul class="breadcrumbs">
+                    <li><a href="#!/dashboard"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
+                    <li><a href="#!/campaignList">Campaign</a> <span class="separator"></span></li>
+                    <li>Add Campaign</li>
+                    <li class="right"> <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
+                        <ul class="dropdown-menu pull-right skin-color">
+                            <li><a href="default">Default</a></li>
+                            <li><a href="navyblue">Navy Blue</a></li>
+                            <li><a href="palegreen">Pale Green</a></li>
+                            <li><a href="red">Red</a></li>
+                            <li><a href="green">Green</a></li>
+                            <li><a href="brown">Brown</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="pageheader"> <a href="#!/campaignList" class="btn btn-primary pull-right top-buffer-20">Back</a>
+                    <div class="pageicon"><span class="iconfa-plus"></span></div>
+                    <div class="pagetitle">
+                        <h5>Add New Campaign</h5>
+                        <h1>Campaign</h1>
+                    </div>
+                </div>
+                <!--pageheader-->
+
+                <div class="maincontent">
+                    <div class="maincontentinner">
+                        <div class="widget">
+                            <h4 class="widgettitle">Fill all fields</h4>
+                            <div class="widgetcontent">
+                                <form class="stdform" action="" method="post" data-ng-submit="sendEmailAndSms()">
+
+                                    <div class="par control-group" data-ng-show="error">
+                                        <label class="control-label">&nbsp;</label>
+                                        <div class="controls errorShow">
+                                            <strong>{{error}}</strong>
+                                        </div>
+                                    </div>
+
+                                    <div class="par control-group">
+                                        <label class="control-label">Campaign Name *</label>
+                                        <div class="controls">
+                                            <input type="text" class="span4" placeholder="Campaign Name" ng-model="campaign.name"/>
+                                        </div>
+                                    </div>
+                                    <p>
+                                        <label>Campaign Type *</label>
+                                        <span class="field">
+                                            <select class="uniformselect" name="select"  ng-model="campaign.type">
+                                                <option value="Email">Email</option>
+                                                <option value="Sms">SMS</option>
+                                            </select>
+                                        </span>
+                                        <!--</p>
+                                        <div class="par">
+                                            <label>Campaign Create Date</label>
+                            <span class="field">
+                            <input id="datepicker" type="text" name="date" value="12/11/2014" class="input-small" />
+                            </span> </div>
+                                        <p>-->
+                                        <label>SMS/Email Text *</label>
+                                        <span class="field">
+                                            <textarea placeholder="SMS/Email Text" class="span4" ng-model="campaign.sms_email_txt"></textarea>
+                                        </span> </p>
+
+                                    <p>
+                                        <label>Select Patients *</label>
+                                        <span id="dualselect" class="dualselect" data-ng-init="getAllPatients()">
+                                            <select class="uniformselect" name="select3" multiple="multiple" size="10" ng-model="campaign.patients">
+                                                <option data-ng-repeat="user in users" value="{{user.id}}">{{user.first_name + ' ' + user.last_name}}</option>
+                                            </select>
+                                            <!--<span class="ds_arrow">
+                                                <button class="btn ds_prev"><i class="iconfa-chevron-left"></i></button><br />
+                                                <button class="btn ds_next"><i class="iconfa-chevron-right"></i></button>
+                                            </span>
+                                            <select name="select4" multiple="multiple" size="10" ng-model="campaign.selectedPatients">
+                                                <option value=""></option>
+                                            </select>-->
+                                        </span>
+                                    </p>
+
+
+
+                                    <p class="stdformbutton">
+                                        <button class="btn btn-primary">Submit</button>
+                                        <button class="btn" type="reset">Reset</button>
+                                    </p>
+                                </form>
+                            </div>
+                            <!--widgetcontent-->
+                        </div>
+                        <!--widget-->
+
+                        <div class="footer">
+                            <div class="footer-left"> <span>&copy; 2014. Dentist Forum. All Rights Reserved.</span> </div>
+                            <div class="footer-right"> <span>Designed by: <a href="http://caprium.com/">Caprium Technologies</a></span> </div>
+                        </div>
+                        <!--footer-->
+
+                    </div>
+                    <!--maincontentinner-->
+                </div>
+                <!--maincontent-->
+
+            </div>
+            <!--rightpanel-->
+
+        </div>
+        <!--mainwrapper-->

@@ -1,0 +1,11 @@
+ReferenceError: validate is not defined
+    at exports.signup (D:\Node\meanjsapp1 - Copy\app\controllers\users\users.authentication.server.controller.js:107:23)
+    at Layer.handle [as handle_request] (D:\Node\meanjsapp1 - Copy\node_modules\express\lib\router\layer.js:82:5)
+    at next (D:\Node\meanjsapp1 - Copy\node_modules\express\lib\router\route.js:100:13)
+    at Route.dispatch (D:\Node\meanjsapp1 - Copy\node_modules\express\lib\router\route.js:81:3)
+    at Layer.handle [as handle_request] (D:\Node\meanjsapp1 - Copy\node_modules\express\lib\router\layer.js:82:5)
+    at D:\Node\meanjsapp1 - Copy\node_modules\express\lib\router\index.js:235:24
+    at Function.proto.process_params (D:\Node\meanjsapp1 - Copy\node_modules\express\lib\router\index.js:313:12)
+    at D:\Node\meanjsapp1 - Copy\node_modules\express\lib\router\index.js:229:12
+    at Function.match_layer (D:\Node\meanjsapp1 - Copy\node_modules\express\lib\router\index.js:296:3)
+    at next (D:\Node\meanjsapp1 - Copy\node_modules\express\lib\router\index.js:190:10)

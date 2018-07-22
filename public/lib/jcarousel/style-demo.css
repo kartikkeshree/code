@@ -1,0 +1,76 @@
+
+#jcl-demo .custom-container {
+    margin: 5px 0;
+}
+
+#jcl-demo .carouscarouselel-1, #jcl-demo .carousel-all * {
+    box-sizing: content-box;    /* My theme uses border-box for whatever reason, I don't know. I am switching it to the standard content-box here */
+}
+
+#jcl-demo .carousel-all {
+    border: 0px solid #bababa;
+
+    background-color: ;
+    float: left;
+
+
+    /* Needed for rendering without flicker */
+    position: relative;
+    visibility: hidden;
+    left: -5000px;
+}
+#jcl-demo .carousel-all>ul {}
+#jcl-demo .carousel-all>ul>li {}
+#jcl-demo .carousel-all>ul>li>img,
+#jcl-demo .carousel-all>ul>li>p {
+    /* mandatory */
+
+    vertical-align:middle;
+
+    /* optional */
+    margin: 1px;
+
+}
+#jcl-demo .carousel-all>ul>li>p {
+    /* mandatory */
+    width: 130px;
+    height: 98px;
+
+    border: 1px solid #808080;
+    line-height: normal;
+    background-color: #fff;
+    padding: 10px;
+}
+
+/* Additional styles for <a> based buttons with images */
+#jcl-demo a.prev, #jcl-demo a.next, #jcl-demo a.go {
+    display: block;
+    width: 22px;
+    height: 22px;
+    line-height: 0.9;
+    background-color: #BBBBBB;
+    color: ghostwhite;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    float: left;
+}
+#jcl-demo a.prev {
+    margin: 2px -5px 5px 0;
+    text-indent: 6px;
+}
+#jcl-demo a.next {
+    margin: 2px 0 5px 117px;
+    text-indent: 8px;
+}
+#jcl-demo a.prev:hover, #jcl-demo a.next:hover, #jcl-demo a.go:hover {
+    background-color: #666666;
+}
+
+
+
+
+

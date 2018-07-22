@@ -1,0 +1,228 @@
+<link rel="stylesheet" href="modules/dentists/css/jquery-ui.css" type="text/css"/>
+<script type="text/javascript" src="modules/dentists/js/jquery-ui-1.9.2.min.js"></script>
+<style>
+    .ui-autocomplete { 
+        cursor:pointer; 
+        height:120px; 
+        overflow-y:scroll;
+    }    
+</style>
+<div ng-include src="'modules/dentists/views/layouts/header_files.html'"></div>
+<div class="mainwrapper" data-ng-controller="PatientController">
+    <div ng-include src="'modules/dentists/views/layouts/header.html'"></div>
+    <div ng-include src="'modules/dentists/views/layouts/leftmenu.html'"></div>
+    <div class="rightpanel" ng-init="find()">
+        <ul class="breadcrumbs">
+            <li><a href="#/dashboard"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
+            <li>Patient</li>
+            <li class="right">
+                <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
+                <ul class="dropdown-menu pull-right skin-color">
+                    <li><a href="default">Default</a></li>
+                    <li><a href="navyblue">Navy Blue</a></li>
+                    <li><a href="palegreen">Pale Green</a></li>
+                    <li><a href="red">Red</a></li>
+                    <li><a href="green">Green</a></li>
+                    <li><a href="brown">Brown</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="pageheader">
+            <form method="post" class="searchbar right-buffer-250" ng-submit="patientFilter()" ng-show="(user[0].role_id != 1)">
+                <input type="text" name="keyword" placeholder="To search type and hit enter..." ng-model="filterVal" />
+
+            </form>
+            <form method="post" class="searchbar right-buffer-10" ng-submit="patientFilter()" ng-show="(user[0].role_id == 1)">
+                <input type="text" name="keyword" placeholder="To search type and hit enter..." ng-model="filterVal" />
+            </form>
+            <a class="btn btn-primary pull-right top-buffer-20 left-buffer-10" href="#!/addPatient"
+               ng-if="user[0].role_id != 1">Add Patient</a>
+            <a class="btn btn-primary pull-right top-buffer-20 left-buffer-10" href="#nextAppointment"
+               data-toggle="modal" ng-if="user[0].role_id != 1">Import Patient Info</a>
+
+            <div class="pageicon"><span class="iconfa-user"></span></div>
+            <div class="pagetitle">
+                <h5>All Patient List</h5>
+
+                <h1>Patient</h1>
+            </div>
+        </div>
+        <!--pageheader-->
+
+        <div class="maincontent">
+            <div class="maincontentinner">
+
+
+                <!-- <h4 class="widgettitle">Table Using Colgroup</h4>-->
+                <table class="table table-bordered responsive">
+                    <colgroup>
+                        <col class="con0" style="width:7%;"/>
+                        <col class="con1" style="width:15%;"/>
+                        <col class="con0" style="width:10%;"/>
+                        <col class="con1" style="width:10%;"/>
+                        <col class="con0" style="width:16%;"/>
+                        <col class="con1" style="width:22%;"/>
+                        <col class="con0" style="width:10%;"/>
+                        <col class="con1" style="width:10%;"/>
+
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th class="center">&nbsp;</th>
+                            <th class="center">Sr. No</th>
+                            <th>Patient Name</th>
+                            <th>Mobile No.</th>
+                            <!-- <th>Treatment</th>-->
+                            <th class="center">Last Visit Date</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th class="center">Area</th>
+                            <th class="center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="patient in patients">
+                            <td class="center">&nbsp;</td>
+                            <td class="center">{{$index + 1}}</td>
+                            <td ng-if="patient.app_id != undefined && (dataVal == undefined && patientVal == true)">
+                                <a href="#!/viewPatientInfo/{{patient.user_id}}/{{patient.app_id}}/{{patient.clinic_id}}?val=edit" >{{patient.first_name
+                                                        + ' ' + patient.last_name}}</a></td>
+                            <td ng-if="patient.app_id != undefined && (dataVal == true && patientVal == true)">
+                                <a href="#!/viewPatientInfo/{{patient.user_id}}/{{patient.app_id}}/{{patient.clinic_id}}?val=edit" >{{patient.first_name
+                                                        + ' ' + patient.last_name}}</a></td>
+                            <td ng-if="patient.app_id == undefined || (dataVal == true && patientVal == undefined)">{{patient.first_name
+                                                    + ' ' + patient.last_name}}</td>
+                            <td ng-if="patient.app_id != undefined && user[0].role_id != 3">
+                                <a href="#!/viewPatientInfo/{{patient.user_id}}/{{patient.app_id}}/{{patient.clinic_id}}?val=edit" >{{patient.first_name
+                                                        + ' ' + patient.last_name}}</a></td>
+                            <td>{{patient.contact_no}}</td>
+                            <!--  <td>Teeth Checkup</td>-->
+                            <td class="center">{{patient.last_visited_date| date:'medium'}}</td>
+                            <td>{{patient.email}}</td>
+                            <td>{{patient.address1}}</td>
+                            <td class="center">{{patient.area_name}}</td>
+                            <td class="center">
+                                <a href="javascript:void(0);" ng-click="editPatient(patient.app_id, patient.user_id)" title="Edit">
+                                    <span class="iconfa-edit large-a-icon"> </span>
+                                </a> &nbsp;
+                                <a href="javascript:void(0)" ng-click="deleteAppointMentWithParentAppId(patient.app_id, $index)" title="Delete">
+                                    <span class="iconfa-trash large-a-icon"></span>
+                                </a>&nbsp;
+                                <a href="#referToDoctor" data-toggle="modal" ng-click="setDentistData(patient.user_id)" title="Refer to a Doctor">
+                                    <span class="iconfa-share large-a-icon"></span>
+                                </a> 
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!--Table end -->
+                <!-- Pagination Section -->
+                <div class="pagination-admin pull-right" ng-if="patients.length > 0">
+                    <ul class="pagination pull-right">
+                        <li ng-class="{disabled: currentPage == 1}"><a aria-label="Previous" href="javascript:void(0);" ng-click="prevPage()"><span aria-hidden="true">«</span></a></li>
+                        <li ng-class="{active: n == currentPage}" ng-repeat="n in pagedItems" ng-click="setPage()"><a href="javascript:void(0);" ng-bind="n">1<span class="sr-only">(current)</span></a></li>
+                        <li ng-class="{disabled: currentPage == pagedItems.length}"><a aria-label="Next" href="javascript:void(0);"  ng-click="nextPage()"><span aria-hidden="true">»</span></a></li>
+                    </ul>
+                </div>
+                <!-- End -->
+            </div>
+            <!--maincontentinner-->
+            <div ng-include src="'modules/dentists/views/layouts/footer.html'"></div>
+            <!--footer-->
+        </div>
+        <!--maincontent-->
+
+    </div>
+    <!--rightpanel-->
+    <div aria-hidden="false" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal hide fade in"
+         id="nextAppointment">
+        <div class="modal-header widgettitle">
+            <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
+            <h3 id="myModalLabel">Import Patient Info</h3>
+
+        </div>
+        <form class="stdform" name="fileForm" ng-submit="importPatientInfo()">
+            <div class="modal-body">
+                <div class="text-center">
+                    <a href="/csv/user.csv" target="_blank" class="btn btn-primary"><span
+                            class="iconfa-download-alt"></span> &nbsp;Download File</a>
+                    <p>Please Upload file in a specific format.For example you can download sample file.</p>
+                </div>
+                <div class="alert alert-success" ng-if="msg != undefined">
+                    <button type="button" class="close" data-dismiss="alert" ng-click="clearData()">×</button>
+                    <strong></strong>{{msg}}
+                </div>
+
+                <div class="alert alert-error" ng-if="msgErr != undefined">
+                    <button type="button" class="close" data-dismiss="alert" ng-click="clearData()">×</button>
+                    <strong></strong>{{msgErr}}
+                </div>
+
+
+                <div class="par text-center">
+                    <!--<label>Select File</label>-->
+                    <!--<span class="field">-->
+
+                    <!-- <input type="file" ng-model-instant id="fileToUpload" ng-model="filetoUp" onchange="angular.element(this).scope().uploadFile(this.files)"/>-->
+                    <div data-provides="fileupload" class="fileupload fileupload-new">
+                        <div class="input-append">
+                            <div class="uneditable-input span3">
+                                <i class="iconfa-file fileupload-exists"></i>
+                                <span class="fileupload-preview"></span>
+                            </div>
+                            <span class="btn btn-file"><span class="fileupload-new">Select file</span>
+                                <span class="fileupload-exists">Select file</span>
+                                <input type="file" ng-model-instant id="fileToUpload" ng-model="filetoUp"
+                                       onchange="angular.element(this).scope().uploadFile(this.files)"/>
+                            </span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn" ng-click="clearData(fileForm)">Close</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+
+
+        </form>
+
+    </div>
+    <!--#Refer To doctor popup start-->
+    <div aria-hidden="false" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" class="modal hide fade in" id="referToDoctor">
+	
+        <div class="modal-header widgettitle">
+            <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
+            <h3 id="myModalLabel">Refer To Doctor</h3>
+        </div>
+        <div class="modal-body">
+            <div class="alert alert-success" ng-if="msg != unddefined">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong></strong> {{msg}}</div>
+            <form class="stdform">
+                <div class="par">
+                    <label>To doctor</label>
+                    <span class="field">
+                        <input type="text" id="tbCountries" />    
+                    </span>  </div>
+                <p>
+                    <label>Reasons</label>
+                    <span class="field">
+                        <textarea name="date" class="" ng-model="refer.reason" rows="5" cols="50"/></textarea>
+                    </span> </p>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button data-dismiss="modal" class="btn" ng-click="clearReferData()">Close</button>
+            <button class="btn btn-primary" ng-click="referToDoctor()">Submit</button>
+        </div>
+		
+    </div>
+    <!--#Refer To Doctor end -->
+</div><!--mainwrapper-->
+
+</body>
+</html>

@@ -1,0 +1,163 @@
+<div ng-include src="'modules/dentists/views/layouts/header_files.html'"></div>
+<div class="mainwrapper">
+    <div ng-include src="'modules/dentists/views/layouts/header.html'"></div>
+    <div ng-include src="'modules/dentists/views/layouts/leftmenu.html'"></div>
+    <div class="rightpanel" data-ng-controller="StaffsController" data-ng-init="findOne()">
+        <ul class="breadcrumbs">
+            <li><a href="dashboard.html"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
+            <li><a href="staff.html">Staff</a> <span class="separator"></span></li>
+            <li>Add Staff</li>
+            <li class="right"> <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
+                <ul class="dropdown-menu pull-right skin-color">
+                    <li><a href="default">Default</a></li>
+                    <li><a href="navyblue">Navy Blue</a></li>
+                    <li><a href="palegreen">Pale Green</a></li>
+                    <li><a href="red">Red</a></li>
+                    <li><a href="green">Green</a></li>
+                    <li><a href="brown">Brown</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="pageheader"> <a href="javascript:history.go(-1)" class="btn btn-primary pull-right top-buffer-20">Back</a>
+            <div class="pageicon"><span class="iconfa-plus"></span></div>
+            <div class="pagetitle" ng-if="edit==undefined">
+                <h5>Add New Staff</h5>
+                <h1>Add Staff</h1>
+            </div>
+            <div class="pagetitle" ng-if="edit != undefined">
+                <h5>Update Staff</h5>
+                <h1>Update Staff</h1>
+            </div>
+        </div>
+        <!--pageheader-->
+
+        <div class="maincontent">
+            <div class="maincontentinner">
+                <div class="widget">
+                    <h4 class="widgettitle">Fill all fields</h4>
+                    <div class="widgetcontent">
+                        <form class="stdform" data-ng-submit="create()">
+
+                            <div class="par control-group" data-ng-show="error">
+                                <label class="control-label">&nbsp;</label>
+                                <div class="controls errorShow">
+                                    <strong>{{error}}</strong>
+                                </div>
+                            </div>
+                            <div class="par control-group">
+                                <label class="control-label">First Name *</label>
+                                <div class="controls">
+                                    <input type="text" class="span4" placeholder="First Name" data-ng-model="staffUser.first_name"/>
+                                </div>
+                            </div>
+
+                            <div class="par control-group">
+                                <label class="control-label">Last Name *</label>
+                                <div class="controls">
+                                    <input type="text" class="span4" placeholder="Last Name" data-ng-model="staffUser.last_name"/>
+                                </div>
+                            </div>
+
+                            <div class="par control-group" ng-if="edit==undefined">
+                                <label class="control-label">Select Clinic *</label>
+                                <div class="controls">
+                                    <select ng-model="staffUser.clinic_id" multiple="multiple">
+                                        <option value="">Select Clinic</option>
+                                        <option ng-repeat="clinic in clinics" value="{{clinic.id}}">{{clinic.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="par control-group" ng-if="edit==true">
+                                <label class="control-label">Select Clinic *</label>
+                                <div class="controls">
+                                    <select ng-model="staffUser.clinic_id">
+                                        <option value="">Select Clinic</option>
+                                        <option ng-repeat="clinic in clinics" value="{{clinic.id}}" ng-selected="((staffUser.clinic_id==clinic.id)?true:false)">{{clinic.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="par control-group">
+                                <label class="control-label">Mobile No. *</label>
+                                <div class="controls">
+                                    <input type="text" class="span4" placeholder="Mobile No." data-ng-model="staffUser.contact_no"/>
+                                </div>
+                            </div>
+
+                            <div class="par control-group">
+                                <label class="control-label">Address</label>
+                                <div class="controls">
+                                    <textarea class="span4" placeholder="Address" data-ng-model="staffUser.address1">{{staffUser.address1}}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="par control-group" >
+                                <label class="control-label">Email ID</label>
+                                <div class="controls">
+                                    <input type="email" class="span4" placeholder="Email ID" data-ng-model="staffUser.email" ng-readonly = "(edit == true)?true:false"/>
+                                </div>
+                            </div>
+
+                            <div class="par control-group" ng-if="edit == undefined">
+                                <label class="control-label">Password *</label>
+                                <div class="controls">
+                                    <input type="password" class="span4" placeholder="Password" data-ng-model="staffUser.password"/>
+                                </div>
+                            </div>
+
+                            <div class="par control-group" ng-if="edit== undefined">
+                                <label class="control-label">Confirm Password *</label>
+                                <div class="controls">
+                                    <input type="password" class="span4" placeholder="Confirm Password" data-ng-model="staffUser.cnfPassword"/>
+                                </div>
+                            </div>
+                            <p>
+                                <label>Access</label>
+
+                            <span class="formwrapper">
+                            	<input type="checkbox"  data-ng-model="staffUser.check.check1"  ng-true-value="Campaign" ng-false-value="" /> Manage Campaign <br />
+                            </span>
+
+                            <span class="formwrapper">
+                                <input type="checkbox"  data-ng-model="staffUser.check.check2"  ng-true-value="Patient" ng-false-value="" /> Manage Patient <br />
+                            </span>
+
+                            <span class="formwrapper">
+                                <input type="checkbox"  data-ng-model="staffUser.check.check3"  ng-true-value="Data" ng-false-value=""  /> Manage Data <br />
+                            </span>
+
+                            <span class="formwrapper">
+                                <input type="checkbox"  data-ng-model="staffUser.check.check4"  ng-true-value="Appointment" ng-false-value="" /> Manage Appointment
+                            </span>
+
+
+                            </p>
+
+
+                            <p class="stdformbutton" ng-if="edit == true">
+                                <button class="btn btn-primary">Update</button>
+                            </p>
+
+                            <p class="stdformbutton" ng-if="edit == undefined">
+                                <button class="btn btn-primary">Submit</button>
+                                <button type="reset" class="btn">Cancel</button>
+                            </p>
+
+
+                        </form>
+                    </div>
+                    <!--widgetcontent-->
+                </div>
+                <!--widget-->
+            </div>
+            <!--maincontentinner-->
+            <div ng-include src="'modules/dentists/views/layouts/footer.html'"></div>
+            <!--footer-->
+        </div>
+        <!--maincontent-->
+
+    </div>
+    <!--rightpanel-->
+
+</div>
+<!--mainwrapper-->

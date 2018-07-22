@@ -1,0 +1,96 @@
+<div ng-include src="'modules/dentists/views/layouts/header_files.html'"></div>
+<div class="mainwrapper">
+    <div ng-include src="'modules/dentists/views/layouts/header.html'"></div>
+    <div ng-include src="'modules/dentists/views/layouts/leftmenu.html'"></div>
+    <div class="rightpanel">
+
+        <ul class="breadcrumbs">
+            <li><a href="dashboard.html"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
+            <li>Staff</li>
+            <li class="right">
+                <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
+                <ul class="dropdown-menu pull-right skin-color">
+                    <li><a href="default">Default</a></li>
+                    <li><a href="navyblue">Navy Blue</a></li>
+                    <li><a href="palegreen">Pale Green</a></li>
+                    <li><a href="red">Red</a></li>
+                    <li><a href="green">Green</a></li>
+                    <li><a href="brown">Brown</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="pageheader">
+            <form method="post" class="searchbar right-buffer-90" data-ng-submit="find()">
+                <input type="text" name="keyword" data-ng-model="searchVal" placeholder="To search type and hit enter..."  />
+            </form>
+            <a href="#!/staffs/create" class="btn btn-primary pull-right top-buffer-20 left-buffer-10">Add Staff</a>
+            <div class="pageicon"><span class="iconfa-user-md"></span></div>
+            <div class="pagetitle">
+                <h5>All Staff Summary</h5>
+                <h1>Staff</h1>
+            </div>
+        </div><!--pageheader-->
+
+        <div class="maincontent">
+            <div class="maincontentinner">
+
+
+                <!-- <h4 class="widgettitle">Table Using Colgroup</h4>-->
+                <table class="table table-bordered responsive">
+                    <colgroup>
+                        <col class="con0" style="width:7%;"/>
+                        <col class="con1" style="width:18%;"/>
+                        <col class="con0" style="width:13%;"/>
+                        <col class="con1" style="width:12%;"/>
+                        <col class="con0" style="width:45%;"/>
+                        <col class="con1" style="width:15%;"/>
+
+
+
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="center">&nbsp;</th>
+                        <th class="center">Sr. No</th>
+                        <th>Staff Name</th>
+                       <th>Clinic Name</th>
+                        <th>Mobile No.</th>
+                        <th>Access</th>
+                       <!-- <th class="center">Status</th>-->
+                        <th class="center">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-ng-repeat="staff in staffs">
+                        <td class="center">&nbsp;</td>
+                        <td class="center">{{$index+1}}</td>
+                        <td>{{staff.first_name+" "+staff.last_name}}</td>
+                         <td>{{staff.clinic_name}}</td>
+                        <td>{{staff.contact_no}}</td>
+                        <td>{{staff.module_access}}</td>
+
+
+                       <!-- <td class="center">
+                            <select name="selection"  class="" style="width: 100%;" ng-change="changeStatus(staff.staffId, item);" data-ng-model="item">
+                                <option value="Pending" ng-selected="((staff.status=='Pending')?true:false)">Pending</option>
+                                <option value="Rejected" ng-selected="((staff.status=='Rejected')?true:false)">Rejected</option>
+                                <option value="Approved" ng-selected="((staff.status=='Approved')?true:false)">Approved</option>
+                            </select>
+                        </td>-->
+                        <td class="center"><a href="#!/staffs/{{staff.staffId}}/edit"><span class="iconfa-edit large-a-icon"></span></a>  &nbsp; <a href="javascript:void(0)" data-ng-click="changeStatus(staff.staffId,'Deleted', $index)"><span class="iconfa-trash large-a-icon"></span></a></td>
+                    </tr>
+
+                    </tbody>
+                </table><!--Table end -->
+
+            </div><!--maincontentinner-->
+
+            <div ng-include src="'modules/dentists/views/layouts/footer.html'"></div>
+
+
+        </div><!--maincontent-->
+
+    </div><!--rightpanel-->
+
+</div><!--mainwrapper-->

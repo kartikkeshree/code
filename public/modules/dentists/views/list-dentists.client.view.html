@@ -1,0 +1,118 @@
+<div ng-include src="'modules/dentists/views/layouts/header_files.html'"></div>
+<div class="mainwrapper">
+    <div ng-include src="'modules/dentists/views/layouts/header.html'"></div>
+    <div ng-include src="'modules/dentists/views/layouts/leftmenu.html'"></div>
+    <div class="rightpanel" data-ng-controller="DentistsController">
+
+        <ul class="breadcrumbs">
+            <li><a href="#!/dasgboard"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
+            <li>Doctor</li>
+            <li class="right">
+                <a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color Skins</a>
+                <ul class="dropdown-menu pull-right skin-color">
+                    <li><a href="default">Default</a></li>
+                    <li><a href="navyblue">Navy Blue</a></li>
+                    <li><a href="palegreen">Pale Green</a></li>
+                    <li><a href="red">Red</a></li>
+                    <li><a href="green">Green</a></li>
+                    <li><a href="brown">Brown</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="pageheader">
+            <form method="post" class="searchbar right-buffer-100" data-ng-submit="dentistFilter()">
+                <input type="text" name="keyword" data-ng-model="filterVal" placeholder="To search type and hit enter..."/>
+                <input type="submit" class="hidden">
+            </form>
+            <a href="#!/dentists/create" class="btn btn-primary pull-right top-buffer-20 left-buffer-10">Add Doctor</a>
+
+            <div class="pageicon"><span class="iconfa-globe"></span></div>
+            <div class="pagetitle">
+                <h5>All Doctors Summary</h5>
+
+                <h1>Doctors</h1>
+            </div>
+        </div>
+        <!--pageheader-->
+
+        <div class="maincontent">
+            <div class="maincontentinner" ng-init="find()">
+
+                <!-- <h4 class="widgettitle">Table Using Colgroup</h4>-->
+                <table class="table table-bordered responsive">
+                    <colgroup>
+                        <col class="con0" style="width:5%;"/>
+                        <col class="con1" style="width:13%;"/>
+                        <col class="con0" style="width:10%;"/>
+                        <col class="con1" style="width:15%;"/>
+                        <col class="con0" style="width:20%;"/>
+                        <col class="con1" style="width:10%;"/>
+                        <col class="con0" style="width:7%;"/>
+                        <col class="con1" style="width:10%;"/>
+                        <col class="con0" style="width:10%;"/>
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th class="center">&nbsp;</th>
+                        <th class="center">Sr. No</th>
+                        <th>Doctor Name</th>
+                        <th>Mobile No.</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th class="center">Area</th>
+                        <th class="center">Experience</th>
+                        <th class="center">Status</th>
+                        <th class="center">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="dentist in dentists">
+                        <td class="center">&nbsp;</td>
+                        <td class="center">{{$index + 1}}</td>
+                        <td><a href="#!/dentistDetail/{{dentist.dentistId}}">{{dentist.first_name + ' ' +
+                            dentist.last_name}}</a></td>
+                        <td>{{dentist.contact_no}}</td>
+                        <td>{{dentist.email}}</td>
+                        <td>{{dentist.address1}}</td>
+                        <td class="center">{{dentist.area_name}}</td>
+                        <td class="center">{{((dentist.experience)/12) | number:0}}{{((((dentist.experience)%12) == 0) ?
+                            '': '+')}} Yrs
+                        </td>
+                        <td class="center">
+                            <select name="selection" class="" style="width: 100%;"
+                                    ng-change="changeStatus(dentist.id, item);" data-ng-model="item">
+                                <option value="Active" ng-selected="((dentist.status=='Active')?true:false)">Active
+                                </option>
+                                <option value="Inactive" ng-selected="((dentist.status=='Inactive')?true:false)">
+                                    Inactive
+                                </option>
+                            </select>
+                        </td>
+                        <td class="center"><a href="#!/dentists/{{dentist.id}}/edit"><span
+                                class="iconfa-edit large-a-icon"></span></a>
+                            &nbsp; <a href="javascript:void(0);" ng-click="remove(dentist.id, $index)"><span
+                                    class="iconfa-trash large-a-icon"></span></a></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!--Table end -->
+			<!-- Pagination Section -->
+			<div class="pagination-admin pull-right" ng-if="dentists.length > 0">
+				<ul class="pagination pull-right">
+					<li ng-class="{disabled: currentPage == 1}"><a aria-label="Previous" href="javascript:void(0);" ng-click="prevPage()"><span aria-hidden="true">«</span></a></li>
+					<li ng-class="{active: n == currentPage}" ng-repeat="n in pagedItems" ng-click="setPage()"><a href="javascript:void(0);" ng-bind="n">1<span class="sr-only">(current)</span></a></li>
+					<li ng-class="{disabled: currentPage == pagedItems.length}"><a aria-label="Next" href="javascript:void(0);"  ng-click="nextPage()"><span aria-hidden="true">»</span></a></li>
+				</ul>
+			</div>
+			<!-- End -->
+            </div>
+            <!--maincontentinner-->
+            <div ng-include src="'modules/dentists/views/layouts/footer.html'"></div>
+            <!--footer-->
+        </div>
+        <!--maincontent-->
+
+    </div>
+    <!--rightpanel-->
+</div>

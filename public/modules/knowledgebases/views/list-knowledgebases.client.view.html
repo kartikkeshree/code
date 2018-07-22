@@ -1,0 +1,65 @@
+
+<div ng-include src="'modules/core/views/header-inside.html'"></div>
+<div class="container inside-content" data-ng-controller="KnowledgebasesController">
+    <div class="row">
+        <div class="col-xs-12 top-buffer-20">
+            <div class="inside-page-title" data-ng-init="getAlphabets()">
+                <h1 class="float-center">Knowledgebase</h1>
+                <ul class="pull-right sort-by-alphabet" ng-if = "knowbase_data.length > 0">
+                    <li data-ng-repeat="allAlphabetsWithUrl in allAlphabetsWithUrl" ui-route="/getAllKnowledgeBaseSort" ng-class="{active: $uiRoute}"><a href="{{allAlphabetsWithUrl.url}}" >{{allAlphabetsWithUrl.alphabet}}</a></li>
+                    <li>&nbsp;</li>
+                    <li>&nbsp;</li>
+                    <li>&nbsp;</li>
+                    <li>&nbsp;</li>
+                    <li><a href="#!/knowledgebases" class="btn btn-primary">All</a></li>
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="clearfix"></div>
+            <div class="panel panel-default forum-section">
+                <!-- Table -->
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th style="width:7%" class="text-center">#</th>
+                        <th style="width:78%">Recent Topic</th>
+
+                        <th style="width:15%" class="text-center">Comments</th>
+                    </tr>
+
+                    </thead>
+                    <tbody>
+                    <tr ng-if = "knowbase_data.length < 1">
+                        <th></th>
+                        <td class="text-primary"><strong>No knowledgebase yet!</strong></td>
+                        <th></th>
+
+                    </tr>
+                    <tr ng-repeat="knowBase in knowbase_data">
+                        <th scope="row" class="text-center">{{$index+1}}</th>
+                        <td class="text-primary"><strong><a href="#!/knowledgebases/{{knowBase.id}}">{{knowBase.title}}</a></strong></td>
+
+                        <td class="text-center"><h3>{{knowBase.cmtCnt}}</h3></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+<div class="book-appointments text-center">
+    <div class="container">
+        <h1 class="text-uppercase">Doctors</h1>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text. </p>
+        <a href="#!/dentistList/" class="btn btn-primary text-uppercase">Book Appointment</a>
+    </div>
+</div>
+<div ng-include src="'modules/core/views/footer.html'"></div>
+
+

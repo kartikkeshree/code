@@ -1,0 +1,106 @@
+
+<div ng-include src="'modules/core/views/header-inside.html'"></div>
+<div class="container inside-content">
+	<div class="row" data-ng-controller="KnowledgebaseDetailsController" data-ng-init="recentKnowBase()">
+		<div class="col-xs-12 col-sm-8">
+			<div class="post-section">
+				<div class="page-header top-buffer-20 no-bottom-buffer">
+					<!--<div class="row"><div class="image-page-header"><a href="javasscript:void(0);"><img alt="Langara" title="Does your hobby relate to SEO?" src="modules/core/images/langara.jpg"></a></div></div>-->
+					<h2>{{knowbase_detail[0].title}}</h2>
+					<small class="pull-left">By {{knowbase_detail[0].first_name + ' ' + knowbase_detail[0].last_name}}</small>
+					<small class="pull-right well-box">{{knowbase_detail[0].createdDate}}</small></div>
+				<div class="post-content">
+					{{knowbase_detail[0].description}}
+					<div class="post-action">
+						<!--<a href="blog_details.html" class="btn btn-primary pull-left">Read More</a>-->
+						Social Sites
+						<div class="pull-right top-buffer-5">
+							<span class='st_facebook_hcount' displayText='Facebook'></span>
+							<span class='st_twitter_hcount' displayText='Tweet'></span>
+							<span class='st_linkedin_hcount' displayText='LinkedIn'></span>
+							<span class='st_pinterest_hcount' displayText='Pinterest'></span>
+
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div ng-if="knowbase_comment_data.length < 1">No any post yet !!<hr></div>
+					<div class="media comment-sec" ng-repeat="commentData in knowbase_comment_data">
+						<a href="javascript:void(0);" class="media-left">
+							<img class="x-48" src="{{commentData.image}}">
+						</a>
+						<div class="media-body full-width-container">
+							<h4 class="media-heading">{{commentData.first_name + ' ' + commentData.last_name}}
+							<span>{{commentData.createdDate}}</span><br>
+							<span><button class="btn btn-primary" ng-if="authentication[0].role_id==1"  ng-click="deleteKnowledgebaseComment(commentData.id,$index)" id="delete-post">Delete</button></span>
+							</h4>
+							{{commentData.description}}
+							<div class="comment-action"><a href="javascript:void(0);" ng-click="replyComment(commentData)">Reply</a></div>
+
+							<div class="media">
+								<div ng-repeat="knowbase_comment_reply in knowbase_comment_reply" ng-if="knowbase_comment_reply.ref_id == commentData.id">
+									<a href="javascript:void(0);" class="media-left">
+										<img class="x-48" src="{{knowbase_comment_reply.image}}">
+									</a>
+									<div class="media-body full-width-container">
+										<h4 class="media-heading">{{knowbase_comment_reply.first_name + ' ' + knowbase_comment_reply.last_name}}
+										<span>{{knowbase_comment_reply.createdDate}}</span><br>
+										<span><button class="btn btn-primary" ng-if="authentication[0].role_id==1" ng-click="deleteKnowledgebaseCommentReply(knowbase_comment_reply.id,$index)" id="delete-post">Delete</button></span>
+										</h4>
+										{{knowbase_comment_reply.description}}
+										<!--<div class="comment-action"><a href="javascript:void(0);">Reply</a> &nbsp; <a href="javascript:void(0);">Delete</a></div>-->
+
+									</div>
+									<hr />
+								</div>
+
+								<form role="form" class="form-horizontal" ng-show="isSelected(commentData)" data-ng-submit="submitReplyComment(commentData.id)">
+									<h3 class="post-comment-title">Reply on this comment.</h3>
+
+									<div class="form-group">
+
+										<div class="col-sm-12"></span>
+											<textarea class="form-control" placeholder="Comment" ng-model="$parent.replyCommentValue"></textarea>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-9">
+											<button class="btn btn-default" type="submit">Submit</button>
+											<button type="button" class="btn btn-default" ng-click="closeComment(this)">Cancel</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+
+
+					<form role="form" class="form-horizontal"  data-ng-submit="addComment()" novalidate="">
+						<h3 class="post-comment-title">Post Your Comment</h3>
+						<div class="form-group">
+							<div class="col-sm-12">
+								<textarea id="knowbase_comment" class="form-control" placeholder="Comment" ng-model="knowbase_comment.comment"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-9">
+								<button class="btn btn-default" type="submit">Submit</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+
+		</div>
+		<div class="col-xs-12 col-sm-4 top-buffer-20 bottom-buffer">
+			<div class="page-header no-top-margin">
+				<h4>Recent Post</h4></div>
+			<ul class="blog-ul">
+				<li data-ng-repeat="recentKnowBase in recentKnowBases"><a class="text-info" href="#!/knowledgebases/{{recentKnowBase.id}}">{{recentKnowBase.title}}</a></li>
+			</ul>
+
+		</div>
+
+	</div>
+</div>
+<div ng-include src="'modules/core/views/footer.html'"></div>
+

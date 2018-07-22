@@ -1,0 +1,223 @@
+<div ng-include src="'modules/core/views/header-inside.html'"></div>
+<div data-ng-controller="BlogsController" ng-init="findOne()">
+    <div class="admin-action" ng-if="(isOwner == 'admin')">
+        <div class="container">
+            <div class="col-xs-4"><strong>{{blog_detail[0].first_name+' '+blog_detail[0].last_name}}</strong></div>
+            <div class="col-xs-3">{{blog_comment_data.length}} Comments</div>
+            <div class="col-xs-5 text-right">
+                <div class="delete-icon" title="Delete" ng-click="publishStatus(blog.id, 'delete', 'blogDetail')"></div>
+                <div class="edit-icon" title="Edit"></div>
+                <div class="reject-icon" title="Reject"
+                     ng-click="publishStatus(blog.id, 'Rejected', 'blogDetail')"></div>
+                <div class="approve-icon" title="Approve"
+                     ng-click="publishStatus(blog.id, 'Approved', 'blogDetail')"></div>
+            </div>
+        </div>
+    </div>
+    <div class="container inside-content">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8" >
+                <div class="post-section">
+                    <div ng-show="success" role="alert" class="alert alert-success topic-alert">
+                        {{success}}.
+                    </div>
+                    <div ng-show="error" role="alert" class="alert alert-danger topic-alert">
+                        {{error}}.
+                    </div>
+
+                    <!-- Edit Blog Section -->
+                    <div class="edit-post-form top-buffer-20" ng-show="isOwner">
+                        <form class="form-horizontal" data-ng-submit="updateBlog()">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Post Image</label>
+
+                                <div class="col-sm-9">
+                                    <div id="blog-image-container"><img src="{{blog_detail[0].image}}"
+                                                                        class="x-80 pull-left"></div>
+                                    <input type="file" ng-model-instant id="fileToUpload"
+                                           onchange="angular.element(this).scope().uploadFile(this.files)"
+                                           class="no-padding-input top-buffer-25 pull-left"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Posted By</label>
+
+                                <div class="col-sm-9">
+                                    <input type="text" placeholder="Posted By"
+                                           value="{{blog_detail[0].first_name + ' ' + blog_detail[0].last_name}}"
+                                           disabled class="form-control no-padding-input">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Title</label>
+
+                                <div class="col-sm-9">
+                                    <input type="text" placeholder="Post Title" data-ng-model="blog_detail[0].title"
+                                           class="form-control no-padding-input">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Post Content</label>
+
+                                <div class="col-sm-9">
+                                    <textarea class="form-control no-padding-input big-textarea"
+                                              placeholder="Post Content" data-ng-model="blog_detail[0].description">
+                                        {{blog_detail[0].description}}</textarea>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" id="update-post" type="submit">Update</button>
+                            <!--<button class="btn btn-primary">Update &amp; Publish</div>-->
+                            <div class="btn btn-default" id="cancel-post">Cancel</div>
+                        </form>
+                    </div>
+                    <!-- End of Edit blog && Blog Details Section  -->
+                    <div class="post-content-section">
+                        <div ng-show="isOwner" class="click-to-edit" id="edit-post"><span
+                                class="click-to-edit-icon"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Click to Edit
+                            Content &amp; Image.
+                        </div>
+                        <div class="page-header top-buffer-20 no-bottom-buffer">
+                            <div class="row">
+                                <div class="image-page-header"><img alt="{{blog_detail[0].title}}"
+                                                                    title="{{blog_detail[0].title}}"
+                                                                    src="{{blog_detail[0].image}}"></div>
+                            </div>
+                            <h2>{{blog_detail[0].title}}</h2>
+                            <small class="pull-left">Posted By : {{blog_detail[0].first_name + ' ' +
+                                blog_detail[0].last_name}}
+                            </small>
+                            <small class="pull-right well-box">{{blog_detail[0].createdDate}}</small>
+                        </div>
+                        <div class="post-content">{{blog_detail[0].description}}
+                        </div>
+                    </div>
+                    <div class="comment-section-container">
+                        <div class="post-action">
+                            <!--<a href="blog_details.html" class="btn btn-primary pull-left">Read More</a>-->
+                            <div class="pull-right top-buffer-5"><span class='st_facebook_hcount'
+                                                                       displayText='Facebook'></span> <span
+                                    class='st_twitter_hcount' displayText='Tweet'></span> <span
+                                    class='st_linkedin_hcount' displayText='LinkedIn'></span> <span
+                                    class='st_pinterest_hcount' displayText='Pinterest'></span></div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <!-- End of Blog Details && Show Comments Section-->
+                        <div ng-if="blog_comment_data.length < 1">No comment yet !!
+                            <hr/>
+                        </div>
+                        <div class="media comment-sec" ng-repeat="commentData in blog_comment_data"><a
+                                href="javascript:void(0);" class="media-left"> <img class="x-48"
+                                                                                    src="{{commentData.image}}"> </a>
+
+                            <div class="media-body full-width-container" >
+                                <h4 class="media-heading">{{commentData.first_name + ' ' + commentData.last_name}}
+								<span>{{commentData.createdDate}}</span><br>
+								<span><button class="btn btn-primary" ng-if="authentication[0].role_id==1" id="delete-post" ng-click="deleteBlogComment(commentData.id,$index)">Delete</button></span>
+                                </h4>
+								
+                                {{commentData.description}}
+                                <div class="comment-action"><a href="javascript:void(0);"
+                                                               ng-click="replyComment(commentData)">Reply</a></div>
+                                <div class="media">
+                                    <div ng-repeat="blog_comment_reply in blog_comment_reply"
+                                         ng-if="blog_comment_reply.ref_id == commentData.id"><a
+                                            href="javascript:void(0);" class="media-left"> <img class="x-48"
+                                                                                                src="{{blog_comment_reply.image}}">
+                                    </a>
+
+                                        <div class="media-body full-width-container" >
+                                            <h4 class="media-heading">{{blog_comment_reply.first_name + ' ' +
+                                                blog_comment_reply.last_name}}
+												<span>{{blog_comment_reply.createdDate}}</span><br>
+												<span><button class="btn btn-primary" ng-if="authentication[0].role_id==1" id="delete-post" ng-click="deleteBlogCommentReply(blog_comment_reply.id,$index)">Delete</button></span>
+                                            </h4>
+                                            {{blog_comment_reply.description}}
+                                            <!--<div class="comment-action"><a href="javascript:void(0);">Reply</a> &nbsp; <a href="javascript:void(0);">Delete</a></div>-->
+
+                                        </div>
+                                        <hr/>
+                                    </div>
+
+                                    <form role="form" class="form-horizontal" ng-show="isSelected(commentData)"
+                                          data-ng-submit="submitReplyComment(commentData.id)">
+                                        <h3 class="post-comment-title">Reply on this comment.</h3>
+
+                                        <div class="form-group">
+                                            <div class="col-sm-12"></span>
+                                                <textarea class="form-control" placeholder="Comment"
+                                                          ng-model="$parent.replyCommentValue"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-9">
+                                                <button class="btn btn-primary" type="submit">Submit</button>
+                                                <button type="button" class="btn btn-default"
+                                                        ng-click="closeComment(this)">Cancel
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End of show Comments && Comment Form-->
+                        <div ng-show="CommentError" role="alert" class="alert alert-danger topic-alert">
+                            {{CommentError}}.
+                        </div>
+                        <form role="form" class="form-horizontal" data-ng-submit="addComment()" novalidate="">
+                            <h3 class="post-comment-title">Post Your Comment</h3>
+
+                            <div class="form-group">
+                                <!--<label class="col-sm-3 control-label">Comment</label>-->
+                                <div class="col-sm-12">
+                                    <textarea id="blog_comment" class="form-control" placeholder="Comment"
+                                              ng-model="blog_comment.comment"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-9">
+                                    <button class="btn btn-primary" type="submit">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- End of Add Comment -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-4 top-buffer-20 bottom-buffer">
+                <div class="page-header no-top-margin">
+                    <h4>Recent Post</h4>
+                </div>
+                <ul class="blog-ul" ng-init="recentBlogs()">
+                    <li ng-repeat="blog in recentBlogs"><a class="text-info" href="#!/blogDetails/{{blog.id}}">{{blog.title}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="book-appointments text-center">
+    <div class="container">
+        <h1 class="text-uppercase"><span>Doctors</span></h1>
+
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text. </p>
+        <a class="btn btn-primary text-uppercase" href="#!/dentistList/">Book Appointment</a>
+    </div>
+</div>
+
+<div ng-include src="'modules/core/views/footer.html'"></div>
+<script type="text/javascript">
+    $('#edit-post, .edit-icon').click(function () {
+        $('.post-content-section').addClass('hide');
+        $('.edit-post-form').addClass('show');
+        $('.edit-icon').addClass('hide');
+        $('.alert-success').addClass('hide');
+    });
+    $('#cancel-post').click(function () {
+        $('.post-content-section').removeClass('hide');
+        $('.edit-post-form').removeClass('show');
+        $('.alert-success').removeClass('hide');
+        $('.edit-icon').removeClass('hide');
+    });
+</script>

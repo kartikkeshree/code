@@ -1,0 +1,209 @@
+<div ng-include src="'modules/dentists/views/layouts/header_files.html'"></div>
+<div class="mainwrapper">
+    <div ng-include src="'modules/dentists/views/layouts/header.html'"></div>
+    <div ng-include src="'modules/dentists/views/layouts/leftmenu.html'"></div>
+    <div class="rightpanel" ng-controller="ClinicsController">
+
+        <ul class="breadcrumbs">
+            <li><a href="#!/dentistHome"><i class="iconfa-home"></i></a> <span class="separator"></span></li>
+            <li><a href="#!/clinics">Clinic</a> <span class="separator"></span></li>
+            <li>Add Clinic</li>
+            <li class="right"><a href="" data-toggle="dropdown" class="dropdown-toggle"><i class="icon-tint"></i> Color
+                Skins</a>
+                <ul class="dropdown-menu pull-right skin-color">
+                    <li><a href="default">Default</a></li>
+                    <li><a href="navyblue">Navy Blue</a></li>
+                    <li><a href="palegreen">Pale Green</a></li>
+                    <li><a href="red">Red</a></li>
+                    <li><a href="green">Green</a></li>
+                    <li><a href="brown">Brown</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="pageheader"><a href="javascript:void(0);" class="btn btn-primary pull-right top-buffer-20" onclick="javascript:history.go(-1);">Back</a>
+
+            <div class="pageicon"><span class="iconfa-plus"></span></div>
+            <div class="pagetitle">
+                <h5 ng-if="isEdit == false">Add new clinic</h5>
+                <h5 ng-if="isEdit == true">Edit clinic</h5>
+                <h1 ng-if="isEdit == false">Add Clinic</h1>
+                <h1 ng-if="isEdit == true">Edit Clinic</h1>
+            </div>
+        </div>
+        <!--pageheader-->
+
+        <div class="maincontent">
+            <div class="maincontentinner">
+                <div class="widget" ng-init="findOne()">
+                    <h4 class="widgettitle">Fill all fields</h4>
+
+                    <div class="widgetcontent">
+                        <form class="stdform">
+                            <div class="par control-group" data-ng-show="error">
+                                <label class="control-label">&nbsp;</label>
+                                <div class="controls errorShow">
+                                    <strong>{{error}}</strong>
+                                </div>
+                            </div>
+
+                            <div class="par control-group" ng-show="(user[0].role_id == 1)">
+                                <label class="control-label">Dentist Name*</label>
+                                <div class="controls">
+                                    <select class="span4" name="doctor_id" data-ng-model="clinic.doctor_id">
+                                        <option value="">Select Dentist</option>
+                                        <option ng-repeat="dentist in dentistList" value="{{dentist.dentistId}}" ng-selected="((dentist.dentistId==clinic.doctor_id)?true:false)">{{dentist.first_name+' '+dentist.last_name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            
+
+                            <div class="par control-group">
+                                <label class="control-label">Clinic Name*</label>
+
+                                <div class="controls">
+                                    <input type="text" class="span4" placeholder="Clinic Name" name="clinic_name" data-ng-model="clinic.name" />
+                                </div>
+                            </div>
+                            
+                            <div class="par control-group">
+                                <label class="control-label">Time Slot*</label>
+                                <div class="controls">
+                                    <select class="span4" name="slot_diff" data-ng-model="clinic.slot_diff">
+                                        <option value="15" ng-selected="((clinic.slot_diff == 10)?true:false)">15 minutes</option>
+                                        <option value="30" ng-selected="((clinic.slot_diff == 30)?true:false)">30 minutes</option>
+                                        <option value="45" ng-selected="((clinic.slot_diff == 45)?true:false)">45 minutes</option>
+                                        <option value="60" ng-selected="((clinic.slot_diff == 60)?true:false)">60 minutes</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="par">
+                                <label>Clinic Photo</label>
+                                <div data-provides="fileupload" class="fileupload fileupload-new">
+                                    <div class="input-append">
+                                        <div class="uneditable-input span3">
+                                            <i class="iconfa-file fileupload-exists"></i>
+                                            <span class="fileupload-preview"></span>
+                                        </div>
+                                        <span class="btn btn-file"><span class="fileupload-new">Select file</span>
+                                        <span class="fileupload-exists">Add More</span>
+                                        <input type="file" ng-model-instant id="fileToUpload" multiple onchange="angular.element(this).scope().uploadFile(this.files)" style="margin: -32px 0 0 50px;" />
+                                        </span>
+                                        <a data-dismiss="fileupload" class="btn fileupload-exists" href="#">Remove</a>
+                                        <br/>
+                                        <div class="media-left" id="clinic-image-container" style="margin-top: 5px; height: 82px;" ng-show="((images.length > 0)?true:false)">
+                                           <div class="clinic-image" ng-repeat="image in images" id="delete_{{image.id}}">
+                                                <div class="remove-upload" ng-click="removeUploadedFile(image.id)"></div>
+                                                <img src="/images/clinic_images/{{image.image}}" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="par control-group">
+                                <label class="control-label">Clinic Address*</label>
+                                <div class="controls">
+                                    <textarea class="span4" placeholder="Clinic Address" name="clinic_address" data-ng-model="clinic.address"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="par control-group">
+                                <label class="control-label">Area*</label>
+                                <div class="controls"><span class="area-icon form-icon"></span>
+                                    <select class="span4" name="area_id" data-ng-model="clinic.area_id">
+                                        <option value="">Select Area</option>
+                                        <option ng-repeat="area in areaList" value="{{area.id}}" ng-selected="((clinic.area_id==area.id)?true:false)">{{area.area_name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="par control-group">
+                                <label class="control-label">City*</label>
+                                <div class="controls">
+                                    <input type="text" class="span4" placeholder="City" name="clinic_city" data-ng-model="clinic.city"/>
+                                </div>
+                            </div>
+
+                            <div class="par control-group">
+                                <label class="control-label">Landmark</label>
+                                <div class="controls">
+                                    <input type="text" class="span4" placeholder="Landmark" name="clinic_landmark" data-ng-model="clinic.landmark"/>
+                                </div>
+                            </div>
+
+                           <div class="par control-group">
+                                <label class="control-label">Geo Location</label>
+                                <div class="controls">
+                                   <!-- <iframe class="geo-map"
+                                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d121069.05634361373!2d73.84408502084187!3d18.510455421892956!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf2e67461101%3A0x828d43bf9d9ee343!2sPune%2C+Maharashtra%2C+India!5e0!3m2!1sen!2sus!4v1417601232032"
+                                            frameborder="0" style="border:0" data-ng-click="getLatLong()"></iframe>-->
+                                    <!--<div id="map-canvas"></div>-->
+
+                                    <div class="geo-map" hello-Maps="" latitude="18.52043" longitude="73.85674" data-ng-click="setLatLong()"></div>
+                                </div>
+                            </div>
+                            <div class="par control-group">
+                                <div class="controls">
+                                <label class="control-label">LatLong*</label>
+                                    <input type="text" class="span2" placeholder="Latitude"  data-ng-model="clinic.latitude"/>
+
+                                    &nbsp;
+
+                                    <input type="text" class="span2" placeholder="Longitude"   data-ng-model="clinic.logitude"/>
+
+
+                                </div>
+
+                            </div>
+                            <div class="par control-group">
+                                <label class="control-label">Zip Code*</label>
+                                <div class="controls">
+                                    <input type="text" class="span4" placeholder="Zip Code" name="clinic_zip" data-ng-model="clinic.zip"/>
+                                </div>
+                            </div>
+
+                            <div class="par control-group">
+                                <label class="control-label">Mobile No.*</label>
+                                <div class="controls">
+                                    <input type="text" class="span4" placeholder="Mobile No." name="clinic_contact_no" data-ng-model="clinic.contact_no"/>
+                                </div>
+                            </div>
+
+                            <div class="par control-group">
+                                <label class="control-label">Phone No.*</label>
+                                <div class="controls">
+                                    <input type="text" class="span4" placeholder="Phone No." name="clinic_contact2" data-ng-model="clinic.contact2"/>
+                                </div>
+                            </div>
+
+                            <div class="par control-group">
+                                <label class="control-label">Select Services*</label>
+                                <div class="controls">
+                                    <select ng-model="clinic.services"  multiple="multiple">
+                                        <option ng-repeat="service in serviceList" value="{{service.id}}" ng-selected="service.flag">{{service.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <p class="stdformbutton">
+                                <button class="btn btn-primary" ng-click="create()" ng-if="isEdit == false">Save and Next</button>
+                                <button class="btn btn-primary" ng-click="update()" ng-if="isEdit == true">Update</button>
+                                <button class="btn" type="reset">Cancel</button>
+                            </p>
+                        </form>
+                    </div>
+                    <!--widgetcontent-->
+                </div>
+
+            </div>
+            <!--widget-->
+            <div ng-include src="'modules/dentists/views/layouts/footer.html'"></div>
+            <!--footer-->
+            <!--maincontentinner-->
+        </div>
+        <!--maincontent-->
+    </div>
+</div>
+

@@ -1,0 +1,38 @@
+<div data-ng-controller="ClassifiedsController">
+<form  data-ng-submit="create()" novalidate>
+    <fieldset>
+        <div class="form-group">
+            <label class="control-label" for="title">Title</label>
+            <div class="controls">
+                <input type="text" data-ng-model="title" id="title" class="form-control" placeholder="Title" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-ng-init="getCategory()">Category</label>
+            <div class="controls">
+                <select class="form-control" data-ng-model="category">
+                    <option ng-repeat="category in categories" value="{{category.id}}">{{category.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="description">Description</label>
+            <div class="controls">
+                <textarea data-ng-model="description" id="description" class="form-control" placeholder="Description" required></textarea>
+            </div>
+        </div>
+        <!--<div class="form-group">
+            <label class="control-label" for="image">Image</label>
+            <div class="controls">
+                <input type="file" data-ng-model="image" id="image" class="form-control" placeholder="Category" required>
+            </div>
+        </div>-->
+        <div class="form-group">
+            <input type="submit" class="btn btn-default">
+        </div>
+        <div data-ng-show="error" class="text-danger">
+            <strong data-ng-bind="error"></strong>
+        </div>
+    </fieldset>
+</form>
+</div>

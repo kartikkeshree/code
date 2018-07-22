@@ -1,0 +1,110 @@
+<div ng-include src="'modules/core/views/header.html'"></div>
+<section>
+    <div data-ride="carousel" class="carousel slide inner-page" id="myCarousel" >
+        <div role="listbox" class="carousel-inner"> <a id="open-map" href="javascript:void(0)">Show Map</a>
+            <div class="item active"> <img src="/modules/core/images/banner.jpg" alt="Banner Image" title="Dentist Forum" />
+                <div class="container">
+					<div class="col-sm-5 pull-right">
+                    <div ng-include src="'modules/core/views/search.html'"></div>
+					</div>
+                </div>
+                <div class="shadow-spreater"></div>
+            </div>
+        </div>
+    </div>
+    <div class="google-map hide" id="inner-page-map">
+        <div class="change-location">Please Choose Your Location - <a href="javascript:void(0)">Pune</a></div>
+        <div class="close-map"><a id="close-map" href="javascript:void(0)">Close</a></div>
+        <div class="map-section-shadow"></div>
+        <iframe class="inner-iframe-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d242118.0689479398!2d73.86296739999999!3d18.52461645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf2e67461101%3A0x828d43bf9d9ee343!2sPune%2C+Maharashtra%2C+India!5e0!3m2!1sen!2s!4v1418710888923"></iframe>
+    </div>
+    <div class="container inner-cont" data-ng-controller="SettingsController">
+        <div class="row">
+            <div class="page-header">
+                <h2 ng-if="isEdit != true">Add Member</h2>
+				<h2 ng-if="isEdit == true">Update Member</h2>
+            </div>
+            <div class="col-sm-8 col-xs-12 top-buffer-15 bottom-buffer" class="row" data-ng-init="find()">
+                <form  name="userForm" class="form-horizontal" data-ng-submit="addNewMember()" novalidate>
+                    <fieldset>
+                        <div data-ng-show="error" class="text-center text-danger">
+                            <strong data-ng-bind="error"></strong>
+                        </div>
+                        <br/>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">First Name</label>
+                            <div class="col-sm-9"> <span class="user-icon"></span>
+                                <input type="text" class="form-control" placeholder="First Name" required id="first_name" name="first_name" data-ng-model="credentials.first_name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Last Name</label>
+                            <div class="col-sm-9"> <span class="user-icon"></span>
+                                <input type="text" class="form-control" placeholder="Last Name" required id="last_name" name="last_name" data-ng-model="credentials.last_name">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Relationship</label>
+                            <div class="col-sm-9"> <span class="user-icon"></span>
+                                <input type="text" class="form-control" placeholder="relationship" required data-ng-model="credentials.relation" >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Gender</label>
+                            <div class="col-sm-9"> <span class="gender-icon"></span>
+                                <input type="radio" name="gender" data-ng-model="credentials.gender" value="male">Male</input> &nbsp;
+                                <input type="radio"  name="gender" data-ng-model="credentials.gender" value="female">Female</input>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Date Of Birth</label>
+                            <div class="col-sm-9"><span class="icon-calender"></span>
+                                <input type="text" class="form-control" placeholder="DOB (MM/DD/YYYY)" required data-ng-model="credentials.birth_date" >
+                            </div>
+                        </div>
+
+                        <!--<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"> Remember me
+        </label>
+      </div>
+    </div>
+  </div>-->
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-9">
+                                <button type="submit" class="btn btn-primary" ng-if="isEdit != true">Add</button>
+                                <button type="submit" class="btn btn-primary" ng-if="isEdit == true">Update</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+
+            </div>
+            <div class="col-sm-4 col-xs-12 top-buffer-15 bottom-buffer">
+                <iframe class="address-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.4615615519147!2d73.78993400000003!3d18.508033!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2be4cb2886fd1%3A0xb22e740567166b2b!2sCaprium+Technologies+India+Pvt.+Ltd.!5e0!3m2!1sen!2s!4v1418721676091"></iframe>
+                <div class="address">
+                    <p><span class="area-icon"></span>Ishana-II 1st Floor, Bhusari Colony Paud Road, <br />
+                        Opp Lohiya Jain IT Park, <br />
+                        Kothrud, Pune 411038, India</p>
+                    <p><span class="phone-number"></span>8983-109-109</p>
+                    <p><span class="email-id"></span>info@doctorhere.in</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="book-appointments text-center">
+        <div class="container">
+            <h1 class="text-uppercase">Doctors</h1>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text. </p>
+            <a href="#!/dentistList/" class="btn btn-primary text-uppercase">Book Appointment</a>
+        </div>
+    </div>
+
+    <div ng-include src="'modules/core/views/footer.html'"></div>
+</section>
